@@ -1,0 +1,417 @@
+﻿Facility Name,Status,Region,Technology,Generator Capacity (MW),Latitude,Longitude
+Adelaide Desalination,operating,South Australia,"Battery (Discharging),Solar (Utility)",9.14,-35.09694820846758,138.48406087198447
+Albany,operating,Western Australia,Wind,21.6,-35.0658354,117.79750630000001
+Angaston,operating,South Australia,Distillate,100,-34.5039482864289,139.024296339333
+Appin,operating,New South Wales,Gas (Waste Coal Mine),55,-34.210868,150.792711
+Ararat,operating,Victoria,Wind,241.59,-37.263393,143.08211599999998
+Avonlie,operating,New South Wales,Solar (Utility),245,-34.91911505022873,146.60953991534387
+Badgingarra,operating,Western Australia,Wind,130,-30.4399239,115.3240452
+Bairnsdale,operating,Victoria,Gas (OCGT),92,-37.842230501524796,147.56372527022
+Baking Board,operating,Queensland,Solar (Utility),17,-26.721165999999997,150.55417
+Bald Hills,operating,Victoria,Wind,106.6,-38.7581889808652,145.95606244657802
+Ballarat,operating,Victoria,Battery (Discharging),30,-37.567452,143.85274099999998
+Ballarat Hospital,operating,Victoria,Gas (Reciprocating),1,-37.558774,143.847247
+Bango,operating,New South Wales,Wind,328.8,-34.767207772932835,148.92149870748742
+Banimboola,operating,Victoria,Hydro,12,-36.534524,147.45978799999997
+Bannerton,operating,Victoria,Solar (Utility),100,-34.67263,142.75036200000002
+Barcaldine,operating,Queensland,Gas (CCGT),37,-23.5521705751292,145.31485121010098
+Barcaldine,operating,Queensland,Solar (Utility),10,-23.547333,145.318972
+Barker Inlet,operating,South Australia,Gas (Reciprocating),211,-34.804,138.524
+Barron Gorge,operating,Queensland,Hydro,60,-16.8507701285363,145.64704928388701
+Bastyan,operating,Tasmania,Hydro,80,-41.7362309059766,145.531588505673
+Bayswater,operating,New South Wales,Coal (Black),2640,-32.3935017885229,150.953963043732
+Bell Bay Three,operating,Tasmania,Gas (OCGT),163,-41.139323562966396,146.905521847101
+Berrybank,operating,Victoria,Wind,289.6,-37.98074089349125,143.47221708704777
+Berwick,operating,Victoria,Bioenergy (Biogas),7,-37.940819,145.236257
+Beryl,operating,New South Wales,Solar (Utility),98,-32.347501,149.460738
+Biala,operating,New South Wales,Wind,110.67,-34.58783555632732,149.36984787301526
+Blayney,operating,New South Wales,Wind,9.9,-33.621944,149.198333
+Blowering,retired,New South Wales,Hydro,160,-35.3974021381011,148.247225084376
+Bluewaters,operating,Western Australia,Coal (Black),434,-33.3306742,116.2259578
+Boco Rock,operating,New South Wales,Wind,113,-36.574526757506106,149.12486288728599
+Bodangora,operating,New South Wales,Wind,113,-32.407128,149.04133000000002
+Bogong / Mackay,operating,Victoria,Hydro,106,-36.80547095191611,147.22784471544
+Bolivar,operating,South Australia,Gas (CCGT),128,,
+Bomen,operating,New South Wales,Solar (Utility),121,,
+Bouldercombe Battery,operating,Queensland,Battery (Discharging),1.25,-23.563443095530477,150.45965800764628
+Braemar,operating,Queensland,Gas (OCGT),504,-27.111668775911003,150.907647496929
+Braemar 2,operating,Queensland,Gas (OCGT),519,-27.1098726737727,150.90765329885
+Bremer Bay,operating,Western Australia,Wind,0.6,-34.399032899999995,119.38937659999998
+Broadmeadows,operating,Victoria,Bioenergy (Biogas),5,-37.685081,144.96611399999998
+Broadwater,operating,New South Wales,Bioenergy (Biogas),38,-29.016483,153.44575600000002
+Broken Hill,operating,New South Wales,Solar (Utility),27,-31.988905,141.391547
+Broken Hill,operating,New South Wales,Distillate,50,-31.9863131909747,141.420620039361
+Brooklyn,operating,Victoria,Bioenergy (Biogas),3,-37.818597,144.82849199999998
+Brown Mountain,operating,New South Wales,Hydro,5,-36.594993,149.473997
+Browns Plains,operating,Queensland,Bioenergy (Biogas),2,-27.674584000000003,153.068499
+Bulgana Green Power Hub,operating,Victoria,"Battery (Discharging),Wind",224,-37.03950707571258,142.98279886137544
+Bungala One,operating,South Australia,Solar (Utility),135,-32.423316,137.841798
+Bungala Two,operating,South Australia,Solar (Utility),135,-32.406993,137.840933
+Burrendong,operating,New South Wales,Hydro,19,-32.664646999999995,149.108016
+Burrinjuck,operating,New South Wales,Hydro,27,-35.003532219190895,148.57989053933
+Butlers Gorge,operating,Tasmania,Hydro,15,-42.2671066306884,146.262126696147
+Callide B,operating,Queensland,Coal (Black),700,-24.3331687723181,150.626321580678
+Callide C,operating,Queensland,Coal (Black),840,-24.347222,150.608611
+Canunda,operating,South Australia,Wind,46,-37.6983027777778,140.383633333333
+Capital,operating,New South Wales,Wind,140,-35.123534200872996,149.500248815014
+Capital Battery,operating,New South Wales,Battery (Discharging),20,-35.33943352721403,149.2160653306813
+Capital East,operating,New South Wales,Solar (Utility),1,-35.180684,149.546482
+Catagunya / Liapootah / Wayatinah,operating,Tasmania,"Distillate,Hydro",197,-42.3761311830926,146.509824066027
+Cathedral Rocks,operating,South Australia,Wind,66,-34.8487411412149,135.592648854827
+Cattle Hill,operating,Tasmania,Wind,148,-42.1548445,146.6946935
+Cethana,operating,Tasmania,Hydro,85,-41.4798517889387,146.13447195282302
+Challicum Hills,operating,Victoria,Wind,52,-37.395465970035204,143.104590414104
+Chepstowe,operating,Victoria,Wind,6,-37.596503000000006,143.499582
+Cherry Tree,operating,Victoria,Wind,57,,
+Childers,operating,Queensland,Solar (Utility),64,-25.295026999999997,152.403674
+Clare,operating,Queensland,Solar (Utility),110,-19.83977,147.21055
+Clayton,operating,Victoria,Bioenergy (Biogas),11,-37.950618,145.119681
+Clements Gap,operating,South Australia,Wind,57,-33.4897731866514,138.11169493851003
+Clermont,operating,Queensland,Solar (Utility),92,-22.8394058,147.5460307
+Clover,retired,Victoria,Hydro,58,-36.785150242910596,147.21951686434602
+Cluny,operating,Tasmania,Hydro,19,-42.5062285725933,146.68112292844998
+Cockburn,operating,Western Australia,Gas (CCGT),249.7,-32.200134000000006,115.77398799999999
+Codrington,operating,Victoria,Wind,18,-38.2828746908265,141.95496017677
+Coleambally,operating,New South Wales,Solar (Utility),180,-34.759494000000004,145.92983999999998
+Collector,operating,New South Wales,Wind,113,-34.82387856332685,149.39679534436084
+Collgar,operating,Western Australia,Wind,206,-31.597509999999996,118.490597
+Collie,operating,Western Australia,Coal (Black),318.3,-33.341509,116.262185
+Collinsville,operating,Queensland,Solar (Utility),42,-20.55714,147.820552
+Colongra,operating,New South Wales,Gas (OCGT),724,-33.2087809607995,151.543540042872
+Columboola,operating,Queensland,Solar (Utility),50,-26.6360877,150.2822104
+Condamine A,operating,Queensland,Gas (CCGT),143,-26.6666729324806,150.268581153696
+Condong,operating,New South Wales,Bioenergy (Biogas),30,-28.314766,153.433808
+Coonoer Bridge,operating,Victoria,Wind,19.8,-36.472722,143.322039
+Coopers Gap,operating,Queensland,Wind,452,-26.7170038,151.4491769
+Copeton,operating,New South Wales,Hydro,22.5,-29.907544,150.930235
+Corio,operating,Victoria,Bioenergy (Biogas),1,-38.059048,144.404905
+Crookwell,operating,New South Wales,Wind,4.8,-34.5165,149.54248
+Crookwell 2,operating,New South Wales,Wind,96,-34.547676,149.589254
+Crowlands,operating,Victoria,Wind,79,-36.97615,143.097998
+Crudine Ridge,operating,New South Wales,Wind,141,-32.86474841023679,149.81297006628185
+Cullerin Range,operating,New South Wales,Wind,30,-34.7509945681949,149.38102679924802
+Daandine,operating,Queensland,Gas (Reciprocating),33,-27.0862943709476,150.94252770215
+Dalrymple North,operating,South Australia,Battery (Discharging),30,-34.888446,137.75811399999998
+Darling Downs,operating,Queensland,Gas (CCGT),121,-27.1168512752019,150.89539128796198
+Darling Downs,operating,Queensland,Solar (Utility),121,-27.112,150.8819
+Darlington Point,operating,New South Wales,Solar (Utility),324,-34.64480799740922,146.03575554070937
+Darlington Point,operating,New South Wales,Battery (Discharging),25,-34.64666830459466,146.0349818819095
+Dartmouth,operating,Victoria,Hydro,150,-36.5552897653927,147.519872277055
+Daydream,operating,Queensland,Solar (Utility),79,-20.512804,147.691968
+Denmark,operating,Western Australia,Wind,1.44,-35.036970600000004,117.3190123
+Devils Gate,operating,Tasmania,Hydro,60,-41.349924712473296,146.262708994396
+Diapur 2,operating,Victoria,Wind,8,-36.33995255346413,141.44736064716525
+Dry Creek,operating,South Australia,Gas (OCGT),156,-34.8472931778913,138.582297039723
+Dulacca,operating,Queensland,Wind,180,-26.637485359480248,149.87018587777902
+Dundonnell,operating,Victoria,Wind,335,-37.8638943,142.94345380000001
+Eastern Creek,operating,New South Wales,Bioenergy (Biogas),5,-33.815468,150.854307
+Eastern Creek 2,operating,New South Wales,Bioenergy (Biogas),8.98,-33.815468,150.854307
+Edenvale,operating,Queensland,Solar (Utility),180,-26.947486249430344,150.5784941355202
+Eildon,operating,Victoria,Hydro,120,-37.2212623147345,145.92096602966998
+Eildon,operating,Victoria,Hydro,5,-37.221773999999996,145.922582
+Elaine,operating,Victoria,Wind,83,,
+Emerald,operating,Queensland,Solar (Utility),88,-23.50879,148.128017
+Emu Downs,operating,Western Australia,Wind,80,-30.475646899999997,115.3790523
+Eraring,operating,New South Wales,Coal (Black),2880,-33.0615480516907,151.524612285081
+Eraring,operating,New South Wales,Distillate,42,-33.062117,151.517224
+Finley,operating,New South Wales,Solar (Utility),162,-35.64421,145.508644
+Fisher,operating,Tasmania,Hydro,43,-41.6726623378254,146.268739375245
+Flyers Creek Wind Farm,operating,New South Wales,Wind,3.8,-33.52147510941558,149.04523360122465
+Gangarri,operating,Queensland,Solar (Utility),119.28,-26.254812591286022,149.9867038361442
+Gannawarra,operating,Victoria,Battery (Discharging),30,-35.735056,143.77946200000002
+Gannawarra,operating,Victoria,Solar (Utility),25,-35.73,143.7711
+Geraldton,operating,Western Australia,Distillate,9.9,-28.790815000000002,114.69183100000001
+German Creek,operating,Queensland,Gas (Waste Coal Mine),45,-22.928526,148.549097
+Gladstone,operating,Queensland,Coal (Black),1680,-23.8487410267305,151.22078674103702
+Glenbawn,operating,New South Wales,Hydro,5.5,-32.107937,150.999481
+Glenmaggie,operating,Victoria,Hydro,4,-37.904835999999996,146.800388
+Glennies Creek,operating,New South Wales,Gas (Waste Coal Mine),12,-32.464343,151.130432
+Glenrowan,operating,Victoria,Solar (Utility),126,-36.475196180192505,146.17987817461224
+Glenrowan West,operating,Victoria,Solar (Utility),132,-36.48808269701029,146.1468872484953
+Goonumbla,operating,New South Wales,Solar (Utility),85,,
+Gordon,operating,Tasmania,Hydro,457,-42.7401570733513,145.983375290986
+Gosnells,operating,Western Australia,Bioenergy (Biogas),1,-32.0795137,115.89508799999999
+Goyder South,operating,South Australia,Wind,412.5,-33.682196301707506,138.93624905375023
+Grange Avenue,operating,New South Wales,Bioenergy (Biogas),2,-33.713011,150.83316000000002
+Granville Harbour,operating,Tasmania,Wind,111,-41.802,145.056
+Grasmere,operating,Western Australia,Wind,13.8,-35.0658354,117.79750630000001
+Greenough River,operating,Western Australia,Solar (Utility),10,-28.9038103,115.10937009999999
+Griffith,operating,New South Wales,Solar (Utility),27,-34.317414,146.120739
+Grosvenor 1,operating,Queensland,Gas (Waste Coal Mine),21,,
+Grosvenor 1,operating,Queensland,Gas (Waste Coal Mine),15,,
+Gullen Range,operating,New South Wales,"Solar (Utility),Wind",175,-34.624511555250805,149.458548623602
+Gunning,operating,New South Wales,Wind,47,-34.676360746605894,149.66443017949499
+Guthega,retired,New South Wales,Hydro,60,-36.3497724824309,148.414030190556
+Hallam,operating,Victoria,Hydro,1,-38.143332,145.11996399999998
+Hallam Road,operating,Victoria,Bioenergy (Biogas),9,-38.052181,145.267798
+Hallett,operating,South Australia,Gas (OCGT),217,-33.3493102447996,138.752632826228
+Hallett 1,operating,South Australia,Wind,95,-33.3284341007768,138.704668661635
+Hallett 2,operating,South Australia,Wind,71,-33.5382102938784,138.857214598585
+Hamilton,operating,Queensland,Solar (Utility),57,-20.468593,147.799484
+Hampton,operating,New South Wales,Wind,1.32,-33.649722,150.05
+Haughton,operating,Queensland,Solar (Utility),132,-19.732167999999998,147.07613700000002
+Hayman,operating,Queensland,Solar (Utility),57,-20.536162,147.84606499999998
+Hazelwood BESS,operating,Victoria,Battery (Discharging),200,-38.26921582767311,146.3947238107822
+Henderson,operating,Western Australia,Bioenergy (Biogas),3,-32.1640034,115.790695
+Hepburn,operating,Victoria,Wind,4,-37.424555,144.115711
+Hornsdale,operating,South Australia,Wind,102,-33.05982,138.537673
+Hornsdale 2,operating,South Australia,Wind,102,-33.05982,138.537673
+Hornsdale 3,operating,South Australia,Wind,112,-33.05982,138.537673
+Hornsdale Power Reserve,operating,South Australia,Battery (Discharging),150,-33.085519,138.52191399999998
+Hume,operating,New South Wales,Hydro,29,-36.1063825051951,147.032263443678
+Hume,operating,Victoria,Hydro,29,-36.106887,147.032572
+Hunter Economic Zone,retired,New South Wales,Distillate,57,-32.835481,151.451033
+Hunter Valley,operating,New South Wales,Distillate,50,-32.3899891907919,150.965962887934
+Invicta Sugar Mill,operating,Queensland,Bioenergy (Biomass),50,-19.5157903138225,147.106530479438
+Isis Central Sugar Mill,operating,Queensland,Bioenergy (Biomass),25,-25.197619,152.206949
+Jacks Gully,operating,New South Wales,Bioenergy (Biogas),2,-34.072955,150.74369099999998
+Jeeralang A,operating,Victoria,Gas (OCGT),204,-38.2751112170371,146.427046429655
+Jeeralang B,operating,Victoria,Gas (OCGT),228,-38.2738445583474,146.424826524902
+Jemalong,operating,New South Wales,Solar (Utility),55,-33.388764003159444,147.66937504508036
+Jindabyne,operating,New South Wales,Hydro,1,-36.434917999999996,148.63057
+Jindabyne Pump At Guthega,operating,New South Wales,Pumps,0,-36.434917999999996,148.63057
+John Butters,operating,Tasmania,Hydro,144,-42.1558901868039,145.536508422632
+Jounama,operating,New South Wales,Hydro,14,-35.561274,148.306384
+Kaban,operating,Queensland,Wind,156,-17.56060647720051,145.41312495396448
+Kalamunda,operating,Western Australia,Bioenergy (Biogas),1.3,-32.0032923,116.07488529999999
+Kalbarri,operating,Western Australia,Wind,1.6,-27.8983027,114.19235359999999
+Kambalda,operating,Western Australia,Gas (OCGT),42,-31.1919033,121.67190120000001
+Karadoc,operating,Victoria,Solar (Utility),104,-34.227903999999995,142.28033
+Karakin,operating,Western Australia,Wind,5,-30.9422424,115.3666128
+Kareeya,operating,Queensland,Hydro,91,-17.7664558224223,145.576884428941
+Keepit,operating,New South Wales,Hydro,6,-30.87868,150.491876
+Kemerton,operating,Western Australia,Gas (OCGT),309.4,-33.163566100000004,115.7811324
+Kemerton,operating,Western Australia,Distillate,9.9,-33.211662,115.76057
+Kemps Creek,operating,New South Wales,Bioenergy (Biogas),1,,
+Kennedy Energy Park,operating,Queensland,"Battery (Discharging),Solar (Utility),Wind",60.2,-20.872792,144.413034
+Kiamal,operating,Victoria,Solar (Utility),239,-35.01813312719621,142.30295254616004
+Kiata,operating,Victoria,Wind,31,-36.397693,141.746827
+Kidston,operating,Queensland,Solar (Utility),50,-18.88,144.151
+Kincumber,operating,New South Wales,Bioenergy (Biogas),1,-33.477111,151.402603
+Kogan Creek,operating,Queensland,Coal (Black),744,-26.915284998618198,150.748947538925
+Kwinana,retired,Western Australia,"Coal (Black),Gas (OCGT)",692.1,-32.197245,115.77544499999999
+Kwinana Battery,operating,Western Australia,Battery (Discharging),100,-32.19831977414033,115.77860638262523
+Kwinana Cogen,operating,Western Australia,Gas (OCGT),120,-32.2290511,115.77441090000002
+Kwinana Swift,operating,Western Australia,Gas (OCGT),116,-32.223991999999996,115.778516
+Ladbroke Grove,operating,South Australia,Gas (OCGT),80,-37.456183170651,140.782699220365
+Lake Bonney,operating,South Australia,Battery (Discharging),25,-37.7387871,140.3846721
+Lake Bonney,operating,South Australia,Wind,81,-37.7605043836737,140.40554118305099
+Lake Bonney 2,operating,South Australia,Wind,159,-37.7605043836737,140.40554118305099
+Lake Bonney 3,operating,South Australia,Wind,39,-37.7605043836737,140.40554118305099
+Lake Echo,operating,Tasmania,Hydro,32,-42.253338934193,146.62051476718202
+Laverton North,operating,Victoria,Gas (OCGT),312,-37.841693295236794,144.788006154048
+Lemonthyme / Wilmot,operating,Tasmania,Hydro,82,-41.483135251403205,146.125337536866
+Lilyvale,operating,Queensland,Solar (Utility),118,-23.070504,148.413865
+Limondale,operating,New South Wales,Solar (Utility),275,-34.7755018,143.50804630000002
+Limondale 2,operating,New South Wales,Solar (Utility),38,-34.7755018,143.50804630000002
+Lincoln Gap,operating,South Australia,Wind,298.4,-32.5463326,137.5527629
+Longford,operating,Victoria,Gas (OCGT),44,-38.223244,147.1631
+Longreach,operating,Queensland,Solar (Utility),17,-23.455048,144.227917
+Lonsdale,operating,South Australia,Distillate,21,-35.109718,138.49096200000002
+Loy Yang A,operating,Victoria,Coal (Brown),2210,-38.2506223018629,146.57636128850402
+Loy Yang B,operating,Victoria,Coal (Brown),1000,-38.2536191822701,146.585593179624
+Lucas Heights 2,operating,New South Wales,Bioenergy (Biogas),5,-34.044088,150.972475
+Macarthur,operating,Victoria,Wind,420,-38.043482838344104,142.179080598594
+Mackay,operating,Queensland,Distillate,30,-21.1444407069939,149.159170667386
+Mackintosh,operating,Tasmania,Hydro,80,-41.701362999273705,145.646558100718
+Manildra,operating,New South Wales,Solar (Utility),25,-33.172831,148.71823999999998
+Manjimup,operating,Western Australia,Bioenergy (Biomass),40,-34.3331509,116.1085206
+Mannum,operating,South Australia,Solar (Utility),5.5,-34.92021697813909,139.31443846248854
+Maroona,operating,Victoria,Wind,6,-37.41875,142.82433999999998
+Maryrorough,operating,Queensland,Solar (Utility),33,-27.7089727,151.5468693
+Meadowbank,operating,Tasmania,"Distillate,Hydro",64,-42.610834503212295,146.84638765481301
+Merredin,operating,Western Australia,Solar (Utility),100,-31.545150060512448,118.22814727984462
+Merredin,operating,Western Australia,Gas (OCGT),92.6,-31.5426501,118.2268664
+Metro,operating,Western Australia,Solar (Utility),0.96,-32.1033849,115.8084562
+Metz N,operating,New South Wales,Solar (Utility),135,,
+Middlemount,operating,Queensland,Solar (Utility),30,-22.82223463474125,148.7201154902096
+Midlands,operating,Tasmania,Hydro,6,-42.085747,147.274558
+Millmerran,operating,Queensland,Coal (Black),852,-27.9616570077391,151.28090983869
+Mintaro,operating,South Australia,Gas (OCGT),115,-33.9031486136929,138.73879717507901
+Mirrabooka,operating,Western Australia,Bioenergy (Biogas),1.23,-31.864457399999996,115.8182949
+Molong,operating,New South Wales,Solar (Utility),36,-33.08257771229906,148.90007342453686
+Moorabool,operating,Victoria,Wind,150,-37.739432726598274,144.1719854658804
+Moranbah,operating,Queensland,Gas (Reciprocating),13,-21.962469,148.006004
+Moranbah North,operating,Queensland,Gas (Waste Coal Mine),63,-21.978481,148.004809
+Moree,operating,New South Wales,Solar (Utility),57,-29.572607,149.861266
+Morganwhyalla Pipeline,operating,South Australia,Solar (Utility),0,,
+Mortlake,operating,Victoria,Gas (OCGT),566,-38.0626278266324,142.666330491351
+Mortlake South,operating,Victoria,Wind,153,-38.1479652,142.8822464
+Mortons Lane,operating,Victoria,Wind,20,-37.8331864361526,142.465288088147
+Mount Barker,operating,Western Australia,Wind,2.43,-34.6011629,117.64390449999999
+Moura,operating,Queensland,Solar (Utility),99,-24.509628260067526,150.07664771206112
+Mt Emerald,operating,Queensland,Wind,180,-17.133248000000002,145.38003700000002
+Mt Gellibrand,operating,Victoria,Wind,137.98,-38.257657,143.798651
+Mt Mercer,operating,Victoria,Wind,131,-37.8475926188678,143.87018302016799
+Mt Millar,operating,South Australia,Wind,70,-33.6193424956887,136.717568216817
+Mt Piper,operating,New South Wales,Coal (Black),1400,-33.3607151085441,150.03569813637
+Mt Stuart,operating,Queensland,Distillate,419,-19.3371562032237,146.851238997871
+Mugga Lane,operating,New South Wales,Solar (Utility),12,-35.398441,149.14906000000002
+Muja CD,operating,Western Australia,Coal (Black),814.5999999999999,-33.445811,116.306655
+Mumbida,operating,Western Australia,Wind,55,-29.011063099999998,114.96622849999999
+Mungarra,operating,Western Australia,Gas (OCGT),117,-28.8878993,115.115999
+Murra Warra,committed,Victoria,Wind,441,-36.438821000000004,142.246003
+Murray,operating,Victoria,Hydro,1500,-36.24599188507089,148.188551670122
+Murray Bridge-Onkaparinga,operating,South Australia,Solar (Utility),2.1,-35.0940934825907,139.21151125343218
+Musselroe,operating,Tasmania,Wind,168,-40.777105262677395,148.00631466047702
+Narromine,operating,New South Wales,Solar (Utility),10,-32.218323,148.254523
+Neerabup,operating,Western Australia,Gas (OCGT),342,-31.671177500000002,115.7988503
+Nevertire,operating,New South Wales,Solar (Utility),132,-31.831043800000003,147.70517780000003
+New England,operating,New South Wales,Solar (Utility),400,-30.627322613322704,151.55642476144078
+Newgen Kwinana,operating,Western Australia,Gas (CCGT),335,-32.201951,115.773172
+Newport,operating,Victoria,Gas (Steam),500,-37.8413742466,144.89547862132
+North Brown Hill,operating,South Australia,Wind,132,-33.2281156193048,138.71688837303898
+Northam,operating,Western Australia,Solar (Utility),7.75,-31.6516099,116.71154109999999
+Northam,operating,Western Australia,Distillate,9.9,-31.642906,116.847503
+Numurkah,operating,Victoria,Solar (Utility),74,-36.159275,145.47389099999998
+Nyngan,operating,New South Wales,Solar (Utility),102,-31.563191344278497,147.074195112039
+Oakey,operating,Queensland,Gas (OCGT),282,-27.4182072591559,151.678887225743
+Oakey,operating,Queensland,Solar (Utility),30,-27.402454,151.6425757
+Oakey 2,operating,Queensland,Solar (Utility),65,-27.402454,151.6425757
+Oaklands Hill,operating,Victoria,Wind,67,-37.6794809945517,142.55299488616998
+Oaky Creek,operating,Queensland,Gas (Reciprocating),20,-23.048717,148.484462
+Oaky Creek 2,operating,Queensland,Gas (Waste Coal Mine),15,-23.048717,148.484462
+Osborne,operating,South Australia,Gas (CCGT),180,-34.797699815377,138.50809861051098
+Paloona,operating,Tasmania,Hydro,33,-41.28267954161829,146.248580482472
+Parkes,operating,New South Wales,Solar (Utility),55,-33.113056,148.076372
+Parkeston,operating,Western Australia,Gas (OCGT),110,-30.738009299999998,121.5062638
+Pelican Point,operating,South Australia,Gas (CCGT),478,-34.764365355128604,138.5053993318
+Phillip Island BESS,operating,Victoria,Battery (Discharging),7,-38.48329290832882,145.22487976314574
+Picton,operating,Western Australia,Distillate,9.9,-33.356646000000005,115.72098000000001
+Pindari,operating,New South Wales,Hydro,6,-29.388034,151.244774
+Pinjar,operating,Western Australia,Gas (OCGT),600.6,-31.558544899999998,115.8185124
+Pinjara,operating,Western Australia,Gas (OCGT),286,-32.6471604,115.94685120000001
+Pioneer Sugar Mill,operating,Queensland,Bioenergy (Biomass),68,-19.557546,147.330825
+Poatina,operating,Tasmania,Hydro,125,-41.8050732147105,146.92436549882402
+Poatina,operating,Tasmania,Hydro,200,-41.8050732147105,146.92436549882402
+Port Augusta Energy Park,operating,South Australia,"Solar (Utility),Wind",309,-32.59560885770281,137.88562879204383
+Port Lincoln,operating,South Australia,Distillate,73,-34.700616012351496,135.804530499443
+Port Stanvac,operating,South Australia,Distillate,173.6,-35.110345,138.490872
+Portland,operating,Victoria,Wind,148,-38.3614171461369,141.38455974743601
+Quarantine,operating,South Australia,Gas (OCGT),229,-34.7790736853879,138.522454543776
+Racecourse Mill,operating,Queensland,Bioenergy (Biomass),48.5,-21.163842000000002,149.13573799999998
+Red Hill,operating,Western Australia,Bioenergy (Biogas),3.64,-31.830628499999996,116.1008881
+Reece,operating,Tasmania,Hydro,232,-41.7231313449952,145.136468433099
+Remount,operating,Tasmania,Bioenergy (Biogas),2,-41.398447,147.1495
+Repulse,operating,Tasmania,Hydro,28,-42.507986886479,146.64716982064
+Richgro,operating,Western Australia,Bioenergy (Biogas),2,-32.103786,115.895771
+Riverina Battery,operating,New South Wales,Battery (Discharging),145,-34.64666830459466,146.0349818819095
+Rockingham,operating,Western Australia,Bioenergy (Biogas),4,-32.287538399999995,115.8158851
+Rocky Point Cogen,operating,Queensland,Bioenergy (Biomass),30,-27.733564,153.326464
+Roma,operating,Queensland,Gas (OCGT),80,-26.576788038755602,148.839485013731
+Ross River,operating,Queensland,Solar (Utility),128,-19.425304999999998,146.715686
+Rowallan,operating,Tasmania,Hydro,11,-41.729569831849,146.218086949827
+Royalla,operating,New South Wales,Solar (Utility),20,-35.486052460420105,149.141965695762
+Rubicon,operating,Victoria,Hydro,13,-37.29245321854629,145.818202438307
+Rugby Run,operating,Queensland,Solar (Utility),83,-21.940469,147.880877
+Rye Park,operating,New South Wales,Wind,396,-34.63316963326623,148.95364033809858
+Salt Creek,operating,Victoria,Wind,54,-37.918698,142.796027
+Sapphire,operating,New South Wales,Wind,270,-29.710272999999997,151.44558
+Shepparton,operating,Victoria,Bioenergy (Biogas),1,-36.322223,145.379291
+Shoalhaven,operating,New South Wales,"Hydro,Pumps",240,-34.7330846446504,150.466700105161
+Silverton,operating,New South Wales,Wind,198,-31.86095,141.296349
+Smithfield,operating,New South Wales,Gas (CCGT),39,-33.8500226284367,150.950050828532
+Snapper Point,operating,South Australia,Gas (OCGT),154,-34.764519992803145,138.50819008412628
+Snowtown,operating,South Australia,Wind,99,-33.6915984540895,138.16602222010098
+Snowtown North,operating,South Australia,Wind,144,-33.756478648772394,138.143043187414
+Snowtown South,operating,South Australia,Wind,126,-33.862624210288,138.13036653197202
+Snuggery,operating,South Australia,Distillate,88,-37.664995624079204,140.41468562441003
+Somerton,operating,Victoria,Gas (OCGT),170,-37.6309486600574,144.95309828615
+South Cardup,operating,Western Australia,Bioenergy (Biogas),4.16,-32.266420000000004,116.019263
+South Keswick,operating,New South Wales,Solar (Utility),15,-32.272859999999994,148.64983600000002
+Springvale,operating,Victoria,Bioenergy (Biogas),5,-37.973375,145.139695
+St George Leagues Club,operating,New South Wales,Distillate,1,-33.974819000000004,151.129354
+St Leonards Data Centre,operating,Tasmania,,0,,
+Stanwell,operating,Queensland,Coal (Black),1460,-23.507501145433302,150.317883708605
+Stapylton,operating,Queensland,Bioenergy (Biogas),3,,
+Starfish Hill,operating,South Australia,Wind,35,-35.5789829575224,138.13965306151698
+Stockyard Hill,operating,Victoria,Wind,456.96,-37.53567986175766,143.25254771422928
+Sun Metals,operating,Queensland,Solar (Utility),117,-19.437317999999998,146.696015
+Sunraysia,operating,New South Wales,Solar (Utility),228,-34.821489157371836,143.50915997932083
+Sunshine Coast,operating,Queensland,Solar (Utility),15,-26.560799,153.025947
+Susan River,operating,Queensland,Solar (Utility),85,-25.420275,152.742028
+Swanbank E,operating,Queensland,Gas (CCGT),385,-27.6552859093397,152.818643586756
+Tableland Mill,operating,Queensland,Bioenergy (Biomass),24,-17.119813,145.34513
+Tahmoor,operating,New South Wales,Gas (Waste Coal Mine),7,-34.249117,150.577718
+Tailem Bend,operating,South Australia,Solar (Utility),108,-35.28,139.49
+Tailem Bend 2,operating,South Australia,"Battery (Discharging),Solar (Utility)",155,-35.28,139.49
+Tallawarra,operating,New South Wales,Gas (CCGT),440,-34.5230894452804,150.808566045493
+Tamala Park,operating,Western Australia,Bioenergy (Biogas),4.8,-31.7061983,115.72573440000001
+Tamar Valley,operating,Tasmania,Gas (CCGT),208.6,-41.1392679526502,146.906184786351
+Taralga,operating,New South Wales,Wind,106,-34.4253872675598,149.859603200677
+Tarong,operating,Queensland,Coal (Black),1400,-26.7743967256886,151.91783763481502
+Tarong North,operating,Queensland,Coal (Black),443,-26.7743967256886,151.91783763481502
+Tarraleah,operating,Tasmania,Hydro,90,-42.301735605204,146.456661016905
+Tataria,operating,South Australia,Distillate,1,-36.326977,140.73703500000002
+Tatura,operating,Victoria,Bioenergy (Biogas),1,-36.47915,145.235037
+Teralba,operating,New South Wales,Gas (Waste Coal Mine),3,-32.945557,151.612042
+The Bluff,operating,South Australia,Wind,52.5,-33.3677405026772,138.79378986166
+The Drop,operating,New South Wales,Hydro,3,-35.973527000000004,145.99927399999999
+Timboon West,operating,Victoria,Wind,7,-38.528351,142.916231
+Toora,operating,Victoria,Wind,21,-38.653527957636,146.339773925194
+Torrens Island,operating,South Australia,Gas (Steam),1280,-34.8045591391219,138.522228698972
+Torrens Island BESS,operating,South Australia,Battery (Discharging),250,-34.80583141034536,138.5241921602499
+Tower,operating,New South Wales,Gas (Waste Coal Mine),41,-34.219460999999995,150.71801200000002
+Townsville,operating,Queensland,Gas (CCGT),242,-19.2003738513919,146.61826474008998
+Traralgon Network Support,operating,Victoria,Gas (Reciprocating),10,-37.833513,144.965955
+Trevallyn,operating,Tasmania,Hydro,93,-41.4223016124435,147.112025239595
+Tribute,operating,Tasmania,Hydro,108,-41.8114682913897,145.653251895339
+Tumut,operating,New South Wales,Hydro,1232,-35.9534920741923,148.369693358993
+Tumut 3,retired,New South Wales,"Hydro,Pumps",3000,-35.6108171090502,148.29264351448998
+Tungatinah,operating,Tasmania,Hydro,125,-42.2963963682648,146.45588138196
+Uranquinty,operating,New South Wales,Gas (OCGT),664,-35.180225647620205,147.21565992714
+Vales Point B,operating,New South Wales,Coal (Black),1320,-33.164639,151.5441155
+Valley Aking,operating,Victoria,Gas (OCGT),300,-38.2526008522186,146.58890593343202
+Veolia Ti Tree,operating,Queensland,Bioenergy (Biogas),2,-27.695551000000002,152.65031299999998
+Victoria Big Battery,operating,Victoria,Battery (Discharging),360,-38.03827950146317,144.2910031846593
+Victoria Mill,operating,Queensland,Bioenergy (Biomass),24,-18.650208,146.200866
+Wagerup,operating,Western Australia,Gas (OCGT),418,-32.9043187,115.9204307
+Walkaway,operating,Western Australia,Wind,89.1,-28.902492300000002,114.8927165
+Wallgrove,operating,New South Wales,Battery (Discharging),50,-33.81747581892088,150.8272761693095
+Wandoan Solar Farm,operating,Queensland,Solar (Utility),159,-26.263563967767258,149.7722434039925
+Wandoan South,operating,Queensland,Battery (Discharging),150,-26.263986201894923,149.7728711343933
+Warradarge,operating,Western Australia,Wind,180,-30.041742290803096,115.34601918477634
+Waterloo,operating,South Australia,Wind,130,-33.991095267936004,138.915722795005
+Wattle Point,operating,South Australia,Wind,91,-35.1154104383038,137.718672417968
+Waubra,operating,Victoria,Wind,192,-37.3579790620375,143.592600206467
+Wellington,operating,New South Wales,Solar (Utility),216,,
+Wemen,operating,Victoria,Solar (Utility),97,-34.80259,142.543348
+West Hills,operating,Western Australia,Wind,5,-30.8581035,115.4632611
+West Illawarra Leagues Club,operating,New South Wales,Distillate,1,-34.451645,150.843037
+West Kalgoorlie,operating,Western Australia,Distillate,64.5,-30.7804027,121.42151909999998
+West Kiewa,operating,Victoria,Hydro,62,-36.759673693368605,147.18608214576798
+West Nowra,operating,New South Wales,Bioenergy (Biogas),1,-34.882318,150.551075
+West Wyalong,operating,New South Wales,Solar (Utility),105,-33.7956353638098,147.3145445846548
+Western Suburbs League Club,operating,New South Wales,Distillate,1,-34.051072999999995,150.83275700000002
+White Rock,operating,New South Wales,"Solar (Utility),Wind",197,,
+Whitsunday,operating,Queensland,Solar (Utility),57,-20.537259,147.80475
+Wilga Park,operating,New South Wales,Gas (Reciprocating),10,-30.314444,149.65276799999998
+Wilga Park B,operating,New South Wales,Gas (Reciprocating),12,-30.314444,149.65276799999998
+Willogoleche,operating,South Australia,Wind,119,-33.393569,138.84821000000002
+Willoughby,operating,New South Wales,Distillate,3,-33.810858,151.196599
+Windy Hill,operating,Queensland,Wind,12,-17.590398999999998,145.52968
+Wingfield,operating,South Australia,Bioenergy (Biogas),5,-34.835138,138.548949
+Wingfield 2,operating,South Australia,Bioenergy (Biogas),5,-34.835138,138.548949
+Winton,operating,Victoria,Solar (Utility),85,-36.49969510417262,146.11455416505774
+Wivenhoe,operating,Queensland,"Hydro,Pumps",570,-27.3722237672267,152.63236172623698
+Wivenhoe,operating,Queensland,Hydro,5,-27.394592,152.609237
+Wollert,operating,Victoria,Bioenergy (Biogas),7,-37.591792,145.043033
+Wonthaggi,operating,Victoria,Wind,12,-38.605129999999996,145.546292
+Woodlawn,operating,New South Wales,Bioenergy (Biogas),7,-35.05928,149.5749
+Woodlawn,operating,New South Wales,Wind,48,-35.0816745987566,149.570510727867
+Woolnorth,operating,Tasmania,Wind,140,-40.736374750198706,144.694820513736
+Woolooga,operating,Queensland,Solar (Utility),222.5,-26.0845224,152.4412264
+Woy Woy,operating,New South Wales,Bioenergy (Biogas),1,-33.506914,151.291606
+Wyalong Solar Farm,operating,New South Wales,Solar (Utility),62.32,-33.80493895585568,147.29515548006776
+Wyangala A,operating,New South Wales,Hydro,20,-33.980371000000005,148.947377
+Wyangala B,operating,New South Wales,Hydro,4,-33.980371000000005,148.947377
+Yallourn W,operating,Victoria,Coal (Brown),1480,-38.177596216851605,146.347508446364
+Yaloak South,operating,Victoria,Wind,28,-37.716474,144.241947
+Yambuk,operating,Victoria,Wind,30,-38.305278107624,142.018439165612
+Yandin,operating,Western Australia,Wind,214,-30.680970908597665,115.69424934340425
+Yarranlea,operating,Queensland,Solar (Utility),121,-27.7089394,151.5326965
+Yarrawonga,operating,Victoria,Hydro,9,-36.009465999999996,145.99956799999998
+Yarwun,operating,Queensland,Gas (CCGT),154,-23.8302003068757,151.149691648905
+Yatpool,operating,Victoria,Solar (Utility),94,-34.38072973033968,142.2053402489219
+Yawong,operating,Victoria,Wind,7.2,-36.471022,143.361722
+Yendon,operating,Victoria,Wind,144,-37.630952,144.022463

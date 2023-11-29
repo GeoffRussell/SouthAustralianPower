@@ -1,5 +1,16 @@
-### A week in the SA grid
 
-South Australia has more wind and solar power per person than pretty much anywhere on the planet.
+This *shiny* website will analyse a week's worth of data from South Australia (SA). Why? Because
+SA has more wind and solar power per person than pretty much anywhere on the planet. It's a real world
+experiment in non-trivial penetration of wind and solar power into an non-trivial grid. 
+
+The SA grid is fairly small, serving about 1.7 million people, but big enough
+to serve as a canary in a coal mine (bad pun intended). It is connected to the rest of the eastern
+Australian electricity grid, known as the NEM by two connections with a third under construction. Why does
+a small state suddenly need another interconnector, for AU$2.1 billion?  Please read on.
+
+## Intermittent renewable energy in South Australia 
+
+The following chart of kilowatts of solar per person uses the latest [Statistical Review of World Energy](https://www.energyinst.org/statistical-review) report (2023) data, which is kept at the national level; but includes estimates of rooftop solar. This is tough to estimate because it is behind the meter and nobody really knows how many panels are performing to their specifications. Still, I doubt they are too far
+off the mark. South Australia has more rooftop solar than most Australian states per person, thanks to early and generous subsidies (feed in tariffs).
 
 
