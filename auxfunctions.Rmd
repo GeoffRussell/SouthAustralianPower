@@ -1,0 +1,61 @@
+---
+title: "auxfunctions"
+author: "GeoffRussell"
+date: "2023-11-29"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(readxl)
+library(wbstats)
+d<-"SouthAustralianElectricity/"
+# very annoying different columns in wind and solar sheets
+lookups<-c(
+  'Megawatts'='...1',
+  '2000'='...6', '2001'='...7', '2002'='...8', '2003'='...9', '2004'='...10',
+  '2005'='...11', '2006'='...12', '2007'='...13', '2008'='...14', '2009'='...15',
+  '2010'='...16', '2011'='...17', '2012'='...18', '2013'='...19', '2014'='...20',
+  '2015'='...21', '2016'='...22', '2017'='...23', '2018'='...24', '2019'='...25',
+  '2020'='...26', '2021'='...27', '2022'='...28'
+  )
+lookupw<-c(
+  'Megawatts'='...1',
+  '2000'='...5', '2001'='...6', '2002'='...7', '2003'='...8', '2004'='...9',
+  '2005'='...10', '2006'='...11', '2007'='...12', '2008'='...13', '2009'='...14',
+  '2010'='...14', '2011'='...16', '2012'='...17', '2013'='...18', '2014'='...19',
+  '2015'='...20', '2016'='...21', '2017'='...22', '2018'='...23', '2019'='...24',
+  '2020'='...25', '2021'='...26', '2022'='...27'
+  )
+gets<-function(s,l) {
+  read_xlsx(paste0(d,"Statistical_Review_of_World_Energy_2023.xlsx"),sheet=s,skip=2) %>% rename(all_of(l)) %>%
+    mutate(Country=`Megawatts`) %>% select(Country,`2005`:`2022`)
+}
+```
+
+## Get World Bank Population Data
+
+We read the World Bank data and then save it for future use. The names of countries as used by the World
+Bank don't match those used in the Statistical Review of World Energy; which is really annoying.
+
+```{r}
+# pop_data <- wb_data("SP.POP.TOTL", start_date = 2005, end_date = 2022) 
+# write_csv(pop_data,"population2022.csv")
+```
+
+```{r}
+dfs <- gets("Solar Capacity",lookups) 
+dfw <- gets("Wind Capacity",lookupw) 
+countries<-read_csv("countries.csv") %>% arrange(Country)
+population<-read_csv("population2022.csv")
+lut<-c("United States"="US",
+       "Korea, Rep."="South Korea")
+pop <- population %>% mutate(country=recode(country,!!!lut))
+write_csv(pop,paste0(d,"populationRenamed2022.csv"))
+pop2022<-pop %>% filter(date=="2022") %>% mutate(Population=`SP.POP.TOTL`,Country=country) %>% select(Country,Population)
+dfs2022 <- dfs %>% select(Country,`2022`) %>% left_join(pop2022) %>% inner_join(countries) %>% filter(!is.na(Population)) %>% mutate(MW=`2022`,kwPerCap=(MW*1000)/Population) 
+write_csv(dfs2022,paste0(d,"kwPerCap2022.csv"))
+dfw2022 <- dfw %>% select(Country,`2022`) %>% left_join(pop2022) %>% inner_join(countries) %>% filter(!is.na(Population)) %>% mutate(MW=`2022`,kwPerCap=(MW*1000)/Population) 
+write_csv(dfw2022,paste0(d,"kwPerCap2022Wind.csv"))
+```
