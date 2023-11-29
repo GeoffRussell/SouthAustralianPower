@@ -1,0 +1,7 @@
+### Understanding the graph
+
+This graph was produced using the [OpenNEM website](https://opennem.org.au/energy/sa1/?range=7d&interval=5m&view=discrete-time) on the 29th of November 2023. If you visit the OpenNEM site now, you'll see a different
+image, because the make up of the electricity supply is heavily dependent on the weather. 
+
+
+

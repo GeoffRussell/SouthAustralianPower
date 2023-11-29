@@ -1,0 +1,55 @@
+﻿Facility Name,Status,Region,Technology,Generator Capacity (MW),Latitude,Longitude
+Adelaide Desalination,operating,South Australia,"Battery (Discharging),Solar (Utility)",9.14,-35.09694820846758,138.48406087198447
+Angaston,operating,South Australia,Distillate,100,-34.5039482864289,139.024296339333
+Barker Inlet,operating,South Australia,Gas (Reciprocating),211,-34.804,138.524
+Bolivar,operating,South Australia,Gas (CCGT),128,,
+Bungala One,operating,South Australia,Solar (Utility),135,-32.423316,137.841798
+Canunda,operating,South Australia,Wind,46,-37.6983027777778,140.383633333333
+Cathedral Rocks,operating,South Australia,Wind,66,-34.8487411412149,135.592648854827
+Clements Gap,operating,South Australia,Wind,57,-33.4897731866514,138.11169493851003
+Dalrymple North,operating,South Australia,Battery (Discharging),30,-34.888446,137.75811399999998
+Dry Creek,operating,South Australia,Gas (OCGT),156,-34.8472931778913,138.582297039723
+Goyder South,operating,South Australia,Wind,412.5,-33.682196301707506,138.93624905375023
+Hallett,operating,South Australia,Gas (OCGT),217,-33.3493102447996,138.752632826228
+Hallett 1,operating,South Australia,Wind,95,-33.3284341007768,138.704668661635
+Hallett 2,operating,South Australia,Wind,71,-33.5382102938784,138.857214598585
+Hornsdale,operating,South Australia,Wind,102,-33.05982,138.537673
+Hornsdale 2,operating,South Australia,Wind,102,-33.05982,138.537673
+Hornsdale 3,operating,South Australia,Wind,112,-33.05982,138.537673
+Hornsdale Power Reserve,operating,South Australia,Battery (Discharging),150,-33.085519,138.52191399999998
+Ladbroke Grove,operating,South Australia,Gas (OCGT),80,-37.456183170651,140.782699220365
+Lake Bonney,operating,South Australia,Battery (Discharging),25,-37.7387871,140.3846721
+Lake Bonney,operating,South Australia,Wind,81,-37.7605043836737,140.40554118305099
+Lake Bonney 2,operating,South Australia,Wind,159,-37.7605043836737,140.40554118305099
+Lake Bonney 3,operating,South Australia,Wind,39,-37.7605043836737,140.40554118305099
+Lincoln Gap,commissioning,South Australia,Wind,298.4,-32.5463326,137.5527629
+Lonsdale,operating,South Australia,Distillate,21,-35.109718,138.49096200000002
+Mannum,operating,South Australia,Solar (Utility),5.5,-34.92021697813909,139.31443846248854
+Mintaro,operating,South Australia,Gas (OCGT),115,-33.9031486136929,138.73879717507901
+Morganwhyalla Pipeline,operating,South Australia,Solar (Utility),0,,
+Mt Millar,operating,South Australia,Wind,70,-33.6193424956887,136.717568216817
+Murray Bridge-Onkaparinga,operating,South Australia,Solar (Utility),2.1,-35.0940934825907,139.21151125343218
+North Brown Hill,operating,South Australia,Wind,132,-33.2281156193048,138.71688837303898
+Osborne,operating,South Australia,Gas (CCGT),180,-34.797699815377,138.50809861051098
+Pelican Point,operating,South Australia,Gas (CCGT),478,-34.764365355128604,138.5053993318
+Port Augusta Energy Park,operating,South Australia,"Solar (Utility),Wind",309,-32.59560885770281,137.88562879204383
+Port Lincoln,operating,South Australia,Distillate,73,-34.700616012351496,135.804530499443
+Port Stanvac,operating,South Australia,Distillate,173.6,-35.110345,138.490872
+Quarantine,operating,South Australia,Gas (OCGT),229,-34.7790736853879,138.522454543776
+Snapper Point,operating,South Australia,Gas (OCGT),154,-34.764519992803145,138.50819008412628
+Snowtown,operating,South Australia,Wind,99,-33.6915984540895,138.16602222010098
+Snowtown North,operating,South Australia,Wind,144,-33.756478648772394,138.143043187414
+Snowtown South,operating,South Australia,Wind,126,-33.862624210288,138.13036653197202
+Snuggery,operating,South Australia,Distillate,88,-37.664995624079204,140.41468562441003
+Starfish Hill,operating,South Australia,Wind,35,-35.5789829575224,138.13965306151698
+Tailem Bend,operating,South Australia,Solar (Utility),108,-35.28,139.49
+Tailem Bend 2,operating,South Australia,"Battery (Discharging),Solar (Utility)",155,-35.28,139.49
+Tataria,operating,South Australia,Distillate,1,-36.326977,140.73703500000002
+The Bluff,operating,South Australia,Wind,52.5,-33.3677405026772,138.79378986166
+Torrens Island,operating,South Australia,Gas (Steam),1280,-34.8045591391219,138.522228698972
+Torrens Island BESS,operating,South Australia,Battery (Discharging),250,-34.80583141034536,138.5241921602499
+Waterloo,operating,South Australia,Wind,130,-33.991095267936004,138.915722795005
+Wattle Point,operating,South Australia,Wind,91,-35.1154104383038,137.718672417968
+Willogoleche,operating,South Australia,Wind,119,-33.393569,138.84821000000002
+Wingfield,operating,South Australia,Bioenergy (Biogas),5,-34.835138,138.548949
+Wingfield 2,operating,South Australia,Bioenergy (Biogas),5,-34.835138,138.548949
