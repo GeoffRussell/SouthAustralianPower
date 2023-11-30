@@ -28,7 +28,17 @@ lookupw<-c(
   '2015'='...20', '2016'='...21', '2017'='...22', '2018'='...23', '2019'='...24',
   '2020'='...25', '2021'='...26', '2022'='...27'
   )
-gets<-function(s,l) {
+
+getEnergySheet<-function(l) {
+  s<-l[[1]] 
+  t<-l[[2]] 
+  read_xlsx(paste0(d,"Statistical_Review_of_World_Energy_2023.xlsx"),sheet=s,skip=2) %>%
+    mutate(Country=`Terawatt-hours`) %>% select(Country,`2005`:`2022...59`) %>% mutate("2022"=`2022...59`) %>%
+    #select(Country,`2005`:`2021`,`2022`) %>% mutate(Type=t)
+    select(Country,`2022`) %>% mutate(Type=t,TWh22=`2022`) %>% select(Country,TWh22,Type)
+}
+
+getCapacitySheet<-function(s,l) {
   read_xlsx(paste0(d,"Statistical_Review_of_World_Energy_2023.xlsx"),sheet=s,skip=2) %>% rename(all_of(l)) %>%
     mutate(Country=`Megawatts`) %>% select(Country,`2005`:`2022`)
 }
@@ -45,8 +55,8 @@ Bank don't match those used in the Statistical Review of World Energy; which is 
 ```
 
 ```{r}
-dfs <- gets("Solar Capacity",lookups) 
-dfw <- gets("Wind Capacity",lookupw) 
+dfs <- getCapacitySheet("Solar Capacity",lookups) 
+dfw <- getCapacitySheet("Wind Capacity",lookupw) 
 countries<-read_csv("countries.csv") %>% arrange(Country)
 population<-read_csv("population2022.csv")
 lut<-c("United States"="US",
@@ -58,6 +68,7 @@ dfs2022 <- dfs %>% select(Country,`2022`) %>% left_join(pop2022) %>% inner_join(
 write_csv(dfs2022,paste0(d,"kwPerCap2022.csv"))
 dfw2022 <- dfw %>% select(Country,`2022`) %>% left_join(pop2022) %>% inner_join(countries) %>% filter(!is.na(Population)) %>% mutate(MW=`2022`,kwPerCap=(MW*1000)/Population) 
 write_csv(dfw2022,paste0(d,"kwPerCap2022Wind.csv"))
+countries<-dfw2022 %>% arrange(desc(kwPerCap)) %>% slice_head(n=20) %>% select(Country)
 ```
 
 ```{r}
@@ -66,4 +77,28 @@ dfdata<-read_csv(paste0(d,"opennem-30-11-2023sa5.csv")) %>%
   rename_with(~sub('  ',' ',.x))
 dfout<-dfdata %>% mutate(demand=select(.,`Battery (Charging) - MW`:`Solar (Rooftop) - MW`) %>% apply(1,sum)) 
 write_csv(dfout,"dfout.csv")
+```
+
+```{r renewable2022}
+l<-list(
+c("Geo Biomass Other - TWh","Biomass"),
+c("Wind Generation - TWh","Wind"),
+c("Solar Generation - TWh","Solar"),
+c("Hydro Generation - TWh","Hydro")
+)
+df2022<-bind_rows(map(l,getEnergySheet)) %>% left_join(pop2022) %>% 
+  inner_join(countries) %>% filter(!is.na(Population)) %>%
+  filter(!grepl("\\^|-",TWh22)) %>% arrange(Country) %>% mutate(kWhPerCap=as.numeric(TWh22)*1e9/Population)
+
+write_csv(df2022,paste0(d,"wsbh.csv"))
+c<-df2022 %>% inner_join(countries) %>% group_by(Country) %>% summarise(sum=sum(kWhPerCap)) %>% ungroup() %>% inner_join(df2022)
+
+```
+
+```{r}
+dfbe<-getEnergySheet("Geo Biomass Other - TWh","Biomass") 
+dfwe<-getEnergySheet("Wind Generation - TWh","Wind") 
+dfse<-getEnergySheet("Solar Generation - TWh","Solar")
+dfhe<-getEnergySheet("Hydro Generation - TWh","Hydro")
+df2022<-bind_rows(dfbe,dfwe,dfse,dfhe) %>% left_join(pop2022) %>% inner_join(countries) %>% filter(!is.na(Population))
 ```
