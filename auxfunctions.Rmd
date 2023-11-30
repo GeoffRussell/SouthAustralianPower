@@ -29,9 +29,7 @@ lookupw<-c(
   '2020'='...25', '2021'='...26', '2022'='...27'
   )
 
-getEnergySheet<-function(l) {
-  s<-l[[1]] 
-  t<-l[[2]] 
+getEnergySheet<-function(s,t) {
   read_xlsx(paste0(d,"Statistical_Review_of_World_Energy_2023.xlsx"),sheet=s,skip=2) %>%
     mutate(Country=`Terawatt-hours`) %>% select(Country,`2005`:`2022...59`) %>% mutate("2022"=`2022...59`) %>%
     #select(Country,`2005`:`2021`,`2022`) %>% mutate(Type=t)
@@ -80,18 +78,19 @@ write_csv(dfout,"dfout.csv")
 ```
 
 ```{r renewable2022}
-l<-list(
-c("Geo Biomass Other - TWh","Biomass"),
-c("Wind Generation - TWh","Wind"),
-c("Solar Generation - TWh","Solar"),
-c("Hydro Generation - TWh","Hydro")
-)
-df2022<-bind_rows(map(l,getEnergySheet)) %>% left_join(pop2022) %>% 
-  inner_join(countries) %>% filter(!is.na(Population)) %>%
+l<-tribble(
+  ~s,                       ~t,
+  "Geo Biomass Other - TWh","Biomass",
+  "Wind Generation - TWh",  "Wind",
+  "Solar Generation - TWh", "Solar", 
+  "Hydro Generation - TWh", "Hydro"
+  )
+df2022<-bind_rows(map2(l$s,l$t,getEnergySheet)) %>% left_join(pop2022,by=join_by(Country)) %>% 
+  inner_join(countries,by=join_by(Country)) %>% filter(!is.na(Population)) %>%
   filter(!grepl("\\^|-",TWh22)) %>% arrange(Country) %>% mutate(kWhPerCap=as.numeric(TWh22)*1e9/Population)
 
 write_csv(df2022,paste0(d,"wsbh.csv"))
-c<-df2022 %>% inner_join(countries) %>% group_by(Country) %>% summarise(sum=sum(kWhPerCap)) %>% ungroup() %>% inner_join(df2022)
+c<-df2022 %>% inner_join(countries,by=join_by(Country)) %>% group_by(Country) %>% summarise(sum=sum(kWhPerCap)) %>% ungroup() %>% inner_join(df2022,by=join_by(Country))
 
 ```
 
