@@ -1,4 +1,5 @@
+
 ## Wind power in South Australia
 
-The amount of wind power in South Australia blitzes any national per person figure; but I don't
-have regional data from other countries.
+The amount of wind power in South Australia blitzes any national per person figure; but there may be other
+sub-national regions for which I don't have data.

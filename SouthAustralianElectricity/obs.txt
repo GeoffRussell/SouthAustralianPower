@@ -1,0 +1,10 @@
+
+## Solar power in South Australia 
+
+South Australia is also a world leader in solar power. Estimating the amount of rooftop solar relies on installation 
+data rather than actual measurement, because the generation is behind the electricity meter. Grid operators know about
+the amount of solar electricity being fed into the grid, but not the amount being used in homes.
+
+The following chart compares per per person solar PV capacity using the latest [Statistical Review of World Energy](https://www.energyinst.org/statistical-review) data (2022 in the 2023 report). This data is national level data; 
+but includes estimates of rooftop solar. As you can see Australia has more solar capacity than any country except the 
+Netherlands. Typically Australia gets about 50% more solar energy than the Netherlands, which would see out panel output well above that of the Netherlands.

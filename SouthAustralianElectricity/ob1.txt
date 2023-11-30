@@ -3,5 +3,17 @@
 This graph was produced using the [OpenNEM website](https://opennem.org.au/energy/sa1/?range=7d&interval=5m&view=discrete-time) on the 29th of November 2023. If you visit the OpenNEM site now, you'll see a different
 image, because the make up of the electricity supply is heavily dependent on the weather. 
 
+The OpenNem website graph is interactive, allowing you to explore features of the data in considerable detail. But the features software designers choose to measure and highlight never cover everything. 
+
+### Minimum amount of wind+solar 
+
+What's the minimum amount of renewable energy during the week? OpenNem allows you to specify the granularity of the
+data; 5 minutes, 30 minutes, day, week or month.
+
+
+
+
+
+
 
 

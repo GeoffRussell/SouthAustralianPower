@@ -59,3 +59,11 @@ write_csv(dfs2022,paste0(d,"kwPerCap2022.csv"))
 dfw2022 <- dfw %>% select(Country,`2022`) %>% left_join(pop2022) %>% inner_join(countries) %>% filter(!is.na(Population)) %>% mutate(MW=`2022`,kwPerCap=(MW*1000)/Population) 
 write_csv(dfw2022,paste0(d,"kwPerCap2022Wind.csv"))
 ```
+
+```{r}
+dfdata<-read_csv(paste0(d,"opennem-30-11-2023sa5.csv")) %>% 
+  rename_with(~sub('date','Time',.x)) %>% 
+  rename_with(~sub('  ',' ',.x))
+dfout<-dfdata %>% mutate(demand=select(.,`Battery (Charging) - MW`:`Solar (Rooftop) - MW`) %>% apply(1,sum)) 
+write_csv(dfout,"dfout.csv")
+```
