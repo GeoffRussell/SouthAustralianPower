@@ -1,10 +1,10 @@
 ## A week of SA data
 
 Now here's a chart showing the makeup of a week's worth of electricity in SA during a mild spring
-week. 
+week at the end of November 2023. 
 
-The horizontal axis is time; covering a week.  You can see the nights are marked
-by a dark vertical band. The vertical axis is power. You can see that the wind farms
+The horizontal axis is time and you can see the nights are marked
+by a grey vertical band. The vertical axis is power in megawatts. You can see that the wind farms
 (green band) produce a considerable portion of the total demand. 
 
 This was a week of mild temperatures; nobody needed heating or cooling. You can see that the

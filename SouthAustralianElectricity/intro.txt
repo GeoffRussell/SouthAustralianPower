@@ -1,14 +1,19 @@
 
-This [*shiny*](https://www.rstudio.com/products/shiny/) website will analyse a week's worth of data from South Australia (SA). Why? Because
+This [*shiny*](https://www.rstudio.com/products/shiny/) website will analyse the renewable energy
+rollout in South Australia (SA); which means wind and solar. Why? Because
 SA has more wind and solar power per person than pretty much anywhere on the planet. It's a real world
-experiment in non-trivial penetration of wind and solar power into an non-trivial grid. 
+experiment in non-trivial penetration of wind and solar power into an non-trivial grid. SA has no hydro-electricity
+and no bioenergy; other than burning garbage at our main waste dump in Adelaide. This is roughly 1/10th of one percent
+of our electricity power generation capacity.
 
 The SA grid is fairly small, serving about 1.7 million people, but big enough
 to serve as a canary in a coal mine (bad pun intended). It is connected to the rest of the eastern
-Australian electricity grid, known as the NEM by two connections with a third under construction. Why does
-a small state suddenly need another interconnector, for AU$2.1 billion?  Please read on.
+Australian electricity grid, known as the NEM by two connections with a third under construction. 
+
+Why does such a small state suddenly need another interconnector, for AU$2.1 billion?  Please read on.
 
 ## Intermittent renewable energy in South Australia 
 
-A generous [feed in tariff](https://en.wikipedia.org/wiki/Feed-in_tariffs_in_Australia#South_Australia) was introduced into South Australia in 2006 with the then Premier Mike Rann aiming for the state to be carbon neutral by 2020. And now, in 2023, after 17 years of solar and wind installations, SA is a world leader in demonstrating the failure of intermittent renewable energy to match the speed and effectiveness of nuclear rollouts in the 70s, 80s and 90s.  
+A generous [feed in tariff](https://en.wikipedia.org/wiki/Feed-in_tariffs_in_Australia#South_Australia) was introduced into South Australia in 2006 with the then Premier Mike Rann aiming for the state to be carbon neutral by 2020. And now, in 2023, after 17 years of solar and wind installations, SA is a world leader in wind and solar electricity generation. Australian's simply love to use the phrase "punching above our weight", and we are. Not that we make the panels or the wind turbines or even the batteries. We are pretty much, like the rest of the planet, punching in the anorexic weight class of the
+energy generation championships.
 
