@@ -1,0 +1,17 @@
+## International comparisons
+
+The following chart shows low-carbon electricity for 20 countries, chosen on the basis of being the
+top 20 countries by wind power per person. 
+The black diamonds are the total per person annual electricty generation in
+each country and in SA. The country data is 2022 data so you can see that Germany still has some nuclear power. 
+
+The data for SA isn't from SRWE is the 12 months from November 2022 to November 2023, courtesy of OpenNem. During this
+period, SA got 71% of its electricity from wind and solar power. 
+
+How has this been achieved without biomass, hydro or nuclear?
+
+Remember that $2.1 billion interconnector? It supplies electricity to the state from Victoria; mostly generated
+from fossil fuel power stations in that state.
+
+
+

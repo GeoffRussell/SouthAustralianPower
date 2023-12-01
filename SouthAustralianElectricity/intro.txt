@@ -1,10 +1,22 @@
 
-This [*shiny*](https://www.rstudio.com/products/shiny/) website will analyse the renewable energy
-rollout in South Australia (SA); which means wind and solar. Why? Because
-SA has more wind and solar power per person than pretty much anywhere on the planet. It's a real world
-experiment in non-trivial penetration of wind and solar power into an non-trivial grid. SA has no hydro-electricity
-and no bioenergy; other than burning garbage at our main waste dump in Adelaide. This is roughly 1/10th of one percent
-of our electricity power generation capacity.
+This website (driven by [*shiny*](https://www.rstudio.com/products/shiny/) software) will analyse the renewable energy
+rollout in South Australia (SA). In the SA context, this means a wind and solar rollout. Why? Because
+SA is one of the driest places on the planet, so it has virtually no rivers suitable for 
+hydro-electricity, nor and forests it can burn. Consequently it is a natural experiment in variable renewable
+resources and has more wind and solar power per person than pretty much anywhere on the planet. 
+
+It's a real world experiment in non-trivial penetration of wind and solar power 
+into an non-trivial grid. 
+
+On objective measures, nuclear power is [safer and more eco-friendly every regard](https://www.blog.geoffrussell.com.au/post/eu-sustainability-taxonomy-why-allow-solar-pv) and has long been [supported by a veritable who's who](https://bravenewclimate.com/2014/12/15/an-open-letter-to-environmentalists-on-nuclear-energy/)
+of ecological and environmental scientists working in Australia and, ignoring roughly 20% undecided is supported
+by a 2:1 majority of the Australian public, but is currently banned because of some extraordinary political 
+manoevering in the late 1990s. So we are currently stuck using second rate environmentally sub-optimal 
+energy sources that are not
+dispatchable. In other jurisictions using wind and solar, forests are available to burn to firm
+supply and rivers can be dammed (which should probably be spelled damned) for hydro-electricity. 
+For example, Germany in 2022 got about 600 terawatt-hours (TWh) from burning forests, only slightly
+below the 723 TWh it got from solar power. So SA is a very singular experiment. 
 
 The SA grid is fairly small, serving about 1.7 million people, but big enough
 to serve as a canary in a coal mine (bad pun intended). It is connected to the rest of the eastern
@@ -12,8 +24,9 @@ Australian electricity grid, known as the NEM by two connections with a third un
 
 Why does such a small state suddenly need another interconnector, for AU$2.1 billion?  Please read on.
 
+The data in this page is either from the latest [Statistical Review of World Energy](https://www.energyinst.org/statistical-review), meaning it is 2022 data from the 2023 report) or [OpenNem](https://opennem.org.au/energy/nem/?range=7d&interval=30m&view=discrete-time) a website which displays data from
+Australian electricity markets. 
+
 ## Intermittent renewable energy in South Australia 
 
-A generous [feed in tariff](https://en.wikipedia.org/wiki/Feed-in_tariffs_in_Australia#South_Australia) was introduced into South Australia in 2006 with the then Premier Mike Rann aiming for the state to be carbon neutral by 2020. And now, in 2023, after 17 years of solar and wind installations, SA is a world leader in wind and solar electricity generation. Australian's simply love to use the phrase "punching above our weight", and we are. Not that we make the panels or the wind turbines or even the batteries. We are pretty much, like the rest of the planet, punching in the anorexic weight class of the
-energy generation championships.
-
+A generous [feed in tariff](https://en.wikipedia.org/wiki/Feed-in_tariffs_in_Australia#South_Australia) was introduced into South Australia in 2006 with the then Premier Mike Rann aiming for the state to be carbon neutral by 2020. And now, in 2023, after 17 years of solar and wind installations, SA is a world leader in wind and solar electricity generation. Australian's simply love to use the phrase "punching above our weight", and we are. Not that we make the panels or the wind turbines or even the batteries. We are pretty much, like the rest of the planet, punching in the anorexic weight class of the energy generation championships.

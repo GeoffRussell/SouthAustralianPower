@@ -14,12 +14,24 @@ markdownFile<-function(filename) {
   markdown(t)
 }
 options(scipen=999)
+cols<-c(
+  "Biomass"="brown",
+  "Solar"="yellow",
+  "Wind"="forestgreen",
+  "Nuclear"="purple",
+  "Hydro"="blue"
+  )
 
 dfpop<-read_csv("populationRenamed2022.csv")
 dfkwPerCapSolar<-read_csv("kwPerCap2022.csv") %>% arrange(desc(kwPerCap)) %>% slice_head(n=20)
 dfkwPerCapWind<-read_csv("kwPerCap2022Wind.csv") %>% arrange(desc(kwPerCap)) %>% slice_head(n=20)
-countries<-dfkwPerCapWind %>% select(Country)
+countries<-dfkwPerCapWind %>% select(Country) 
+countries<-bind_rows(countries,tribble(~Country,"South Australia"))
+
 dfwsbh<-read_csv("wsbh.csv") %>% inner_join(countries)
+dfel<-bind_rows(tribble(~Country,~TWh,~Population,"South Australia",14.2,1.8e6),(read_csv("el.csv") %>% inner_join(countries)))
+print(dfel)
+
 dfwsbh<-dfwsbh %>% group_by(Country) %>% summarise(sum=sum(kWhPerCap)) %>% ungroup() %>% inner_join(dfwsbh)
 
 dfsa<-tribble(
@@ -49,6 +61,7 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       plotOutput("kwpercapwind"),
       markdownFile("obs.txt"),
       plotOutput("kwpercapsolar"),
+      markdownFile("obwsbh.txt"),
       plotOutput("wsbh"),
       markdownFile("ob0.txt"),
       fluidRow(align="center",imageOutput("weekpng",height=400)),
@@ -65,19 +78,27 @@ server<-function(input,output) {
   output$weekpng<-renderImage(list(src="WeekEnding30-11-2023.png",height=400),deleteFile=FALSE)
   output$kwpercapsolar<-renderPlot({
       dfkwPerCapSolar %>% ggplot() + geom_col(aes(x=reorder(Country,kwPerCap),y=kwPerCap),width=0.6,fill="yellow") + 
-      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + ptheme +
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,
+        color=c(rep("black",18),"red","black"))) + 
+      ptheme +
       labs(x="",y="kilowatts per person",title="Solar: Top 20 countries by kilowatts per person")
   })
   output$wsbh<-renderPlot({
-    dfwsbh %>% ggplot() + geom_col(aes(x=reorder(Country,desc(sum)),y=kWhPerCap,fill=Type)) +
-      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,color=c(rep("black",4),"red",rep("black",15)))) + ptheme +
-      labs(x="",y="Annual kilowatt-hours per person",
-           title="Wind/Solar/Biomass/Hydro: Top 20 \ncountries by wind capacity")
+    dfwsbh %>% ggplot() + 
+      geom_col(aes(x=reorder(Country,desc(sum)),y=kWhPerCap,fill=Type)) +
+      geom_point(aes(x=Country,y=TWh*1e9/Population),shape=5,data=dfel) +
+      scale_fill_manual(name="Technology",values=cols)+
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,
+        color=c(rep("black",4),"red",rep("black",8),"red",rep("black",7)))) + 
+      ptheme +
+      labs(x="",y="Annual low carabon kilowatt-hours per person",
+           title="Wind/Solar/Biomass/Hydro/Nuclear: Top 20 \ncountries by wind capacity")
   })
   output$kwpercapwind<-renderPlot({
       dfkwPerCapWind %>% ggplot() + geom_col(aes(x=reorder(Country,kwPerCap),y=kwPerCap,fill=Group),width=0.6) + 
-      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + ptheme +
-      scale_fill_manual(values=c("red","forestgreen"))+guides(fill="none")+
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,
+        color=c(rep("black",7),"red",rep("black",12),"red"))) + ptheme + 
+      scale_fill_manual(values=c("forestgreen","forestgreen"))+guides(fill="none")+
       labs(x="",y="kilowatts per person",title="Wind: Top 20 countries (plus SA) by kilowatts per person")
   })
   output$shortfall<-renderPlot({
