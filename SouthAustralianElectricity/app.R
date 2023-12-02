@@ -63,6 +63,7 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       plotOutput("kwpercapsolar"),
       markdownFile("obwsbh.txt"),
       plotOutput("wsbh"),
+      markdownFile("obwsbh2.txt"),
       markdownFile("ob0.txt"),
       fluidRow(align="center",imageOutput("weekpng",height=400)),
       markdownFile("ob1.txt"),
@@ -86,7 +87,8 @@ server<-function(input,output) {
   output$wsbh<-renderPlot({
     dfwsbh %>% ggplot() + 
       geom_col(aes(x=reorder(Country,desc(sum)),y=kWhPerCap,fill=Type)) +
-      geom_point(aes(x=Country,y=TWh*1e9/Population),shape=5,data=dfel) +
+      #geom_point(aes(x=Country,y=TWh*1e9/Population),shape=5,data=dfel) +
+      geom_col(aes(x=Country,y=(TWh*1e9/Population)*2),data=dfel,alpha=0.1,fill="red") +
       scale_fill_manual(name="Technology",values=cols)+
       theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,
         color=c(rep("black",4),"red",rep("black",8),"red",rep("black",7)))) + 
