@@ -9,4 +9,7 @@ The following chart compares per per person solar PV capacity. This data is nati
 but includes estimates of rooftop solar. As you can see Australia has more solar capacity than any country except the 
 Netherlands. Typically Australia gets about 50% more solar energy than the Netherlands, which would see our annual
 panel output well above that of the Netherlands. So nationally, and at a state level, we are punching above our
-weight :)
+weight :). 
+
+Note that there is no column for South Australia. OpenNem is software used to analyse the Australian electricity grids. It gives and estimate of rooftop and utility scale solar power generation every 5 minutes. The maximum estimated rooftop 
+PV output in South Australia is typically 1,500 megawatts on a bright sunny day. There is another 590 megawatts of utility scale solar, giving us about 2,090 megawatts for a population of 1.8 million. So our total installed capacity will be similar to the national average. 

@@ -2,16 +2,25 @@
 
 The following chart shows low-carbon electricity for 20 countries, chosen on the basis of being the
 top 20 countries by wind power per person. 
-The black diamonds are the total per person annual electricty generation in
-each country and in SA. The country data is 2022 data so you can see that Germany still has some nuclear power. 
+
+The red shaded area is the aspirational target of Australia's AEMO ISP by 2050 (the Integrated System Plan of our Energy
+Market Operator). This target is that **the grid** should be supplying about double what it supplies today;
+meaning **in addition** to whatever rooftop and domestic batteries supply. The international IEA has a similar target.
+
+Note that the national data in the chart is from 2022, which is why Germany still has some nuclear power. 
 
 The data for SA isn't from SRWE is the 12 months from November 2022 to November 2023, courtesy of OpenNem. During this
 period, SA got 71% of its electricity from wind and solar power. 
 
-How has this been achieved without biomass, hydro or nuclear?
+How has this been achieved without the biomass, hydro or nuclear which is used by other countries to
+cover the gaps in intermittent energy supply. 
 
 Remember that $2.1 billion interconnector? It supplies electricity to the state from Victoria; mostly generated
 from fossil fuel power stations in that state.
+
+
+
+
 
 
 

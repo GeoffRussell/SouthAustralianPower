@@ -1,0 +1,12 @@
+Are the AEMO and IEA aspirational targets to double electricity really necessary? 
+
+How much electricity you need is determined by the economy you want. If you can afford to buy energy intensive 
+manufactured goods like aluminium, batteries, phones, computers, ChatGPT and so on, then you may not need to double your electricity. Australia is ranked 82 on the [economic complexity index](https://en.wikipedia.org/wiki/Economic_Complexity_Index), down with many developing countries. Our relatively small range of resource and commodity exports have made us wealthy more by good luck than by skill and ingenuity.
+
+Compare South Australia, or Australia as a whole, with the UAE. As a country we have more than double the population. We used to have 6 aluminium smelters, but 2 have closed. Tomago, for example, has called for a plan to [operate with
+renewable](https://reneweconomy.com.au/tomago-aluminium-smelter-seeks-partners-in-shift-to-100-pct-renewables/) power. It
+needs a constant 850MW power supply. Australia's largest **proposed** battery is expected to cost
+$AU1.9 billion and can supply 1.2GW of power for 2 hours. Buy 3 of these and you could get the smelter through a
+single 8 hour shift. The UAE has 4 x 1.4GW nuclear reactors, built for about $US5 billion each and they can 
+drive the UAE's smelters continuously. Consequently, the UAE can supply low carbon aluminium to European car
+makers. 
