@@ -56,7 +56,7 @@ Bank don't match those used in the Statistical Review of World Energy; which is 
 # write_csv(pop_data,"population2022.csv")
 ```
 
-```{r}
+```{r capacity}
 dfs <- getCapacitySheet("Solar Capacity",lookups) 
 dfw <- getCapacitySheet("Wind Capacity",lookupw) 
 countries<-read_csv("countries.csv") %>% arrange(Country)
@@ -73,12 +73,16 @@ write_csv(dfw2022,paste0(d,"kwPerCap2022Wind.csv"))
 countries<-dfw2022 %>% arrange(desc(kwPerCap)) %>% slice_head(n=20) %>% select(Country)
 ```
 
-```{r}
+```{r testing}
 dfdata<-read_csv(paste0(d,"opennem-30-11-2023sa5.csv")) %>% 
   rename_with(~sub('date','Time',.x)) %>% 
   rename_with(~sub('  ',' ',.x))
 dfout<-dfdata %>% mutate(demand=select(.,`Battery (Charging) - MW`:`Solar (Rooftop) - MW`) %>% apply(1,sum)) 
 write_csv(dfout,"dfout.csv")
+dfimp<-dfdata %>% mutate(Imports=select(.,`Imports - MW`),Battery=`Battery (Discharging) - MW`,
+                         Price=`Price - AUD/MWh`,BP=Price*Battery,IP=Price*Imports) %>%
+  select(Battery,Imports,Price,BP,IP) %>% 
+  summarise(sumb=sum(Battery),sumi=sum(Imports),avb=sum(BP)/sum(Battery),avi=sum(IP)/sum(Imports)) 
 ```
 
 ```{r renewable2022}
@@ -111,4 +115,38 @@ dfyear<-bind_rows(dfyear,dfsa)
 write_csv(dfyear,paste0(d,"wsbh.csv"))
 write_csv(dfel,paste0(d,"el.csv"))
 
+```
+
+```{r batteryusage}
+dfbatt<-read_csv(paste0(d,"batteryusage2023.csv"))
+dfbattout<-dfbatt %>% mutate(MWh=MW5*5/60,MWhI=IM5*5/60) %>% arrange(desc(MWh))
+dfbattout %>% ggplot() + 
+  geom_col(aes(x=ymd(date),y=MWh)) + 
+  geom_smooth(aes(x=ymd(date),y=MWh)) 
+
+```
+```{r yearbyday}
+dfybd<-read_csv(paste0(d,"opennem-3-12-2023sayearbyday.csv")) %>%
+  rename_with(~sub('date','Date',.x)) %>% rename_with(~sub('  ',' ',.x)) %>%
+  mutate(Month=str_sub(Date,1,7))
+dfybdsum<-dfybd %>% summarise(ex=sum(`Exports - GWh`),im=sum(`Imports - GWh`),bat=sum(`Battery (Discharging) - GWh`))
+dfyvals<-dfybd %>% summarise(battValPerGWh=sum(`Battery (Discharging) Market Value - AUD`)/sum(`Imports - GWh`),impValPerGWh=sum(`Imports Market Value - AUD`)/sum(`Imports - GWh`))
+```
+
+```{r batteriesbystate}
+statepops<-tribble(
+  ~Region,~Population,~Increase,
+"New South Wales",8294.0,156.3,
+"Victoria",6766.6,161.7,
+"Queensland",5418.5,124.2,
+"South Australia",1844.6,29.2,
+"Western Australia",2855.6,78.3,
+"Tasmania",572.7,2.4,
+"Northern Territory",251.7,2.1,
+"Australian Capital Territory",464.6,8.9
+) %>% mutate(Population=Population*1000,Increase=Increase*1000)
+df0<-read_csv(paste0(d,"facilities-australia.csv")) 
+dff<-read_csv(paste0(d,"facilities-australia.csv")) %>% filter(grepl("Discharging",Technology)) %>%
+  group_by(Region) %>% summarise(Capacity=sum(`Generator Capacity (MW)`)) %>% inner_join(statepops) %>% mutate(CapPerCap=Capacity*1e6/Population) %>% select(-Increase)
+write_csv(dff,paste0(d,"BatCapPerRegion.csv"))
 ```
