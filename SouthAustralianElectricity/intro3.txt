@@ -1,0 +1,82 @@
+
+The third interconnection is, as of November 2023,  almost complete. 
+
+When it was requested, as a matter of urgency, by AEMO in 2020, here's [what they said](https://www.aemo.com.au/-/media/Files/Electricity/NEM/Planning_and_Forecasting/SA_Advisory/2020/Minimum-Operational-Demand-Thresholds-in-South-Australia-Review):
+
+> *"If EnergyConnect does not proceed, extensive further measures (beyond those outlined in this
+> report) will be required to address identified system security risks. Potential further measures
+> could include commissioning significant utility-scale storage to provide FFR, retrofit of a large
+> number of distributed PV systems to improve disturbance ride-through capabilities, resistor
+> banks for managing excess distributed generation, and possibly a moratorium on new dis-
+> tributed PV connections."*
+
+Keep in mind that this was request was just four years after the entire state was blacked out, with some
+people waiting days for the power to come back on. 
+
+At the time, 28 September 2016, the politics was intense. Premier Jay Weatherill and [renewable advocates working
+as journalists](https://www.theguardian.com/australia-news/2016/sep/29/south-australia-blackout-explained-renewables-not-to-blame) refusing to acknowledge the
+event as being caused by the level of renewables in SA. By the time the final official report from AEMO
+emerged, in March 2017, the
+heat had gone out of the issue and renewable advocates ignored the clear conclusion that the crucial
+factor which turned a serious storm driven power outage into a
+statewide black was the low level of *inertia*; ie., the high level of renewables which had displaced the
+kinds of generators which provide inertia: 
+
+
+> *"The key differentiator between the 28 September 2016 event and other three events [major power outages] is that there was
+> significantly lower inertia in SA in the most recent event, due to a lower number of on-line synchronous
+> generators. This resulted in a substantially faster RoCoF [change in frequency] compared to the other events, exceeding the
+> ability of the UFLS [load shedding] scheme to arrest the frequency fall before it dropped below 47 Hz."*
+
+What is "lower inertia"? We'll explain the concept shortly, but the final AEMO report 
+was a slam dunk against renewables. They had screwed up the grid and created engineering "challenges" that
+needed solutions. Engineering "challenges" are different from political challenges, they
+can't be solved by sound bites or a fresh new font or colour scheme. 
+
+## Inertia
+
+Our *alternating current* electricity supply swings backwards and forwards
+between plus and minus 240 volts. The swings happen 50 times a second. 
+Coal, gas, nuclear and hydro electricity generators are massive spinning lumps of metal. If you understand how hard it is to slow a goods train, then you'll get that slowing these spinning masses is also hard. It's their spinning that
+creates the alternating current in our powersupply. The spinning and the electricity frequency can't be separated.
+The spinning lumps of metal act as
+drag to slow frequency changes in the electricity 
+supply in response to the loss of a generator. It's a grid stabilising service the generators 
+used to provide for free and nobody thought
+twice about it as a service until it was gone. 
+
+Start up an aluminium smelter requiring 500 megawatts of power and, without adding extra power to the grid, the frequency will fall.  The inertia of the spinning lumps of metal slows that
+frequency drop just long enough to or bring another generator on line at best, or, at worst, 
+kick some other users of the system (ie., deliberately blackout a suburb or two).
+
+Renewables are gradually being reengineered to provide
+alternative mechanisms to achieve the same goal; usually via batteries. But the new and advanced engineering to do
+this was far from clear in 2016; let alone built into wind turbines and solar farms. It didn't matter how many
+engineers had been warning about the problems; nobody was listening, what the f*ck do they know!
+
+And how did AEMO eventually fix the problem of low inertia on the SA grid and the risks it posed? 
+
+A few years after the event, and with very little fanfare, [four synchronous condensers](https://www.electranet.com.au/what-we-do/projects/power-system-strength/) were installed. These
+are large spinning lumps of metal that provide the same kind of inertia that traditional generators provide for free, but without generating any actual power (or carbon dioxide emissions).  
+
+Couldn't batteries provide the same service? Following the blackout, Elon Musk famously installed the then "biggest battery in the world". Was it big enough to prevent a repeat of the blackout with a similar sequence of events? Australia's Council of Learned Academies put out
+a [report in 2017](https://acola.org/wp-content/uploads/2021/05/hs1_role-energy-storage_acola_summary-paper.pdf) on battery storage. They specifically estimated that it would have taken 600MW of batteries to have prevented the
+2016 SA blackout; 6 times the size of that biggest-battery-in-the-world. 
+
+The 600MW is double the 300MW of the $160m [Victorian Big Battery](https://en.wikipedia.org/wiki/Victorian_Big_Battery).  Synchronous condensers, in comparison, are cheap ($166m) and run for decades, 
+batteries are just continuous price gaugers; charging whatever the market will bare when the grid is in a 
+weak state. 
+
+## EnergyConnect
+
+Once the new EnergyConnect interconnector is complete, SA will have access to about 1670MW of 
+Victorian coal power to allow it to both keep the lights on and 
+continue pretending that it is a renewable electricity success story.  
+
+## Intermittent renewable energy in South Australia 
+
+The data in this page is either from the latest [Statistical Review of World Energy](https://www.energyinst.org/statistical-review), meaning it is 2022 data from the 2023 report) or [OpenNem](https://opennem.org.au/energy/nem/?range=7d&interval=30m&view=discrete-time) a website which displays data from
+Australian electricity markets. 
+
+
+A generous [feed in tariff](https://en.wikipedia.org/wiki/Feed-in_tariffs_in_Australia#South_Australia) was introduced into South Australia in 2006 with the then Premier Mike Rann aiming for the state to be carbon neutral by 2020. And now, in 2023, after 17 years of solar and wind installations, SA is a world leader in wind and solar electricity generation. Australian's simply love to use the phrase "punching above our weight", and we are. Not that we make the panels or the wind turbines or even the batteries. We are pretty much, like the rest of the planet, punching in the anorexic weight class of the energy generation championships.

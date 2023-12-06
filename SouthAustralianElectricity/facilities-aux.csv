@@ -1,0 +1,13 @@
+Facility Name,Status,Company,Date,Price,MWh,MW,Source
+Torrens Island BESS,operating,,2023-12-02,180000000,250,,https://www.energy-storage.news/agl-breaks-ground-on-250mw-torrens-island-battery-project-in-south-australia/
+Hornsdale Power Reserve,operating,,2023-12-02,172000000,194,,https://en.wikipedia.org/wiki/Hornsdale_Power_Reserve
+Victoria Big Battery,operating,,,1.60E+08,450,,https://www.smh.com.au/business/the-economy/federal-green-bank-powers-up-victoria-s-big-battery-with-160m-boost-20210225-p575ow.html
+Mornington,proposed,Maoneng,,1.90E+08,1830,950,https://www.afr.com/companies/energy/all-clear-for-mornington-peninsula-s-190-million-big-battery-20220118-p59p2t
+Chinchilla,construction,,,1.50E+08,200,100,Chris Adlam
+Bouldercombe Battery,operating,,,6.00E+07,100,50,Chris Adlam
+Kwinana Battery,operating,,,1.84E+08,200,100,https://reneweconomy.com.au/kwinana-first-big-battery-in-worlds-biggest-isolated-grid-finally-gets-registered/
+Dalrymple North,operating,,,,8,30,
+Lake Bonney,operating ,,,,52,,
+Hazelwood BESS,operating,Energie,,1.50E+08,200,200,https://www.pv-magazine-australia.com/2021/12/02/engie-begins-construction-of-150-mw-big-battery-at-hazelwood-site/
+Riverina Battery,operating ,,,,300,150,
+Wandoan South,operating,,,1.20E+08,150,100,https://www.businessnewsaustralia.com/articles/agl-powers-up-full-operations-at-queensland-battery-project.html

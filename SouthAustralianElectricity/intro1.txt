@@ -1,0 +1,21 @@
+
+This website (driven by [*shiny*](https://www.rstudio.com/products/shiny/) software) will analyse the renewable energy
+rollout in South Australia (SA). In the SA context, this means a wind and solar rollout. Why? Because
+SA is one of the driest places on the planet, so it has virtually no rivers suitable for 
+hydro-electricity, nor and forests it can burn. Consequently it is a natural experiment in variable renewable
+resources and has more wind and solar power per person than pretty much anywhere on the planet. 
+
+It's a real world experiment in non-trivial penetration of wind and solar power 
+into an non-trivial grid. 
+
+The SA grid is fairly small, serving about 1.7 million people, but big enough
+to serve as a canary in a coal mine (bad pun intended). 
+
+There are a number of public and private
+organisations working together to operate Australia's grids. To keep things simple and to reduce acronyms, I'm going
+to pretend that AEMO (the Australian Energy Market Operator) is responsible for everything and does everything. 
+
+### SA offshoring coal emissions 
+
+SA closed it's last coal plant in 2016.
+
