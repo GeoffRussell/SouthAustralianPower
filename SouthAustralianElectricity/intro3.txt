@@ -73,10 +73,14 @@ Once the new EnergyConnect interconnector is complete, SA will have access to ab
 Victorian coal power to allow it to both keep the lights on and 
 continue pretending that it is a renewable electricity success story.  
 
-## Intermittent renewable energy in South Australia 
+## US renewable energy experts 
 
-The data in this page is either from the latest [Statistical Review of World Energy](https://www.energyinst.org/statistical-review), meaning it is 2022 data from the 2023 report) or [OpenNem](https://opennem.org.au/energy/nem/?range=7d&interval=30m&view=discrete-time) a website which displays data from
-Australian electricity markets. 
+[*In a June 2021 scientific paper*](https://www.osti.gov/biblio/1804705-challenges-achieving-renewable-electricity-system-united-states), lead author Paul Denholm and sixteen other researchers from three US renewable energy institutes outlined
+the problems confronting advocates for high penetration of wind and solar power. Keep in mind that other countries also
+burn forests and dam rivers to provide electricity on still nights. In SA we have precious little in the way of
+forest or hydro resources. The experts summarised the state of high penetration renewable grids in a diagram:
 
 
-A generous [feed in tariff](https://en.wikipedia.org/wiki/Feed-in_tariffs_in_Australia#South_Australia) was introduced into South Australia in 2006 with the then Premier Mike Rann aiming for the state to be carbon neutral by 2020. And now, in 2023, after 17 years of solar and wind installations, SA is a world leader in wind and solar electricity generation. Australian's simply love to use the phrase "punching above our weight", and we are. Not that we make the panels or the wind turbines or even the batteries. We are pretty much, like the rest of the planet, punching in the anorexic weight class of the energy generation championships.
+
+
+
