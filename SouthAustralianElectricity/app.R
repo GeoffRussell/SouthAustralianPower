@@ -21,7 +21,16 @@ cols<-c(
   "Wind"="forestgreen",
   "Nuclear"="purple",
   "Hydro"="blue"
-  )
+  )  
+#-------------------------------------------------------------------------------------------
+# Set up plotly
+#-------------------------------------------------------------------------------------------
+ggplconfig <- function(.data) {
+  config(.data,displayModeBar = "static", displaylogo = FALSE, 
+         modeBarButtonsToRemove = list("autoScale2d", 
+                                       "hoverClosestCartesian", "hoverCompareCartesian", 
+                                       "select2d", "zoomIn2d", "zoomOut2d","lasso2d","toggleSpikelines"))
+}
 
 dfpop<-read_csv("populationRenamed2022.csv")
 dfkwPerCapSolar<-read_csv("kwPerCap2022.csv") %>% arrange(desc(kwPerCap)) %>% slice_head(n=20)
@@ -83,7 +92,7 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
             ) 
         ),
         column(width=9,
-            plotOutput("wsbh")
+            plotlyOutput("wsbh")
         )
       ),
       markdownFile("obwsbh2.txt"),
@@ -122,19 +131,20 @@ server<-function(input,output,session) {
       ptheme +
       labs(x="",y="kilowatts per person",title="Solar: Top 20 countries by kilowatts per person")
   })
-  output$wsbh<-renderPlot({
+  output$wsbh<-renderPlotly({
     c<-input$countrypick
     print(c)
-    dfwsbh %>% filter(Country %in% c) %>% ggplot() + 
+    p<-dfwsbh %>% filter(Country %in% c) %>% ggplot() + 
       geom_col(aes(x=reorder(Country,desc(sum)),y=kWhPerCap,fill=Type)) +
       #geom_point(aes(x=Country,y=TWh*1e9/Population),shape=5,data=dfel) +
-      geom_col(aes(x=Country,y=(TWh*1e9/Population)*2),data=dfel %>% filter(Country %in% c),alpha=0.1,fill="red") +
+      geom_col(aes(x=Country,y=kWhPerCapTimes2),data=dfel %>% filter(Country %in% c) %>% mutate(kWhPerCapTimes2=(TWh*1e9/Population)*2),alpha=0.1,fill="red") +
       scale_fill_manual(name="Technology",values=cols)+
       theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
 #        color=c(rep("black",4),"red",rep("black",8),"red",rep("black",7)))) + 
       ptheme +
       labs(x="",y="Annual low carabon kilowatt-hours per person",
-           title="Wind/Solar/Biomass/Hydro/Nuclear with\nIEA/AEMO doubling target")
+           title="Low carbon electricity+targets")
+     ggplotly(p) %>% ggplconfig
   })
   output$kwpercapwind<-renderPlot({
       dfkwPerCapWind %>% ggplot() + geom_col(aes(x=reorder(Country,kwPerCap),y=kwPerCap,fill=Group),width=0.6) + 
