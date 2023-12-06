@@ -3,6 +3,7 @@
 # the 'Run App' button above.
 
 library(shiny)
+library(shinyWidgets)
 library(shinythemes)
 library(tidyverse)
 library(markdown)
@@ -30,7 +31,7 @@ countries<-bind_rows(countries,tribble(~Country,"South Australia"))
 
 dfwsbh<-read_csv("wsbh.csv") %>% inner_join(countries)
 dfel<-bind_rows(tribble(~Country,~TWh,~Population,"South Australia",14.2,1.8e6),(read_csv("el.csv") %>% inner_join(countries)))
-print(dfel)
+#print(dfel)
 
 dfwsbh<-dfwsbh %>% group_by(Country) %>% summarise(sum=sum(kWhPerCap)) %>% ungroup() %>% inner_join(dfwsbh)
 
@@ -61,12 +62,30 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       markdownFile("intro2.txt"),
       tableOutput("interconnectors"),
       markdownFile("intro3.txt"),
+      fluidRow(align="center",imageOutput("scaleissues1",height=300)),
+      markdownFile("intro3b.txt"),
+      fluidRow(align="center",imageOutput("scaleissues2",height=300)),
+      markdownFile("intro3c.txt"),
       markdownFile("obw.txt"),
       plotOutput("kwpercapwind"),
       markdownFile("obs.txt"),
       plotOutput("kwpercapsolar"),
       markdownFile("obwsbh.txt"),
-      plotOutput("wsbh"),
+      fluidRow(
+        column(width=3,
+            pickerInput("countrypick",choices=sort(countries$Country),selected=sort(c("South Australia","Australia","Germany")),multiple=TRUE,
+                          label = 'Top 20 Wind power countries',
+                        options = pickerOptions(
+                          actionsBox = TRUE,
+                          selectedTextFormat = 'static',
+                          noneSelectedText = 'Select',
+                        )
+            ) 
+        ),
+        column(width=9,
+            plotOutput("wsbh")
+        )
+      ),
       markdownFile("obwsbh2.txt"),
       markdownFile("ob0.txt"),
       fluidRow(align="center",imageOutput("weekpng",height=400)),
@@ -76,10 +95,11 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
     )
   )
 )
-server<-function(input,output) {
+server<-function(input,output,session) {
   ptheme<-theme(plot.title=element_text(color="#008080",size=15,face="bold",family="Helvetica"),
                 axis.text=element_text(face="bold",size=12)
                 )
+    
   output$interconnectors<-renderTable(
     tribble(
       ~Interconnector, ~Capacity, ~Status, ~Type,
@@ -92,6 +112,8 @@ server<-function(input,output) {
   output$coal<-renderTable(
     tibble("Retired Coal Plants"=c("Playford B","Northern"),"Capacity"=c("240MW","520MW"),"Closed"=c("2021","May 2016"))
   )
+  output$scaleissues1<-renderImage(list(src="renewable-scaleissues.jpg",height=300),deleteFile=FALSE)
+  output$scaleissues2<-renderImage(list(src="renewable-scaleissues-mod.png",height=300),deleteFile=FALSE)
   output$weekpng<-renderImage(list(src="WeekEnding30-11-2023.png",height=400),deleteFile=FALSE)
   output$kwpercapsolar<-renderPlot({
       dfkwPerCapSolar %>% ggplot() + geom_col(aes(x=reorder(Country,kwPerCap),y=kwPerCap),width=0.6,fill="yellow") + 
@@ -101,16 +123,18 @@ server<-function(input,output) {
       labs(x="",y="kilowatts per person",title="Solar: Top 20 countries by kilowatts per person")
   })
   output$wsbh<-renderPlot({
-    dfwsbh %>% ggplot() + 
+    c<-input$countrypick
+    print(c)
+    dfwsbh %>% filter(Country %in% c) %>% ggplot() + 
       geom_col(aes(x=reorder(Country,desc(sum)),y=kWhPerCap,fill=Type)) +
       #geom_point(aes(x=Country,y=TWh*1e9/Population),shape=5,data=dfel) +
-      geom_col(aes(x=Country,y=(TWh*1e9/Population)*2),data=dfel,alpha=0.1,fill="red") +
+      geom_col(aes(x=Country,y=(TWh*1e9/Population)*2),data=dfel %>% filter(Country %in% c),alpha=0.1,fill="red") +
       scale_fill_manual(name="Technology",values=cols)+
-      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,
-        color=c(rep("black",4),"red",rep("black",8),"red",rep("black",7)))) + 
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+#        color=c(rep("black",4),"red",rep("black",8),"red",rep("black",7)))) + 
       ptheme +
       labs(x="",y="Annual low carabon kilowatt-hours per person",
-           title="Wind/Solar/Biomass/Hydro/Nuclear: Top 20 \ncountries by wind capacity")
+           title="Wind/Solar/Biomass/Hydro/Nuclear with\nIEA/AEMO doubling target")
   })
   output$kwpercapwind<-renderPlot({
       dfkwPerCapWind %>% ggplot() + geom_col(aes(x=reorder(Country,kwPerCap),y=kwPerCap,fill=Group),width=0.6) + 
