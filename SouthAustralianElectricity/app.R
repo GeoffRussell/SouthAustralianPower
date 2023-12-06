@@ -56,7 +56,11 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
   titlePanel("South Australia's excellent renewable adventure"),
   verticalLayout(
     mainPanel(
-      markdownFile("intro.txt"),
+      markdownFile("intro1.txt"),
+      tableOutput("coal"),
+      markdownFile("intro2.txt"),
+      tableOutput("interconnectors"),
+      markdownFile("intro3.txt"),
       markdownFile("obw.txt"),
       plotOutput("kwpercapwind"),
       markdownFile("obs.txt"),
@@ -76,6 +80,18 @@ server<-function(input,output) {
   ptheme<-theme(plot.title=element_text(color="#008080",size=15,face="bold",family="Helvetica"),
                 axis.text=element_text(face="bold",size=12)
                 )
+  output$interconnectors<-renderTable(
+    tribble(
+      ~Interconnector, ~Capacity, ~Status, ~Type,
+      "Heywood", "650MW", "Operating","AC",
+      "Murraylink", "220MW", "Operating","HVDC",
+      "Energy Connect", "800MW", "InProgress","AC"
+    )
+    
+  )
+  output$coal<-renderTable(
+    tibble("Retired Coal Plants"=c("Playford B","Northern"),"Capacity"=c("240MW","520MW"),"Closed"=c("2021","May 2016"))
+  )
   output$weekpng<-renderImage(list(src="WeekEnding30-11-2023.png",height=400),deleteFile=FALSE)
   output$kwpercapsolar<-renderPlot({
       dfkwPerCapSolar %>% ggplot() + geom_col(aes(x=reorder(Country,kwPerCap),y=kwPerCap),width=0.6,fill="yellow") + 
