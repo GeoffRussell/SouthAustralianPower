@@ -1,10 +1,11 @@
 
 
-
 ## Intermittent renewable energy in South Australia 
+
+A generous [feed in tariff](https://en.wikipedia.org/wiki/Feed-in_tariffs_in_Australia#South_Australia) was introduced into South Australia in 2006 with the then Premier Mike Rann aiming for the state to be carbon neutral by 2020. And now, in 2023, after 17 years of solar and wind installations, SA is a world leader in wind and solar electricity generation. Australian's simply love to use the phrase "punching above our weight", and we are. Not that we make the panels or the wind turbines or even the batteries. We are pretty much, like the rest of the planet, punching in the anorexic weight class of the energy generation manufacturing.
 
 The data in this page is either from the latest [Statistical Review of World Energy](https://www.energyinst.org/statistical-review), meaning it is 2022 data from the 2023 report) or [OpenNem](https://opennem.org.au/energy/nem/?range=7d&interval=30m&view=discrete-time) a website which displays data from
 Australian electricity markets. 
 
 
-A generous [feed in tariff](https://en.wikipedia.org/wiki/Feed-in_tariffs_in_Australia#South_Australia) was introduced into South Australia in 2006 with the then Premier Mike Rann aiming for the state to be carbon neutral by 2020. And now, in 2023, after 17 years of solar and wind installations, SA is a world leader in wind and solar electricity generation. Australian's simply love to use the phrase "punching above our weight", and we are. Not that we make the panels or the wind turbines or even the batteries. We are pretty much, like the rest of the planet, punching in the anorexic weight class of the energy generation championships.
+Where are we relative to the above chart?

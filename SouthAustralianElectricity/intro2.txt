@@ -4,7 +4,10 @@ Australian electricity grid, known as the NEM by two connections.
 *Heywood*, originally built in 1988 with a capacity of 450MW, was upgraded in 2016
 for about $100m [to raise its capacity from 450MW to 650MW](https://www.electranet.com.au/projects/sa-vic-heywood-interconnector-upgrade/). This was the final step to totally replace SA coal by Victorian coal. *Playford A* was 
 a 90MW coal plant closed earlier in 1985, a few years before *Heywood* was complete. 
+The second interconnector, *Murraylink* brings power to the Riverland region north-east of Adelaide.
 
-Currently there are two interconnectors, *Heywood* bringing power up to Adelaide 
-from the south and *Murraylink* bringing power to the Riverland region north-east of Adelaide.
+When the interconnectors are
+offline, SA is said to be "islanded"; it's a nice intuitive term for a grid with no external links. During the 2016
+blackout, we were islanded. We were also islanded (without a statewide blackout) in 2020 for 17 days.
+
 

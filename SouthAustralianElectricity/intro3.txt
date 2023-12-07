@@ -13,14 +13,24 @@ When it was requested, as a matter of urgency, by AEMO in 2020, here's [what the
 Keep in mind that this was request was just four years after the entire state was blacked out, with some
 people waiting days for the power to come back on. 
 
-At the time, 28 September 2016, the politics was intense. Premier Jay Weatherill and [renewable advocates working
+I won't explain the jargon except to say that "security risks" refer to risks of power failures
+and blackouts, not risk of espionage or hacking.
+
+At the time of the big one, 28 September 2016, the politics was 
+intense. Premier Jay Weatherill and [renewable advocates working
 as journalists](https://www.theguardian.com/australia-news/2016/sep/29/south-australia-blackout-explained-renewables-not-to-blame) refusing to acknowledge the
-event as being caused by the level of renewables in SA. By the time the final official report from AEMO
+event as being caused by the level of renewables in SA. They piled up a mountain of irrelevant details about wind
+turbine settings and towers buckling that seemed really important to them because they never understood that
+equipment failures are frequent and normal on a grid; but they don't bring it down!
+
+
+By the time the final official report from AEMO
 emerged, in March 2017, the
-heat had gone out of the issue and renewable advocates ignored the clear conclusion that the crucial
+heat had gone out of the issue, the public had moved on, probably to more important matters like football, 
+and renewable advocates simply ignored the clear conclusion that the crucial
 factor which turned a serious storm driven power outage into a
-statewide black was the low level of *inertia*; ie., the high level of renewables which had displaced the
-kinds of generators which provide inertia: 
+statewide black was the low level of *inertia*; produced because renewables had replaced the kinds of
+generators which provide inertia. I'll explain "inertia" in more detail below, but the report is clear:
 
 
 > *"The key differentiator between the 28 September 2016 event and other three events [major power outages] is that there was
@@ -28,8 +38,14 @@ kinds of generators which provide inertia:
 > generators. This resulted in a substantially faster RoCoF [change in frequency] compared to the other events, exceeding the
 > ability of the UFLS [load shedding] scheme to arrest the frequency fall before it dropped below 47 Hz."*
 
-What is "lower inertia"? We'll explain the concept shortly, but the final AEMO report 
-was a slam dunk against renewables. They had screwed up the grid and created engineering "challenges" that
+There's a bit of jargon but what normally happens on a grid is that failures of generators result in the frequency
+dropping and load shedding; a polite way of saying deliberately blacking out enough areas that supply and demand
+are balanced. As you rapidly bring reserve generators on-line, the power is restored to the areas you blacked out.
+But with the low inertia, the crash was so fast that the mechanisms to respond couldn't keep up. Even huge power outages normally give you (meaning the automated systems) a couple of seconds to respond, but 0.6 seconds? The crash was
+simply too fast.
+
+What is "lower inertia"? We'll explain the concept shortly, but it is clear that 
+renewables had screwed up the grid, with the report referring to numerous engineering "challenges" that
 needed solutions. Engineering "challenges" are different from political challenges, they
 can't be solved by sound bites or a fresh new font or colour scheme. 
 
@@ -38,12 +54,12 @@ can't be solved by sound bites or a fresh new font or colour scheme.
 Our *alternating current* electricity supply swings backwards and forwards
 between plus and minus 240 volts. The swings happen 50 times a second. 
 Coal, gas, nuclear and hydro electricity generators are massive spinning lumps of metal. If you understand how hard it is to slow a goods train, then you'll get that slowing these spinning masses is also hard. It's their spinning that
-creates the alternating current in our powersupply. The spinning and the electricity frequency can't be separated.
+creates the alternating current in our powersupply. The spinning and the electricity frequency are one and the same. 
 The spinning lumps of metal act as
 drag to slow frequency changes in the electricity 
 supply in response to the loss of a generator. It's a grid stabilising service the generators 
 used to provide for free and nobody thought
-twice about it as a service until it was gone. 
+twice about it as a service until it was gone.  
 
 Start up an aluminium smelter requiring 500 megawatts of power and, without adding extra power to the grid, the frequency will fall.  The inertia of the spinning lumps of metal slows that
 frequency drop just long enough to or bring another generator on line at best, or, at worst, 
@@ -57,13 +73,18 @@ engineers had been warning about the problems; nobody was listening, what the f*
 And how did AEMO eventually fix the problem of low inertia on the SA grid and the risks it posed? 
 
 A few years after the event, and with very little fanfare, [four synchronous condensers](https://www.electranet.com.au/what-we-do/projects/power-system-strength/) were installed. These
-are large spinning lumps of metal that provide the same kind of inertia that traditional generators provide for free, but without generating any actual power (or carbon dioxide emissions).  
+are large spinning lumps of metal that provide the same kind of inertia that the generators
+displaced by wind farms and solar panels had
+provided for free. They spin and provide inertia, they just don't generate any actual power (or carbon dioxide emissions).  
 
-Couldn't batteries provide the same service? Following the blackout, Elon Musk famously installed the then "biggest battery in the world". Was it big enough to prevent a repeat of the blackout with a similar sequence of events? Australia's Council of Learned Academies put out
+Couldn't batteries provide the same service? Following the blackout, Elon Musk famously installed the then "biggest battery in the world", which could provide 100MW for a bit over an hour. 
+Was it big enough to prevent a repeat of the blackout with a similar sequence of events? Australia's Council of Learned Academies put out
 a [report in 2017](https://acola.org/wp-content/uploads/2021/05/hs1_role-energy-storage_acola_summary-paper.pdf) on battery storage. They specifically estimated that it would have taken 600MW of batteries to have prevented the
-2016 SA blackout; 6 times the size of that biggest-battery-in-the-world. 
+2016 SA blackout; i.e., 6 times the size of that biggest-battery-in-the-world. 
 
-The 600MW is double the 300MW of the $160m [Victorian Big Battery](https://en.wikipedia.org/wiki/Victorian_Big_Battery).  Synchronous condensers, in comparison, are cheap ($166m) and run for decades, 
+Batteries have grown in size since 2016, but 600MW is still a big battery, even if it can only run for an hour. 
+The [Victorian Big Battery](https://en.wikipedia.org/wiki/Victorian_Big_Battery) is 300MW and cost $160m.  
+Synchronous condensers, in comparison, are cheap ($166m) and run for decades, 
 batteries are just continuous price gaugers; charging whatever the market will bare when the grid is in a 
 weak state. 
 
@@ -71,7 +92,8 @@ weak state.
 
 Once the new EnergyConnect interconnector is complete, SA will have access to about 1670MW of 
 Victorian coal power to allow it to both keep the lights on and 
-continue pretending that it is a renewable electricity success story.  
+continue pretending that it is a renewable electricity success story. All SA has actually done, is
+the relatively easy bit. 
 
 ## US renewable energy experts 
 
@@ -79,8 +101,4 @@ continue pretending that it is a renewable electricity success story.
 the problems confronting advocates for high penetration of wind and solar power. Keep in mind that other countries also
 burn forests and dam rivers to provide electricity on still nights. In SA we have precious little in the way of
 forest or hydro resources. The experts summarised the state of high penetration renewable grids in a diagram:
-
-
-
-
 

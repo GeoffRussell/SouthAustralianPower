@@ -1,31 +1,38 @@
 ## International comparisons
 
-The following chart shows low-carbon electricity for 20 countries, chosen on the basis of being the
-top 20 countries by wind power per person. 
+How does South Australia compare with other countries and regions? Region information is hard to come by, so I'll
+stick with national data.
 
-The red shaded area is the aspirational target of Australia's AEMO ISP by 2050 (the Integrated System Plan of our Energy
+The following chart shows low-carbon electricity for a selection of countries; based on those with the most
+wind power per person. You can pick countries you want to compare South Australia to. We start with just
+comparing Australia and South Australia to Germany. 
+
+The red shaded area is the aspirational target of Australia's AEMO [ISP](https://aemo.com.au/en/energy-systems/major-publications/integrated-system-plan-isp/2022-integrated-system-plan-isp) by 2050 (the Integrated System Plan of our Energy
 Market Operator). This target is that **the grid** should be supplying about double what it supplies today;
-meaning **in addition** to whatever rooftop and domestic batteries supply. The international IEA has a similar target.
+meaning **in addition** to whatever rooftop and domestic batteries supply behind the meter. 
+The International Energy Agency (IEA),
+a quasi-official think tank, has a similar target. So if you install a 10kW pv system on your roof, the bit over and
+above what you use would count towards the aspirational target.
 
-Note that the national data in the chart is from 2022, which is why Germany still has some nuclear power. 
+Note that the national data in the chart is from 2022, which is why Germany still has some nuclear power. The additional
+fossil fuel pollution in Germany following the closure of most of its nuclear plants in 2012 is estimated
+to be killing about [900 Germans a year](https://academic.oup.com/jeea/article-abstract/20/3/1311/6520438?redirectedFrom=fulltext).
 
-The data for SA isn't from SRWE is the 12 months from November 2022 to November 2023, courtesy of OpenNem. During this
-period, SA got 71% of its electricity from wind and solar power. 
+The data for SA **isn't** from the Statistical Review of World Energy,  but is the latest available, meaning
+the 12 months from November 2022 to November 2023, courtesy of OpenNem. During this
+period, SA got 72% of its electricity from wind and solar power. This puts SA at bleeding edge of renewable
+rollouts, far ahead of Germany. Germany burns forests, dams rivers and can always fall back on the various
+interconnectors within Europe to bail it out. In 2022, for example, Germany got about 600 kWh/person from biomass burning and 723 kWh/person from solar.  
 
-How has this been achieved without the biomass, hydro or nuclear which is used by other countries to
-cover the gaps in intermittent energy supply. 
+How has SA got to 72% with just wind and solar? 
 
-Remember that $2.1 billion interconnector? It will allow even more electricity to flow to SA from Victoria; 
-mostly generated from fossil fuel power stations in that state. Currently, the flow from Victoria is limited 
-to 650MW from the Heywood Interconnector and 220MW from Murraylink. In the past 12 months, SA has received about 1600 GWh of electricity via these links and sent about half that in the reverse direction to Victoria. Even though SA has 500MW of battery power capacity, the two significant batteries (Torrens Island BESS and Hornsdale Power Reserve)
-can only run at full power for 1 and 2 hours respectively. So those batteries have supplied just 88 GWh of electricity.  
+Obviously, the interconnectors provide a safety net. When EnergyConnect comes on-line,
+it will allow even more electricity to flow to SA from Victoria; 
+mostly generated from fossil fuel power stations in that state. It can also get rid of excess wind power; perhaps. 
 
-
-
-
-
-
-
-
+Currently, the flow *from* Victoria is limited 
+to the Heywood and Murraylink interconnectors. 
+In the past 12 months, SA has received about 1600 GWh of electricity via these links and sent about half that in the reverse direction to Victoria. Even though SA has 500MW of battery power capacity, the two significant batteries (Torrens Island BESS and Hornsdale Power Reserve) can only run at full power for 1 and 2 hours respectively. So those batteries have supplied just 88 GWh of electricity. Now you can see the difference between batteries and interconnectors. On 
+a still night, the batteries won't cover gaps in the wind supply for long, but the interconnectors can run all night.
 
 
