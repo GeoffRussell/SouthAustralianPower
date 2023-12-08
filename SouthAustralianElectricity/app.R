@@ -40,7 +40,7 @@ countries<-bind_rows(countries,tribble(~Country,"South Australia"))
 
 dfwsbh<-read_csv("wsbh.csv") %>% inner_join(countries)
 dfel<-bind_rows(tribble(~Country,~TWh,~Population,"South Australia",14.2,1.8e6),(read_csv("el.csv") %>% inner_join(countries)))
-#print(dfel)
+write_csv(dfel,"electricityByCountry.csv")
 
 dfwsbh<-dfwsbh %>% group_by(Country) %>% summarise(sum=sum(kWhPerCap)) %>% ungroup() %>% inner_join(dfwsbh)
 
@@ -66,14 +66,16 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
   titlePanel("South Australia's excellent renewable adventure"),
   verticalLayout(
     mainPanel(
-      markdownFile("intro1.txt"),
+      markdownFile("intro1a.txt"),
+      fluidRow(align="center",imageOutput("scaleissues2",height=400)),
+      markdownFile("intro1b.txt"),
       tableOutput("coal"),
       markdownFile("intro2.txt"),
       tableOutput("interconnectors"),
       markdownFile("intro3.txt"),
       fluidRow(align="center",imageOutput("scaleissues1",height=300)),
       markdownFile("intro3b.txt"),
-      fluidRow(align="center",imageOutput("scaleissues2",height=300)),
+#      fluidRow(align="center",imageOutput("scaleissues2",height=300)),
       markdownFile("intro3c.txt"),
       markdownFile("obw.txt"),
       plotOutput("kwpercapwind"),
@@ -105,9 +107,9 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
   )
 )
 server<-function(input,output,session) {
+  mtheme<-theme(plot.margin=unit(c(1,0,0,0),"cm"))
   ptheme<-theme(plot.title=element_text(color="#008080",size=15,face="bold",family="Helvetica"),
-                axis.text=element_text(face="bold",size=12)
-                )
+                axis.text=element_text(face="bold",size=12))+mtheme
     
   output$interconnectors<-renderTable(
     tribble(
@@ -119,10 +121,10 @@ server<-function(input,output,session) {
     
   )
   output$coal<-renderTable(
-    tibble("Retired Coal Plants"=c("Playford B","Northern"),"Capacity"=c("240MW","520MW"),"Closed"=c("2021","May 2016"))
+    tibble("Retired Coal Plants"=c("Playford A","Playford B","Northern"),"Capacity"=c("90MW","240MW","520MW"),"Closed"=c("1985","2016","2016"))
   )
   output$scaleissues1<-renderImage(list(src="renewable-scaleissues.jpg",height=300),deleteFile=FALSE)
-  output$scaleissues2<-renderImage(list(src="renewable-scaleissues-mod.png",height=300),deleteFile=FALSE)
+  output$scaleissues2<-renderImage(list(src="renewable-scaleissues-mod.png",height=400),deleteFile=FALSE)
   output$weekpng<-renderImage(list(src="WeekEnding30-11-2023.png",height=400),deleteFile=FALSE)
   output$kwpercapsolar<-renderPlot({
       dfkwPerCapSolar %>% ggplot() + geom_col(aes(x=reorder(Country,kwPerCap),y=kwPerCap),width=0.6,fill="yellow") + 
@@ -137,14 +139,16 @@ server<-function(input,output,session) {
     p<-dfwsbh %>% filter(Country %in% c) %>% ggplot() + 
       geom_col(aes(x=reorder(Country,desc(sum)),y=kWhPerCap,fill=Type)) +
       #geom_point(aes(x=Country,y=TWh*1e9/Population),shape=5,data=dfel) +
-      geom_col(aes(x=Country,y=kWhPerCapTimes2),data=dfel %>% filter(Country %in% c) %>% mutate(kWhPerCapTimes2=(TWh*1e9/Population)*2),alpha=0.1,fill="red") +
+      geom_col(aes(x=Country,y=kWhPerCapTimes2),
+               data=dfel %>% filter(Country %in% c) %>% mutate(kWhPerCapTimes2=(TWh*1e9/Population)*2),
+               alpha=0.1,fill="red") +
       scale_fill_manual(name="Technology",values=cols)+
       theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-#        color=c(rep("black",4),"red",rep("black",8),"red",rep("black",7)))) + 
+      theme(plot.margin=unit(c(1,0,0,0),"cm"))+
       ptheme +
-      labs(x="",y="Annual low carabon kilowatt-hours per person",
+      labs(x="",y="Annual low carabon\nkilowatt-hours per person",
            title="Low carbon electricity+targets")
-     ggplotly(p) %>% ggplconfig
+     ggplotly(p) %>% ggplconfig %>% layout(plot_bgcolor = "#e5ecf6") 
   })
   output$kwpercapwind<-renderPlot({
       dfkwPerCapWind %>% ggplot() + geom_col(aes(x=reorder(Country,kwPerCap),y=kwPerCap,fill=Group),width=0.6) + 
