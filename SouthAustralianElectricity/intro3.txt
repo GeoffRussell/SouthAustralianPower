@@ -1,7 +1,9 @@
 
 The third interconnection is, as of November 2023,  almost complete. 
 
-When it was requested, as a matter of urgency, by AEMO in 2020, here's [what they said](https://www.aemo.com.au/-/media/Files/Electricity/NEM/Planning_and_Forecasting/SA_Advisory/2020/Minimum-Operational-Demand-Thresholds-in-South-Australia-Review):
+## Two ways to alleviate the chaos 
+
+When that third interconnector was requested, as a matter of urgency, by AEMO in 2020, here's [what they said](https://www.aemo.com.au/-/media/Files/Electricity/NEM/Planning_and_Forecasting/SA_Advisory/2020/Minimum-Operational-Demand-Thresholds-in-South-Australia-Review):
 
 > *"If EnergyConnect does not proceed, extensive further measures (beyond those outlined in this
 > report) will be required to address identified system security risks. Potential further measures
@@ -13,24 +15,35 @@ When it was requested, as a matter of urgency, by AEMO in 2020, here's [what the
 Keep in mind that this was request was just four years after the entire state was blacked out, with some
 people waiting days for the power to come back on. 
 
-I won't explain the jargon except to say that "security risks" refer to risks of power failures
-and blackouts, not risk of espionage or hacking.
+It's worth explaining the jargon, because while the public is regularly exposed to advocates talking up 
+renewables, they don't typically plunge into the AEMO engineering documents which expose the chaos behind
+the slogans. 
 
-At the time of the big one, 28 September 2016, the politics was 
+1. "security risks" refer to risks of power failures and blackouts, not risk of espionage or hacking.
+2. "significant utility-scale storage" means much bigger batteries to prevent blackouts, I'll explain exactly what this means below.
+3. "retrofit ..." the electrical design specifications of inverters, particularly rooftop solar inverters, the 
+things connecting them to the grid, have been changed frequently as more and more flaws are discovered. The flaws often
+relate to the ability to handle power interruptions. For example, how does your inverter handle a fault when a
+tree falls on a power line. Suppose it just disconnects, a common response. This kind of disconnect can cascade through 
+the power system as nearby inverters detect a change. There are two problems here; solving the hard design problems and solving them at scale in cheap consumer grade electronics. 
+4. "resistor banks" ... more stuff to handle problems.
+5. "moratorium" ... everybody knows what this means! 
+
+At the time of the statewide blackout, 28 September 2016, the politics was 
 intense. Premier Jay Weatherill and [renewable advocates working
 as journalists](https://www.theguardian.com/australia-news/2016/sep/29/south-australia-blackout-explained-renewables-not-to-blame) refusing to acknowledge the
-event as being caused by the level of renewables in SA. They piled up a mountain of irrelevant details about wind
-turbine settings and towers buckling that seemed really important to them because they never understood that
+event as being caused by the level of renewables in SA. They hid behind a mountain of irrelevant details about wind
+turbine settings and storm damage that seemed really important to them because they never understood that
 equipment failures are frequent and normal on a grid; but they don't bring it down!
-
 
 By the time the final official report from AEMO
 emerged, in March 2017, the
-heat had gone out of the issue, the public had moved on, probably to more important matters like football, 
+media had lost interest, the public had moved on, probably to more important matters like football, 
 and renewable advocates simply ignored the clear conclusion that the crucial
 factor which turned a serious storm driven power outage into a
-statewide black was the low level of *inertia*; produced because renewables had replaced the kinds of
-generators which provide inertia. I'll explain "inertia" in more detail below, but the report is clear:
+statewide black was the low level of *inertia*; produced because renewables which contributed no inertia
+had displaced the  
+generators which did. I'll explain "inertia" in more detail below, but the report is clear:
 
 
 > *"The key differentiator between the 28 September 2016 event and other three events [major power outages] is that there was
@@ -38,41 +51,60 @@ generators which provide inertia. I'll explain "inertia" in more detail below, b
 > generators. This resulted in a substantially faster RoCoF [change in frequency] compared to the other events, exceeding the
 > ability of the UFLS [load shedding] scheme to arrest the frequency fall before it dropped below 47 Hz."*
 
-There's a bit of jargon but what normally happens on a grid is that failures of generators result in the frequency
-dropping and load shedding; a polite way of saying deliberately blacking out enough areas that supply and demand
-are balanced. As you rapidly bring reserve generators on-line, the power is restored to the areas you blacked out.
-But with the low inertia, the crash was so fast that the mechanisms to respond couldn't keep up. Even huge power outages normally give you (meaning the automated systems) a couple of seconds to respond, but 0.6 seconds? The crash was
-simply too fast.
+There's a bit of jargon in this, but what normally happens on a grid is that failures of generators results in the frequency of the AC power
+dropping which is arrested by load shedding; a polite way of saying deliberately 
+blacking out enough areas to bring demand for electricity
+back into line with the generators still operating. It's conceptually simple, even if the details are mind blowingly
+complex.  
+
+As you then rapidly bring reserve generators on-line, the power is restored to the areas you blacked out.
+
+But with the low inertia caused by renewables displacing the things which normally provided it, 
+the drop in frequency was so fast that the mechanisms to respond couldn't keep up. Even huge power outages normally give you (meaning the automated systems) a couple of seconds to respond, but in this state of low inertia, all
+they got was 0.6 seconds? The crash was simply too fast.
 
 What is "lower inertia"? We'll explain the concept shortly, but it is clear that 
-renewables had screwed up the grid, with the report referring to numerous engineering "challenges" that
-needed solutions. Engineering "challenges" are different from political challenges, they
-can't be solved by sound bites or a fresh new font or colour scheme. 
+renewables had screwed up the grid, and the report referred to numerous new engineering "challenges" that
+needed solutions. 
+
+Engineering "challenges" are different from political challenges, they
+can't be solved by sound bites or a new and cool "brand ambassador". 
 
 ## Inertia
 
 Our *alternating current* electricity supply swings backwards and forwards
 between plus and minus 240 volts. The swings happen 50 times a second. 
-Coal, gas, nuclear and hydro electricity generators are massive spinning lumps of metal. If you understand how hard it is to slow a goods train, then you'll get that slowing these spinning masses is also hard. It's their spinning that
-creates the alternating current in our powersupply. The spinning and the electricity frequency are one and the same. 
-The spinning lumps of metal act as
-drag to slow frequency changes in the electricity 
-supply in response to the loss of a generator. It's a grid stabilising service the generators 
-used to provide for free and nobody thought
-twice about it as a service until it was gone.  
+Coal, gas, nuclear and hydro electricity generators are massive spinning lumps of metal. If you 
+understand how hard it is to slow a goods train, then you'll get that slowing these spinning masses is also hard. 
 
-Start up an aluminium smelter requiring 500 megawatts of power and, without adding extra power to the grid, the frequency will fall.  The inertia of the spinning lumps of metal slows that
+It's the spinning that
+creates the alternating current in our powersupply. Each revolution of the spinning lump of metal is one cycle
+of the voltage. The spinning and the electricity frequency are one and the same. 50 times a second means the generator
+rotors (the lumps) are spinning at 3,000 revolutions per minute. If you lose a generator, then the other
+generators will slow down slightly in response to the extra power they need to supply. The grid operator has to 
+connect an additional generator to replace the failed one. This is typically called "spinning reserves". Spare
+generators which are running but just not connected. 
+
+A battery can do something similar, quickly connect to make up
+for the shortfall when a generator fails. In a traditional grid, inertia rides over small changes and buys time to
+handle big ones. A battery can similarly buy time, but for what purpose? In a predominantly wind and solar 
+system, there may be nothing to turn on. You can't just start up a solar farm when a wind farm goes down in the 
+middle of the night. You could perhaps have a wind turbine operating like spinning reserve; if it was windy. But
+on a still night? What then? In that situation the battery has to be more than something to buy time, it has 
+to actually supply energy for an extended period; until the fault is fixed.
+
+As well as dealing with loss of generation, the grid has to deal with changes in demand.
+Starting an aluminium smelter requiring 500 megawatts of power and, without adding extra power to the grid, the frequency will fall.  The inertia of the spinning lumps of metal slows that
 frequency drop just long enough to or bring another generator on line at best, or, at worst, 
 kick some other users of the system (ie., deliberately blackout a suburb or two).
 
 Renewables are gradually being reengineered to provide
 alternative mechanisms to achieve the same goal; usually via batteries. But the new and advanced engineering to do
-this was far from clear in 2016; let alone built into wind turbines and solar farms. It didn't matter how many
-engineers had been warning about the problems; nobody was listening, what the f*ck do they know!
+this was far from clear in 2016; let alone built into wind turbines and solar farms.
 
 And how did AEMO eventually fix the problem of low inertia on the SA grid and the risks it posed? 
 
-A few years after the event, and with very little fanfare, [four synchronous condensers](https://www.electranet.com.au/what-we-do/projects/power-system-strength/) were installed. These
+A few years after the event, and with very little fanfare, [four synchronous condensers](https://www.electranet.com.au/what-we-do/projects/power-system-strength/) were installed; at a cost of $166m. These
 are large spinning lumps of metal that provide the same kind of inertia that the generators
 displaced by wind farms and solar panels had
 provided for free. They spin and provide inertia, they just don't generate any actual power (or carbon dioxide emissions).  

@@ -1,24 +1,29 @@
 
 Germany is often regarded as the global renewable energy poster child, but the Australian state of South Australia (SA)
 gets almost three times the electricity per person from wind and almost three times the electricity per person from 
-solar. I live in SA and while we have a smaller population, at just 1.8 million people, our electricity grid is
-non-trivial and big enough to serve as a model, or perhaps a warning, for others looking for a high penetration of
+solar. 
+
+I live in SA and while we have a smaller population, at just 1.8 million people, our electricity grid is
+non-trivial and big enough to serve as a model, or perhaps a warning, for others aspiring to a high penetration of
 renewables.
 
-Renewables, in the SA context, means wind turbines and solar panels. Unlike Germany, we have virtually no forests we
-can burn or rivers we can dam. SA is one of the driest places on the planet.
+"Renewables", in the SA context, means wind turbines and solar panels. This Australian state, over double the size of Germany, is one of the driest places on the planet. So, unlike Germany, we have virtually no forests we
+can burn or rivers we can dam. 
 
-It's a real world experiment in non-trivial penetration of wind and solar power 
-into an non-trivial grid. 
+Ours has been, and still is, a real world experiment in bolting high levels of wind and solar power 
+onto a grid. We have enough solar panels feeding the grid at times that we need to centrally 
+disconnect them. But on still, 40 degree C, nights we need over three gigawatts to be available to
+run air conditioners.
 
-We had a statewide blackout in 2016 which is intimately connected with our renewable energy rollout; and
+In 2016, we had a statewide blackout that was intimately connected with our renewable energy rollout; and
 getting the grid back up again wasn't quick or easy.
+
+### The evolution of the SA grid
 
 There are a number of public and private
 organisations working together to operate Australia's grid(s). It's a veritable acronym jungle which isn't helped when
-Governments sack organisations, rename them, or reallocate responsibilities from time to time.
+Governments sack organisations, rename them, or reallocate responsibilities from time to time. I'll try and keep things
+as simple as possible, but no simpler.
 
-### SA offshoring coal emissions 
-
-SA closed it's last coal plant in 2016.
+SA closed it's last coal power plant in 2016. 
 

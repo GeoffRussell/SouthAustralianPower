@@ -1,0 +1,15 @@
+
+Where are we in terms of the hard stuff?
+
+## Modeling the grid
+
+Early in 2023, over 6 years after the statewide blackout, AEMO produced a modelling report on running
+the SA grid without this big spinning lumps of metal; or rather without spinning lumps of metal actually generating
+anything. Meaning we definitely needed the synchronous condensors, but the study was into running without generators
+and maintaining a reference voltage.
+
+Why do marching bands have big bass drums? They set the rhythm. An electrical grid is similar.
+When anything on the grid disconnects for some reason, perhaps a storm, perhaps maintenance, it
+needs to get back in step during the re-connection. A marching band drum tells you when to put a foot
+forward, but it doesn't tell you which one, or how high to lift your knees. The 2023 study laid out
+the conditions underwhich the grid could establish a reference voltage without traditional generators. 
