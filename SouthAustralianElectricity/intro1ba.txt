@@ -1,0 +1,15 @@
+<br>
+
+I live in SA, and while our 1.8 million people is a much smaller population than Germany's, our electricity grid is
+non-trivial and big enough to serve as a model, or perhaps a warning, for others aspiring to a high penetration of
+intermittent renewables.
+
+*Renewables*, in the SA context, is restricted to wind turbines and solar panels. This Australian state, over double the size of Germany, is one of the driest places on the planet. So, unlike Germany, we have virtually no forests we
+can burn or rivers we can dam. 
+
+Look at the chart reference to the "diurnal mismatch problem"; which is a pretentious way of saying the 
+sun doesn't shine at night. In SA we have another problem, not mentioned on the chart and best explained by
+an image from 2019. What are called the "black summer bushfires" in Australia. When we have heat waves in SA, two types of weather are common; very very still, or hot north winds. The hot north winds from inland have always heralded fires. Toward the end of December, we had four days over 42 degrees C in succession; with the 4th day bringing hot north
+winds and horrific fires in the Hills around Adelaide. Here's a graph showing the electrical demand and the wind power
+available during that horror week.
+

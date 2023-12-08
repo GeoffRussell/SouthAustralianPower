@@ -1,0 +1,26 @@
+
+
+Ours has been, and still is, a real world experiment in bolting high levels of wind and solar power 
+onto a grid. We have enough solar panels feeding the grid at times that we need to centrally 
+disconnect them. But on a still, 40 degree C, night we need over three gigawatts to be available to
+run air conditioners and the rest of our lives.
+
+In 2016, we had a statewide blackout that was intimately connected with our renewable energy rollout; and
+getting the grid back up again wasn't quick or easy. You can test a building evacuation from time to time
+without too much fuss, but not so a statewide grid restart! And things which aren't tested have a habit of
+failing, which it did. But this article isn't about the past, it's about the future; the steeply rising part
+of that chart above.
+
+### The evolution of the SA grid
+
+First a little background. As I said, the SA grid isn't a toy.  It has 200,000 km of overhead cables, 77,000 transformers
+and 400 zone substations spread over 178,000 square kilometers. Over the past 6 years, the SA grid manager has replaced
+1,700 of the transformers during the past 6 years. It's a complicated process to do safely. So if you do something requiring a transformer upgrade, like add so much rooftop PV that you overload your transformers, it's going to take a while; unless you can find an army of out-of-work linespeople. 
+
+There are a number of public and private
+organisations working together to operate Australia's grid(s). It's a veritable acronym jungle which isn't helped when
+Governments sack organisations, rename them, or reallocate responsibilities from time to time. I'll try and keep things
+as simple as possible, but no simpler.
+
+SA closed it's last coal power plant in 2016. 
+
