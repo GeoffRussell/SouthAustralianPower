@@ -1,0 +1,30 @@
+## Grid connection bottlenecks and red tape
+
+Many people are aware of a large number of solar and wind farms waiting to connect to grids around
+the world. There are usually references to red tapes and calls for reform, blah blah blah.
+
+The connection bottlenecks have nothing to do with red tape. Not that I can confidently deny the
+existence of such tape wrapping each and every grid on the planet. But what I can be sure of
+is that there are some very real and very complex impediments to rapid grid connection of any 
+new significant wind or solar power collector.  
+
+Back in the old days of high inertia and something else called "system strength" (which we won't discuss), 
+connecting new
+power plants was relatively simple. Firstly, because it didn't happen often, and secondly because
+the complexity of such grids was low and relatively easily modelled with software.
+
+There are two levels of software modelling for grids. You don't have to understand anything about
+them except that one is fast and relatively simple (for an electrical engineer), and the second is
+slow and complex (even for the best engineers).  
+
+Basically, wind and solar have undermined the ability to do relatively quick and simple grid modelling of
+proposed changes. 
+
+Note that I keep saying "wind and solar" and not "renewables". Why? Burning forests and flooding valleys are
+just old-school thermal power plants. The DRAX powerplant in the UK used to run on coal. Now it burns 
+wood. The grid doesn't care. It's just a thermal power plant, meaning it produces steam which drives 
+a turbine which produces electricity. DRAX burned ??? tonnes of wood pellets imported, mostly, from 
+the US in 2021. It's renewable, but it sucks. 
+
+Wind and solar are different. The acronym VRE, "variable renewable energy" captures the difference, 
+but acronyms suck also. 
