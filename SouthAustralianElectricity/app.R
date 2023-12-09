@@ -77,7 +77,7 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       markdownFile("intro3.txt"),
       fluidRow(align="center",imageOutput("scaleissues1",height=300)),
       markdownFile("intro3b.txt"),
-      fluidRow(align="center",imageOutput("scaleissues2b",height=400)),
+#      fluidRow(align="center",imageOutput("scaleissues2b",height=400)),
       markdownFile("intro3c.txt"),
       markdownFile("obw.txt"),
       plotOutput("kwpercapwind"),
@@ -103,6 +103,7 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       markdownFile("ob0.txt"),
       fluidRow(align="center",imageOutput("weekpng",height=400)),
       markdownFile("ob1.txt"),
+      markdownFile("connect.txt"),
       plotOutput("shortfall"),
       plotOutput("facilities")
     )
@@ -128,7 +129,7 @@ server<-function(input,output,session) {
   output$blacksummer<-renderImage(list(src="black-summer-2019.png",height=300),deleteFile=FALSE)
   output$scaleissues1<-renderImage(list(src="renewable-scaleissues.jpg",height=300),deleteFile=FALSE)
   output$scaleissues2<-renderImage(list(src="renewable-scaleissues-mod.png",height=400),deleteFile=FALSE)
-  output$scaleissues2b<-renderImage(list(src="renewable-scaleissues-mod.png",height=400),deleteFile=FALSE)
+#  output$scaleissues2b<-renderImage(list(src="renewable-scaleissues-mod.png",height=400),deleteFile=FALSE)
   output$weekpng<-renderImage(list(src="WeekEnding30-11-2023.png",height=400),deleteFile=FALSE)
   output$kwpercapsolar<-renderPlot({
       dfkwPerCapSolar %>% ggplot() + geom_col(aes(x=reorder(Country,kwPerCap),y=kwPerCap),width=0.6,fill="yellow") + 
