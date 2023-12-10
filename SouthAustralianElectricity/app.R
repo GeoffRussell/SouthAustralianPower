@@ -11,7 +11,7 @@ library(plotly)
 
 comma<-function(x) prettyNum(signif(x,digits=4),big.mark=",")
 markdownFile<-function(filename) {
-  t<-read_file(filename)
+  t<-read_file(pipe(paste0("cat m4defs.txt ",filename," | m4 ")))
   markdown(t)
 }
 options(scipen=999)
@@ -75,7 +75,7 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       markdownFile("intro2.txt"),
       tableOutput("interconnectors"),
       markdownFile("intro3.txt"),
-      fluidRow(align="center",imageOutput("scaleissues1",height=300)),
+#      fluidRow(align="center",imageOutput("scaleissues1",height=300)),
       markdownFile("intro3b.txt"),
 #      fluidRow(align="center",imageOutput("scaleissues2b",height=400)),
       markdownFile("intro3c.txt"),
@@ -103,7 +103,11 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       markdownFile("ob0.txt"),
       fluidRow(align="center",imageOutput("weekpng",height=400)),
       markdownFile("ob1.txt"),
-      markdownFile("connect.txt"),
+      markdownFile("connecta.txt"),
+      fluidRow(align="center",imageOutput("connect",height=400)),
+      markdownFile("connectb.txt"),
+      fluidRow(align="center",imageOutput("connectgit",height=400)),
+      markdownFile("connectc.txt"),
       plotOutput("shortfall"),
       plotOutput("facilities")
     )
@@ -126,6 +130,8 @@ server<-function(input,output,session) {
   output$coal<-renderTable(
     tibble("Retired Coal Plants"=c("Playford A","Playford B","Northern"),"Capacity"=c("90MW","240MW","520MW"),"Closed"=c("1985","2016","2016"))
   )
+  output$connectgit<-renderImage(list(src="aemo-kuhlmann-git.png",height=300),deleteFile=FALSE)
+  output$connect<-renderImage(list(src="modelling-rms-vs-emt.png",height=300),deleteFile=FALSE)
   output$blacksummer<-renderImage(list(src="black-summer-2019.png",height=300),deleteFile=FALSE)
   output$scaleissues1<-renderImage(list(src="renewable-scaleissues.jpg",height=300),deleteFile=FALSE)
   output$scaleissues2<-renderImage(list(src="renewable-scaleissues-mod.png",height=400),deleteFile=FALSE)
