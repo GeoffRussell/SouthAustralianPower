@@ -1,3 +1,2 @@
 changequote(`[[',`]]')dnl
-define(LLBEL,[[**$1**]])
-define(LABEL,[[]])
+define(LABEL,[[**$1**]])

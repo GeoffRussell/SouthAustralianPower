@@ -9,9 +9,11 @@ intermittent renewables.
 *Renewables*, in the SA context, is restricted to wind turbines and solar panels. This Australian state, over double the size of Germany, is one of the driest places on the planet. So, unlike Germany, we have virtually no forests we
 can burn or rivers we can dam. 
 
-Look at the chart reference to the "diurnal mismatch problem". This is a pretentious name for the problem of
-the sun being elsewhere at night. In SA we have another problem, not mentioned on the chart and best explained by
-an image from 2019. This is the season of the "black summer bushfires" in Australia. 
+Look at the chart above and note the 
+reference to the "diurnal mismatch problem". This is a pretentious name for the problem of
+the sun being elsewhere at night. In SA we have that problem, of course, but
+we also have another problem which isn't mentioned on the chart and best explained by
+an image from 2019; the year of the "black summer bushfires" in Australia. 
 
 When we have heat waves in SA, the days are often very very still. Alternatively, we can get hot 
 north winds. These winds blowing from the hot center of Australia have always heralded fires. 

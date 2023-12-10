@@ -1,7 +1,9 @@
 LABEL(intro2)
 
 The older coal plants were 300 km north of Adelaide, this provided a convenient transmission backbone
-to locate wind turbines and solar plants around. Note ... in grid jargon, "transmission" means the big wires on high towers crossing long distances, as opposed to "distribution", which is the smaller stuff near houses. The transmission infrastructure uses high voltages (to reduce energy losses) and transformers reduce the voltage back down to the
+to locate wind turbines and solar plants around. Note ... in grid jargon, "transmission" means the big wires on high towers crossing long distances, as opposed to "distribution", which is the smaller stuff near houses. The transmission infrastructure uses transformers to increase the voltage 
+from power plants to reduce energy losses over long distances and transformers at the receiving
+point to reduce the voltage down to the
 240 volts in a typical Australian powerpoint.
 
 ### Offshoring our coal emissions with interconnectors
