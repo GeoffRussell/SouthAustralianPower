@@ -1,3 +1,4 @@
+LABEL(intro1a)
 
 Germany is often regarded as the global renewable energy poster child, but the Australian state of South Australia (SA)
 gets almost three times the electricity per person from wind and almost three times the electricity per person from 

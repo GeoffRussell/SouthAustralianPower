@@ -1,7 +1,8 @@
+LABEL(intro3)
 
 The third interconnection is, as of November 2023,  almost complete. 
 
-## Two ways to alleviate the chaos 
+### Two ways to alleviate the chaos 
 
 When that third interconnector was requested, as a matter of urgency, by AEMO in 2020, here's [what they said](https://www.aemo.com.au/-/media/Files/Electricity/NEM/Planning_and_Forecasting/SA_Advisory/2020/Minimum-Operational-Demand-Thresholds-in-South-Australia-Review):
 
@@ -73,7 +74,7 @@ needed solutions.
 Engineering "challenges" are different from political challenges, they
 can't be solved by sound bites or a new and cool "brand ambassador". 
 
-## Inertia
+### Inertia
 
 Inertia in an electrical system has plenty of good analogies from daily life. Stopping an empty shopping trolley
 is easy. Fill it with 40 kilos of beer and it becomes really hard to wrangle.
@@ -131,7 +132,7 @@ Synchronous condensers, in comparison, are relatively cheap ($166m) and run for 
 batteries charge you every time you use them, and their operators know just how vulnerable you are when you
 need them. The term *price gouging* leaps to mind.   
 
-## EnergyConnect
+### The third interconnector: EnergyConnect
 
 The stationary condensers provide inertia, but, like batteries they won't get you over a long
 loss of generation. Enter the new EnergyConnect interconnector.
@@ -141,10 +142,3 @@ Victorian coal power to allow it to both keep the lights on and
 continue pretending that it is a renewable electricity success story. All SA has actually done, is
 the relatively easy bit. 
 
-## US renewable energy experts 
-
-The renewable energy paper I mentioned at the beginning of this piece was written in [*June 2021*](https://www.osti.gov/biblio/1804705-challenges-achieving-renewable-electricity-system-united-states). 
-Lead author Paul Denholm and sixteen other researchers from three US renewable energy institutes outlined
-the problems confronting advocates for high penetration of wind and solar power. Keep in mind that other countries can
-burn forests and dam rivers to provide electricity on still nights. In SA we have precious little in the way of
-forest or hydro resources. Let me repeat the diagram:

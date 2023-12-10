@@ -1,5 +1,7 @@
 <br>
 
+LABEL(intro1ba)
+
 I live in SA, and while our 1.8 million people is a much smaller population than Germany's, our electricity grid is
 non-trivial and big enough to serve as a model, or perhaps a warning, for others aspiring to a high penetration of
 intermittent renewables.

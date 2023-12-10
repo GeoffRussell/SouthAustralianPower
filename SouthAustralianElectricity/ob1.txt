@@ -1,5 +1,6 @@
-### Explainer: Power and energy
+LABEL(ob1)
 
+### Explainer: Power and energy
 
 
 ### Understanding the graph

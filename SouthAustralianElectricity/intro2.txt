@@ -1,9 +1,10 @@
+LABEL(intro2)
 
 The older coal plants were 300 km north of Adelaide, this provided a convenient transmission backbone
 to locate wind turbines and solar plants around. Note ... in grid jargon, "transmission" means the big wires on high towers crossing long distances, as opposed to "distribution", which is the smaller stuff near houses. The transmission infrastructure uses high voltages (to reduce energy losses) and transformers reduce the voltage back down to the
 240 volts in a typical Australian powerpoint.
 
-## Interconnectors: Offshoring our coal emissions
+### Offshoring our coal emissions with interconnectors
 
 SA has long been connected to the rest of the eastern
 Australian electricity grid, known since the mid 1990s as the NEM, by two connections.

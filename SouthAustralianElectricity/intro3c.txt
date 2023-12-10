@@ -1,3 +1,5 @@
+LABEL(intro3c)
+
 At 72% wind and solar, you can see that we've done the easy bit; and with only a single statewide blackout.
 
 Before looking at the hard part of running a grid with high levels of wind and solar, let's 

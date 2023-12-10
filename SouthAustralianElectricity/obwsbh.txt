@@ -1,3 +1,5 @@
+LABEL(obwsbh)
+
 ## International comparisons
 
 How does South Australia compare with other countries and regions? Region information is hard to come by, so I'll

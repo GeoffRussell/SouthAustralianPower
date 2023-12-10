@@ -1,3 +1,5 @@
+LABEL(obwsbh2)
+
 Are the AEMO and IEA aspirational targets to double electricity really necessary? 
 
 How much electricity you need is determined by the economy you want. If you can afford to buy energy intensive 

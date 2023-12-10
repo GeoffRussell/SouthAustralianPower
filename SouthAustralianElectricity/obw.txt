@@ -1,4 +1,5 @@
+LABEL(obw)
 
-## Wind power in South Australia
+### Wind power
 
 The wind power capacity per person in South Australia blitzes any national figure. 

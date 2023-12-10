@@ -1,7 +1,8 @@
+LABEL(obs)
 
-## Solar power in South Australia 
+### Solar power
 
-South Australia is also a world leader in solar power. Estimating the amount of rooftop solar relies on installation 
+South Australia is also a per-person leader in solar power. Estimating the amount of rooftop solar relies on installation 
 data rather than actual measurement, because the generation is behind the electricity meter. Grid operators know about
 the amount of solar electricity being fed into the grid, but not the amount being used in homes.
 

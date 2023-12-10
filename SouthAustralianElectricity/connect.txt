@@ -1,24 +1,29 @@
+LABEL(connect)
+
 ## Grid connection bottlenecks and red tape
 
 Many people are aware of a large number of solar and wind farms waiting to connect to grids around
-the world. There are usually references to red tapes and calls for reform, blah blah blah.
+the world. There are usually references to red tape and calls for reform.
 
-The connection bottlenecks have nothing to do with red tape. Not that I can confidently deny the
-existence of such tape wrapping each and every grid on the planet. But what I can be sure of
-is that there are some very real and very complex impediments to rapid grid connection of any 
-new significant wind or solar power collector.  
+But there are good reasons having nothing to do with red tape for the connection bottlenecks.
 
-Back in the old days of high inertia and something else called "system strength" (which we won't discuss), 
-connecting new
-power plants was relatively simple. Firstly, because it didn't happen often, and secondly because
-the complexity of such grids was low and relatively easily modelled with software.
+Back in the old days of high inertia and something else called "system strength" (which is far more
+complex), connecting new
+power plants was relatively simple. Firstly, it didn't happen often, and secondly,
+the complexity of such grids was low and relatively easily modelled with software. 
+
+### We can do this the easy way or the hard way
 
 There are two levels of software modelling for grids. You don't have to understand anything about
 them except that one is fast and relatively simple (for an electrical engineer), and the second is
-slow and complex (even for the best engineers).  
+slow and complex (even for the best engineers).   
 
 Basically, wind and solar have undermined the ability to do relatively quick and simple grid modelling of
-proposed changes. 
+proposed changes. Consider the following image from an Australian grid connection information clip.
+
+
+
+
 
 Note that I keep saying "wind and solar" and not "renewables". Why? Burning forests and flooding valleys are
 just old-school thermal power plants. The DRAX powerplant in the UK used to run on coal. Now it burns 

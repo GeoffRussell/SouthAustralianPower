@@ -1,8 +1,8 @@
+LABEL(intro3b)
 
 So how did SA come to be further along that renewable energy penetration curve than anybody else in the world (as far
 as I can tell)?
 
-## Intermittent renewable energy in South Australia 
 
 A generous [feed in tariff](https://en.wikipedia.org/wiki/Feed-in_tariffs_in_Australia#South_Australia) was introduced into South Australia in 2006 with the then Premier Mike Rann aiming for the state to be carbon neutral by 2020. And now, in 2023, after 17 years of solar and wind installations, SA is a world leader in per-person wind and solar electricity generation.
 
