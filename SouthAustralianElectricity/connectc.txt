@@ -1,0 +1,5 @@
+LABEL(connectc)
+
+The top panel is  labelled "GIT". This is a complex piece of software for handling multiple related versions of
+things; typically program code. This helps you model connecting your device to the grid assuming different equipment or
+software versions for some critical parts of the grid.    

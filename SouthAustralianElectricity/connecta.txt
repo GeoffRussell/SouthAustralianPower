@@ -1,0 +1,23 @@
+LABEL(connecta)
+
+## Grid connection bottlenecks and red tape
+
+Many people are aware of a large number of solar and wind farms waiting to connect to grids around
+the world. There are usually references to red tape and calls for reform.
+
+But there are good reasons having nothing to do with red tape for the connection bottlenecks.
+
+Back in the old days of high inertia and something else called "system strength" (which is far more
+complex), connecting new
+power plants was relatively simple. Firstly, it didn't happen often, and secondly,
+the complexity of such grids was low and relatively easily modelled with software. 
+
+### We can do this the easy way or the hard way
+
+There are two levels of software modelling for grids; simple and complex. You don't have to understand anything about
+these two levels except that the former is quick to perform and relatively simple (for an electrical engineer), 
+and the second is slow and complex (even for the best engineers).   
+
+Basically, wind and solar have undermined the ability to do relatively quick and simple grid modelling of
+proposed changes. Consider the following image from a presentation from an AEMO engineer talking
+to other engineers about [grid modeling](https://www.youtube.com/watch?v=XqYaS_JNPRo). The heading on the chart is RMS and EMT. These are the simple and complex modelling methods respectively. 

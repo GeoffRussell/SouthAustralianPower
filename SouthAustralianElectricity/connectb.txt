@@ -1,0 +1,58 @@
+LABEL(connectb)
+
+The red line is what happens when you model a complex system with the wrong level of model (RMS); 
+you get the wrong answer. The
+right answer is the blue line (EMT), showing the shuddering disconnection of a high voltage DC power line under 
+the test scenario. It's very common in physics to make assumptions which you know are false, but which still
+allow you to get the right answer. For example, astronomers might pretend the moon is a concentrated mass with
+no volume ... just a point mass. That's fine for many purposes, but you can't use that model when you want
+to land on the moon. For that purpose, you need something much better. So it is with
+a grid. You used to be able to use simple (RMS) models and get the right answer; not any more.
+
+The need to use more precise models is driving the delays in grid connections of wind 
+and solar; not bureaucratic red tape.
+
+Note that I keep saying "wind and solar" and not "renewables". 
+
+Why? 
+
+Burning forests and flooding valleys are
+just old-school *thermal* power plants. Meaning things which produce steam which drives 
+a turbine which produces electricity. The DRAX powerplant in the UK used to run on coal. Now it burns 
+wood. The grid doesn't care. DRAX burned [7.8 million tonnes of forest](https://www.drax.com/wp-content/uploads/2022/03/Drax_AR2021_2022-03-07.final_.pdf) in 2021. This was in the form of 
+wood pellets imported, mostly, from  the US. If you are paying attention you are probably asking how much forest 
+you have to cut down to get 7.8 million tonnes of pellets. It's renewable, but it sucks. 
+
+Wind and solar are different. The acronym VRE, "variable renewable energy" captures the difference, 
+but acronyms quickly get confusing, so I'll just keep saying "wind and solar". 
+
+If you want to understand a bit more about why wind and solar connections are hard, then I'd suggest watching
+this [AEMO videoclip about the connection simulation tool](https://www.youtube.com/watch?v=6lvswRzf49k).  
+
+AEMO doesn't have the thousands of engineers required to do all the testing on all the equipment people want to
+connect, so they've built a do-it-yourself connection tool. This doesn't remove AEMO's roll in final approval, but is
+intended to streamline the process. Companies using the tool should have fixed most of the problems in their equipment, application
+and modelling by the time they apply for final connection. It is a requirement for using the connection tool
+that you understand the complex (EMT) modelling rather than just the simpler (RMS) modelling.
+
+Here's a simplified description of what the tool has to do:
+
+1. Assume every device on the grid has associated manufacturer supplied software model; obtain the right model for the
+right hardware at the right version and load it into your virtual model of the grid. Maybe it won't matter if your software version doesn't match the version on the physical device; or maybe it will. Increasingly, wind and solar
+inverters use sophisticated software which can dramatically change their behaviour during a grid fault. 
+
+2. Models often work with a simplified grid. For example, SA is connected by a couple (soon to
+be three) of interconnectors. Surely you can model this as a black box with a set of characteristics rather than
+needing to know everything on the end of those interconnectors; and you can. The old adage says keep it as simple as possible, but no simpler. How do you determine the behaviour of your "black box" when simplifying parts of
+the grid? See step one.
+
+3. Now add the proposed new device at the right point on the model and simulate the behaviour of the grid under fault conditions with the new device. You should do this with the complex tool, not the simple tool. What does it mean, "under fault conditions"? It means imagine lightening or some other failure taking out a transmission line, or transformer, or 
+generator. 
+
+4. You are probably getting an idea of the problems.
+
+Now, did I mention that there might be 50 or 100 other power plants trying to do the same thing. What companies 
+A, B, and C are each adding equipment in the same area. So they will test the existing grid plus A, the grid plus B
+and the grid plus C. Who will test the grid plus A, B, and C? 
+
+Here's my favourite slide from the AEMO Connection simulation tool presentation.
