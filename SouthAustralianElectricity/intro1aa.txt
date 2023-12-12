@@ -1,0 +1,31 @@
+LABEL(intro1aa)
+
+Germany is often regarded as the global renewable energy poster child,
+but the Australian state of South Australia (SA) gets more than double
+the electricity per person from wind and almost three times the
+electricity per person from solar power than Germany. 
+
+Many countries aspire to follow in Germany's footsteps despite the 
+fact that it has been astonishingly unsuccessful in replacing fossil fuels
+by wind and solar power during a solid and well funded 20 years of effort.
+
+The following chart gives the per person low carbon electricity collected or generated for
+various countries; including nuclear, solar, wind, hydro and biomass. I've included biomass (burning
+forests as energy crops) despite there being considerable debate about it being low carbon without
+sequestration of the resulting carbon dioxide; and despite the health problems associated with
+wood smoke.  
+
+The default selection is for Germany, Australia and the state of South 
+Australia. You can select from another 20 countries that account for the bulk of the world's
+energy use, population and greenhouse gas emissions. Hover over the chart and you can see 
+the size of the components. You can also see how well we are travelling in terms of
+meeting the International Energy Agency's 2050 targets. 
+
+South Australia, and Australia as a whole has lessons for other countries on the
+growing problem of *"renewable energy backlogs"*. Why do so many countries have a backlog
+of wind and solar farms trying to connect to the grid? Is it just bureaucratic tape, or is there
+an intrinsic problem that makes connecting to the grid much harder than, for example, plugging 
+another device into a computer network. 
+
+
+

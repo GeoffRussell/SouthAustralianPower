@@ -1,0 +1,35 @@
+LABEL(intro1bba)
+
+Look at the red humps. They are peaks in demand. Now look at the blue troughs, they are when the
+wind isn't blowing. See how the correspond? You can see that once the heat wave locks in, the wind pattern shifts into sync and when demand is at its maximum, wind power is pretty much AWOL. This synchronisation isn't a rare event; I first noticed it in an AEMO report on a heatwave in 2009, and you can be sure that professional experts at AEMO have known about it forever. And even if it did only happen a few times a decade, our need for reliable power peaks precisely during *every* such event. 
+Those demand peaks corresponded to well over 40 degrees C; 49 degrees C in some parts of the state.  
+
+### Aside: Wildlife and the grid  
+
+Adelaide is blessed with a flying fox colony in the heart of the city.
+In 2019 there were about 30,000 of these highly social and intelligent
+animals in this colony. On Tuesday the 17th, the first super hot  
+day of that heat wave, the youngest animals started falling from trees. A team
+of rescuers saved as many as they could. But by the end of Thursday, all
+available aviary space was full and rescuing had to stop. We had some
+400 rescued animals needing care and feeding. On Friday, all we could do
+at the colony was a little spraying to keep animals (and ourselves) cool
+and hope for the best as increasing numbers succumbed and fell from the 
+trees.  They were either dead before hitting the ground or shortly after.
+About 8,000 died. Nobody could really keep count of the black plastic
+bags of dead animals. Adelaide City Council staff were picking up stinking
+corpses for weeks after. Flying foxes have special feet and tendons, they hang
+without effort and have to actively contract muscles to release their grip. This
+means that many dead bats didn't fall; they just died where they hung.
+
+Adelaide City Council has subsequently installed high rise (30+
+metres) sprinklers in the trees at the heart of the colony. It
+would be disastrous to have spent the money on the sprinklers only
+to have the electric pumps fail for lack of power when they are most
+needed. Also on that Friday, the wind slipped out of synch and started
+blowing hot and dusty from the north and attention [flipped from dying
+animals](https://knowledge.aidr.org.au/resources/black-summer-bushfires-sa-2019-20/)
+to terrified home owners in the hills around the city and on Kangaroo
+Island just of the coast. Burnt out houses and dying koalas joined the flying foxes
+in making international news.
+

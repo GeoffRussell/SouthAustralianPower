@@ -1,0 +1,87 @@
+
+### Inertia
+
+Inertia is one of a cluster of grid attributes that wind and solar screw up. I won't
+deal with the others. One is enough.
+
+Inertia in an electrical system has plenty of good analogies from daily
+life. Stopping an empty shopping trolley is easy. Fill it with 40 kilos
+of beer and it becomes really hard to wrangle. 
+
+Our *alternating current* electricity supply swings backwards and forwards
+between plus and minus 240 volts. The swings happen 50 times a second. 
+Coal, gas, nuclear and hydro electricity generators are massive spinning lumps of metal. These are your
+full shopping trolley and they are a bugger to slow down.
+
+It's the *spinning* of the metal masses that creates the alternating
+current in our powersupply. Each revolution of the spinning lump of
+metal is one cycle of the voltage. The spinning and the electricity
+frequency are one and the same. 50 times a second means the generator
+rotors (the lumps) are spinning at 3,000 revolutions per minute. If you
+lose one such generator, then the other generators will experience a
+drag and slow down slightly in response to the extra power they need to
+supply. The inertia of the spinning masses give the grid operator enough
+time to connect an reserve generator to replace the failed one. Assuming that
+the reserve generator is up and running, but just not connected. These
+spare generators are called, obviously enough ... "spinning reserves".
+
+A battery can do something similar. It can quickly connect to make up
+for the shortfall when a generator fails. In a traditional grid, inertia
+rides over small changes and buys time to handle bigger ones. A battery can
+similarly buy time, but for what purpose? In a predominantly wind and
+solar system, there may be *nothing to turn on*. You can't just start up
+a solar farm when a wind farm fails in the middle of the night. You
+could perhaps have a wind turbine operating like spinning reserve; if
+it was windy. But on a still night? What then? In such situations the
+battery has to be more than something to buy time, it has to actually
+supply energy for an extended period; until the fault is fixed.
+
+As well as dealing with loss of generation, the grid has to deal with
+changes in demand.  Starting an aluminium smelter requiring 500 megawatts
+of power will require the grid operator to rapidly add 500 megawatts of
+generation. The inertia of the spinning lumps of metal slows the rate at
+which the frequency drops just long enough to bring another generator
+on line at best, or, at worst, kick some other users of the system (ie.,
+deliberately blackout a suburb or two).
+
+Renewables are, ever so slowly, being reengineered to provide alternative
+mechanisms to achieve the same goal; usually via batteries. But the
+new and advanced engineering to do this was far from clear in 2016;
+let alone built into wind turbines and solar farms. It's come a long
+way since 2016 and we'll get to it in due course. Why has progress on making renewables
+do these things been so slow? Because they are incredibly complex to fix do well; there is
+no lack of will. 
+
+And how did AEMO eventually fix the problem of low inertia on the SA grid and the risks it posed? 
+
+A few years after the blackout, and with very little fanfare, [four synchronous condensers](https://www.electranet.com.au/what-we-do/projects/power-system-strength/) were installed; at a cost of $166 
+million. These
+are large spinning lumps of metal that provide the same kind of inertia that the generators
+displaced by wind farms and solar panels had
+provided for free. They are connected to the grid and provide inertia, they just don't generate 
+any actual power (or carbon dioxide emissions).  
+
+Following the blackout, Elon Musk famously installed the then "biggest battery in the world", which could provide 100MW for a bit over an hour. Was it big enough to prevent a repeat of the blackout with a similar sequence of events? Nobody bothered to ask. You have to understand that Adelaide is a small city and having the world's biggest battery was an incredible event. Almost worth having the blackout! 
+
+But the following year, 2017, Australia's Council of Learned Academies put out
+a [report](https://acola.org/wp-content/uploads/2021/05/hs1_role-energy-storage_acola_summary-paper.pdf) on storage technologies. They asked that question and
+specifically estimated that it would have taken 600MW of batteries to have prevented the
+2016 SA blackout; i.e., 6 times the size of that biggest-battery-in-the-world! 
+
+Batteries have grown in size since 2016, but 600MW is still a big
+battery, even if it can only run for an hour.  The [Victorian Big
+Battery](https://en.wikipedia.org/wiki/Victorian_Big_Battery) is 300MW
+and cost $160m.  Synchronous condensers, in comparison, are relatively
+cheap and run for decades, batteries charge you every time you
+use them, and their operators know just how vulnerable you are when you
+need them. The term *price gouging* leaps to mind.
+
+### The third interconnector: EnergyConnect
+
+The stationary condensers provide inertia, but, like batteries, they won't get you over a long
+loss of generation. Enter the new EnergyConnect interconnector.
+
+Once this new interconnector is complete, SA will have access to about 1670MW of 
+Victorian coal power to allow it to both keep the lights on and 
+continue pretending that it is a renewable electricity success story. All SA has actually done, is
+the relatively easy bit. 

@@ -1,0 +1,17 @@
+LABEL(intro3aa)
+
+### Offshoring our coal emissions with interconnectors
+
+SA has long been connected to the rest of the eastern
+Australian electricity grid, known since the mid 1990s as the NEM, by two connections.
+*Heywood*, originally built in 1988 with a capacity of 450MW, was upgraded in 2016
+for about $100m [to raise its capacity from 450MW to 650MW](https://www.electranet.com.au/projects/sa-vic-heywood-interconnector-upgrade/). This was the final step needed to totally replace SA coal by Victorian coal. It brings power
+up through the south of the state to Adelaide, a sprawling city with a population (1.3m) a little smaller than Munich (1.45m) but 10 times larger in area. Our electricity distribution system has over 70,000 transformers.
+
+The second interconnector, *Murraylink* brings power to the Riverland region north-east of Adelaide.
+
+When the interconnectors are offline, SA is said to be "islanded"; it's a nice 
+intuitive term for a grid with no external links. During the 2016
+blackout, we were islanded. We were also islanded (without a statewide blackout) in 2020 for 17 days.
+
+

@@ -1,0 +1,65 @@
+LABEL(intro1bbb)
+
+### Background on the SA grid
+
+The SA grid isn't massive by any standard, but
+it isn't a toy. A [2023 AEMO study](https://aemo.com.au/-/media/files/electricity/nem/security_and_reliability/congestion-information/sa-transition-to-fewer-synch-gen-grid-reference.pdf) (to be discussed later) looked at international "studies" of high penetration renewables and they are truly trivial. Calling them micro-grids would be a grandiose exaggeration. A few megawatts of wind or solar and some batteries; ho, hum. Every piece of research has to start this way, but it's simply ignorant and irresponsible for such
+efforts to  be reported like they are global decarbonisation breakthrough.
+
+SA on the other hand, is a gigawatt scale grid. 
+It has 200,000 km of overhead cables, 77,000 transformers
+and 400 zone substations spread over 178,000 square kilometers. 
+
+Over the past 6 years, the *SA Power Networks* (the 
+grid operating entity) has replaced
+some 1,700 of the transformers.  
+
+Why does that matter? 
+
+Suppose we make changes to our electricity system requiring widespread
+transformer upgrades, like adding so much rooftop PV that you overload
+transformers, most of which are decades old. Suppose significant amounts of
+power has to run backwards (away from houses and businesses) 
+at levels never anticipated when the grid was
+designed, then such a grid upgrade is going to take a while! Kudos to SA Power Networks who
+are also upgrading the system to be more wildlife friendly; installing devices to reduce
+the risks to flying foxes, in particular, of electrocution. 
+
+The focus of our Australian Energy Minister Chris Bowen on the cost of generating
+electricity is like the person ordering a toasted sandwhich on-line and
+wondering why it costs so much. The cost of electricity is dominated by
+the cost of delivery, not production. 
+
+Break the grid and not only will decarbonisation be glacially slow, it will be incredibly expensive. 
+
+## The evolution of the SA grid
+
+A generous [feed in
+tariff](https://en.wikipedia.org/wiki/Feed-in_tariffs_in_Australia#South_Australia)
+was introduced into South Australia in 2006 with the then Premier Mike
+Rann aiming for the state to be carbon neutral by 2020. And now, in 2023,
+after 17 years of solar and wind installations, SA is a world leader in
+per-person wind and solar electricity generation.
+
+Australian's simply love to use the phrase "punching above our weight",
+and we are. Not that we make the panels or the wind turbines or
+even the batteries. We are pretty much, like the rest of the planet,
+punching in the anorexic weight class of the renewable energy generation
+manufacturing; but we are pretty good at buying it and plugging it in.
+
+SA closed it's last coal power plant in 2016. 
+
+Also in 2016, and not conincidentally, we 
+had a statewide blackout; and
+getting the grid back up again wasn't quick or easy. You can test a building evacuation from time to time
+without too much fuss, but not so a statewide grid restart! And things which aren't tested have a habit of
+failing, which it did. But this article isn't about the past, it's about the future; the steeply rising part
+of that renewable energy expert chart above.
+
+At the time the last coal power plant closed, we only had two. The
+chart below lists the total output of the plants, but both Northern and
+Playford B were composed of various smaller generators. A single large
+power plant would create considerable risks in a small grid like ours.
+
+
+

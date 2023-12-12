@@ -1,0 +1,25 @@
+LABEL(intro1ab)
+
+The default selection of regions Germany, Australia and the state of South 
+Australia. You can select from 18 countries that account for the bulk of the world's
+energy use, population and greenhouse gas emissions. Hover over the chart and you can see 
+the size of the individual electricity sources. 
+
+You can also see how well we are travelling in terms of
+meeting the International Energy Agency's 2050 targets. The IEA's targets are whole-of-system targets, including
+a clear statement that we can't get to net-zero without agriculture (meaning animal agriculture) changing.
+
+South Australia, and Australia as a whole, has lessons for other countries. Critically importand
+is the growing problem of *"renewable energy backlogs"*. Why do so many countries have a backlog
+of wind and solar farms trying to connect to their grid? Is it just bureaucratic red tape? or is there
+an intrinsic engineering problem that makes connecting to the electricity
+grid much harder than, for example, plugging another device into a computer network. 
+
+## Complexity at high concentrations of wind+solar 
+
+The following graph is a 2021 estimation from some US [renewable energy experts](https://www.osti.gov/biblio/1804705-challenges-achieving-renewable-electricity-system-united-states) on the rising difficulty of implementation as penetration rises for variable renewables, like 
+wind and solar. As you can see, South Australia, which produced 72% of its electricity from
+wind and solar during the past year, is getting into the area that 
+advocates call "challenging" while others call "scary". 
+
+
