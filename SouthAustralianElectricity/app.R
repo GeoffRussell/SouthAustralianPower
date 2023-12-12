@@ -77,7 +77,7 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       ),
       fluidRow(
         column(width=12,
-            checkboxInput("kwhpercap",label="Show kWh/person",value=FALSE),
+            checkboxInput("kwhpercap",label="Show total 2022 kWh/person",value=FALSE),
             checkboxInput("ieatarget",label="Show IEA Targets for 2050",value=FALSE),
             checkboxInput("cmpnr",label="Compare nuclear/solar+wind",value=FALSE),
             pickerInput("countrypick",choices=sort(countries$Country),selected=sort(c("South Australia","Australia","Germany")),multiple=TRUE,
@@ -94,7 +94,8 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       fluidRow(align="center",imageOutput("scaleissues2",height=400)),
       markdownFile("intro1ba.txt"),
       fluidRow(align="center",imageOutput("blacksummer",height=300)),
-      markdownFile("intro1bba.txt")
+      markdownFile("intro1bba.txt"),
+      fluidRow(align="center",imageOutput("batheat",height=400))
                   ),
                   tabPanel("SA's grid",
       markdownFile("intro1bbb.txt"),
@@ -150,6 +151,7 @@ server<-function(input,output,session) {
   output$coal<-renderTable(
     tibble("Retired Coal Plants"=c("Playford A","Playford B","Northern"),"Capacity"=c("90MW","240MW","520MW"),"Closed"=c("1985","2016","2016"))
   )
+  output$batheat<-renderImage(list(src="suzanne-bat.jpg",height=400),deleteFile=FALSE)
   output$connectgit<-renderImage(list(src="aemo-kuhlmann-git.png",height=300),deleteFile=FALSE)
   output$connect<-renderImage(list(src="modelling-rms-vs-emt.png",height=300),deleteFile=FALSE)
   output$blacksummer<-renderImage(list(src="black-summer-2019.png",height=300),deleteFile=FALSE)
