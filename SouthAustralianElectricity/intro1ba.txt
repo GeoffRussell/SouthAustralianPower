@@ -11,8 +11,13 @@ can burn or rivers we can dam.
 
 Look at the chart above and note the 
 reference to the "diurnal mismatch problem". This is a pretentious name for the problem of
-the sun being elsewhere at night. In SA we have that problem, of course, but
-we also have another problem which isn't mentioned on the chart and best explained by
+the sun being elsewhere at night. SA has solved that problem with interconnectors across the boarder
+to Victorian coal power. On some nights we don't need any, but an electricity system isn't about
+the easy stuff; it's about *always being on*.  Being reliant on Victorian coal isn't
+much of a long term solution. What happens when it is windless in SA and Victoria? Batteries? We'll
+get to that, but first there is 
+another really interesting 
+problem which isn't mentioned on the chart and best explained by
 an image from 2019; the year of the "black summer bushfires" in Australia. 
 
 When we have heat waves in SA, the days are often very very still. Alternatively, we can get hot 

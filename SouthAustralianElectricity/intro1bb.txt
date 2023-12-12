@@ -1,23 +1,28 @@
 LABEL(intro1bb)
 
-You can see that once the heat wave locks in, the wind pattern shifts into sync and when demand is at its maximum, wind power is pretty much AWOL. This synchronisation isn't a rare event; I first noticed it in an AEMO report on a heatwave in 2009, and you can be sure that professional experts at AEMO have known about it forever. And even if it did only happen a few times a decade, our need for reliable power peaks precisely during *every* such event. 
-Those demand peaks corresponded to well over 40 degrees C; 49 degrees C in some parts of the state. 
+Look at the red humps. They are peaks in demand. Now look at the blue troughs, they are when the
+wind isn't blowing. See how the correspond? You can see that once the heat wave locks in, the wind pattern shifts into sync and when demand is at its maximum, wind power is pretty much AWOL. This synchronisation isn't a rare event; I first noticed it in an AEMO report on a heatwave in 2009, and you can be sure that professional experts at AEMO have known about it forever. And even if it did only happen a few times a decade, our need for reliable power peaks precisely during *every* such event. 
+Those demand peaks corresponded to well over 40 degrees C; 49 degrees C in some parts of the state.  
 
 ### Aside: Wildlife and the grid  
 
-Adelaide is blessed with a flying fox colony in the heart of the city,
-in 2019 there were about 30,000 animals in this colony. On the first
-day of that heat wave, the youngest started falling from trees. A team
-of rescuers saved as many as they could. By the end of Thursday, all
+Adelaide is blessed with a flying fox colony in the heart of the city.
+In 2019 there were about 30,000 of these highly social and intelligent
+animals in this colony. On Tuesday the 17th, the first super hot  
+day of that heat wave, the youngest animals started falling from trees. A team
+of rescuers saved as many as they could. But by the end of Thursday, all
 available aviary space was full and rescuing had to stop. We had some
 400 rescued animals needing care and feeding. On Friday, all we could do
-at the colony was a little spraying and just watch animals drop from the
-trees. They were either dead before hitting the ground or shortly after.
+at the colony was a little spraying to keep animals (and ourselves) cool
+and hope for the best as increasing numbers succumbed and fell from the 
+trees.  They were either dead before hitting the ground or shortly after.
 About 8,000 died. Nobody could really keep count of the black plastic
 bags of dead animals. Adelaide City Council staff were picking up stinking
-corpses for weeks after.
+corpses for weeks after. Flying foxes have special feet and tendons, they hang
+without effort and have to actively contract muscles to release their grip. This
+means that many dead bats didn't fall; they just died where they hung.
 
-As a result, Adelaide City Council has installed high rise (30+
+Adelaide City Council has subsequently installed high rise (30+
 metres) sprinklers in the trees at the heart of the colony. It
 would be disastrous to have spent the money on the sprinklers only
 to have the electric pumps fail for lack of power when they are most
@@ -25,35 +30,38 @@ needed. Also on that Friday, the wind slipped out of synch and started
 blowing hot and dusty from the north and attention [flipped from dying
 animals](https://knowledge.aidr.org.au/resources/black-summer-bushfires-sa-2019-20/)
 to terrified home owners in the hills around the city and on Kangaroo
-Island just of the coast.
+Island just of the coast. Burnt out houses and dying koalas joined the flying foxes
+in making international news.
 
-### The SA grid
+### Background on the SA grid
 
 The SA grid isn't massive by any standard, but
-it isn't a toy. A [2023 AEMO study](https://aemo.com.au/-/media/files/electricity/nem/security_and_reliability/congestion-information/sa-transition-to-fewer-synch-gen-grid-reference.pdf) (to be discussed later) looked at international "studies" of high penetration renewables and they are truly trivial. Calling them micro-grids would be a grandiose exaggeration. A few megawatts of wind or solar and some batteries; ho, hum. Every piece of research has to start this way, but it doesn't have to be sold like it's a global energy solution.
+it isn't a toy. A [2023 AEMO study](https://aemo.com.au/-/media/files/electricity/nem/security_and_reliability/congestion-information/sa-transition-to-fewer-synch-gen-grid-reference.pdf) (to be discussed later) looked at international "studies" of high penetration renewables and they are truly trivial. Calling them micro-grids would be a grandiose exaggeration. A few megawatts of wind or solar and some batteries; ho, hum. Every piece of research has to start this way, but it's simply ignorant and irresponsible for such
+efforts to  be reported like they are global decarbonisation breakthrough.
 
 SA on the other hand, is a gigawatt scale grid. 
 It has 200,000 km of overhead cables, 77,000 transformers
 and 400 zone substations spread over 178,000 square kilometers. 
 
-Over the past 6 years, the SA Power Networks (the 
+Over the past 6 years, the *SA Power Networks* (the 
 grid operating entity) has replaced
 some 1,700 of the transformers.  
 
 Why does that matter? 
 
-If we make changes to our electricity system requiring widespread
+Suppose we make changes to our electricity system requiring widespread
 transformer upgrades, like adding so much rooftop PV that you overload
-transformers installed 40 years ago, or have significant amounts of
-power running backwards at levels never anticipated when the grid was
-designed, then that upgrade is going to take a while! Kudos to SA Power Networks who
+transformers, most of which are decades old. Suppose significant amounts of
+power has to run backwards (away from houses and businesses) 
+at levels never anticipated when the grid was
+designed, then such a grid upgrade is going to take a while! Kudos to SA Power Networks who
 are also upgrading the system to be more wildlife friendly; installing devices to reduce
 the risks to flying foxes, in particular, of electrocution. 
 
 The focus of our Australian Energy Minister Chris Bowen on the cost of generating
 electricity is like the person ordering a toasted sandwhich on-line and
 wondering why it costs so much. The cost of electricity is dominated by
-the cost of delivery, not production.
+the cost of delivery, not production. 
 
 Break the grid and not only will decarbonisation be glacially slow, it will be incredibly expensive. 
 
