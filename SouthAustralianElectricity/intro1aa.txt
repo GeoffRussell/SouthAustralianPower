@@ -16,7 +16,8 @@ sequestration of the resulting carbon dioxide; and despite the health problems a
 wood smoke.  
 
 The default selection is for Germany, Australia and the state of South 
-Australia. You can select from another 20 countries that account for the bulk of the world's
+Australia. You also view other countries to see how they are going. I've included
+data from 20 countries that account for the bulk of the world's
 energy use, population and greenhouse gas emissions. Hover over the chart and you can see 
 the size of the components. You can also see how well we are travelling in terms of
 meeting the International Energy Agency's 2050 targets. 

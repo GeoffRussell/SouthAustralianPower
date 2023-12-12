@@ -6,9 +6,9 @@ The SA grid isn't massive by any standard, but
 it isn't a toy. A [2023 AEMO study](https://aemo.com.au/-/media/files/electricity/nem/security_and_reliability/congestion-information/sa-transition-to-fewer-synch-gen-grid-reference.pdf) (to be discussed later) looked at international "studies" of high penetration renewables and they are truly trivial. Calling them micro-grids would be a grandiose exaggeration. A few megawatts of wind or solar and some batteries; ho, hum. Every piece of research has to start this way, but it's simply ignorant and irresponsible for such
 efforts to  be reported like they are global decarbonisation breakthrough.
 
-SA on the other hand, is a gigawatt scale grid. 
+SA on the other hand, is a [gigawatt scale grid](https://www.sapowernetworks.com.au/public/download.jsp?id=9716). 
 It has 200,000 km of overhead cables, 77,000 transformers
-and 400 zone substations spread over 178,000 square kilometers. 
+and 400 zone substations spread over 178,000 square kilometers (the area of the state is 983,000 square kms).
 
 Over the past 6 years, the *SA Power Networks* (the 
 grid operating entity) has replaced
