@@ -43,6 +43,7 @@ dfel<-bind_rows(tribble(~Country,~TWh,~Population,"South Australia",14.2,1.8e6),
 write_csv(dfel,"electricityByCountry.csv")
 
 dfwsbh<-dfwsbh %>% group_by(Country) %>% summarise(sum=sum(kWhPerCap)) %>% ungroup() %>% inner_join(dfwsbh)
+write_csv(dfwsbh,"tmpwsbh.csv")
 
 dfsa<-tribble(
   ~Country,~"2022",~Population,~MW,~kwPerCap,
@@ -66,6 +67,26 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
   titlePanel("South Australia's excellent renewable adventure"),
   verticalLayout(
     mainPanel(
+      fluidRow(
+        column(width=12,
+            plotlyOutput("wsbh")
+        )
+      ),
+      fluidRow(
+        column(width=12,
+            checkboxInput("kwhpercap",label="Show kWh/person",value=FALSE),
+            checkboxInput("ieatarget",label="Show IEA Targets for 2050",value=FALSE),
+            checkboxInput("cmpnr",label="Compare nuclear/solar+wind",value=FALSE),
+            pickerInput("countrypick",choices=sort(countries$Country),selected=sort(c("South Australia","Australia","Germany")),multiple=TRUE,
+                          label = 'Top 20 Wind power countries',
+                        options = pickerOptions(
+                          actionsBox = TRUE,
+                          selectedTextFormat = 'static',
+                          noneSelectedText = 'Select',
+                        )
+            ) 
+        ),
+      ),
       markdownFile("intro1a.txt"),
       fluidRow(align="center",imageOutput("scaleissues2",height=400)),
       markdownFile("intro1ba.txt"),
@@ -84,21 +105,6 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       markdownFile("obs.txt"),
       plotOutput("kwpercapsolar"),
       markdownFile("obwsbh.txt"),
-      fluidRow(
-        column(width=3,
-            pickerInput("countrypick",choices=sort(countries$Country),selected=sort(c("South Australia","Australia","Germany")),multiple=TRUE,
-                          label = 'Top 20 Wind power countries',
-                        options = pickerOptions(
-                          actionsBox = TRUE,
-                          selectedTextFormat = 'static',
-                          noneSelectedText = 'Select',
-                        )
-            ) 
-        ),
-        column(width=9,
-            plotlyOutput("wsbh")
-        )
-      ),
       markdownFile("obwsbh2.txt"),
       markdownFile("ob0.txt"),
       fluidRow(align="center",imageOutput("weekpng",height=400)),
@@ -114,7 +120,7 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
   )
 )
 server<-function(input,output,session) {
-  mtheme<-theme(plot.margin=unit(c(1,0,0,0),"cm"))
+  mtheme<-theme(plot.margin=unit(c(5,0,0,0),"mm"))
   ptheme<-theme(plot.title=element_text(color="#008080",size=15,face="bold",family="Helvetica"),
                 axis.text=element_text(face="bold",size=12))+mtheme
     
@@ -147,18 +153,26 @@ server<-function(input,output,session) {
   output$wsbh<-renderPlotly({
     c<-input$countrypick
     print(c)
-    p<-dfwsbh %>% filter(Country %in% c) %>% ggplot() + 
-      geom_col(aes(x=reorder(Country,desc(sum)),y=kWhPerCap,fill=Type)) +
+    p<-dfwsbh %>% filter(Country %in% c) %>% 
+      { if (input$cmpnr==TRUE) filter(.,Type %in% c("Nuclear","Wind","Solar")) else  . } %>%
+      mutate(Country=reorder(Country,desc(Population))) %>% 
+      ggplot() + 
       #geom_point(aes(x=Country,y=TWh*1e9/Population),shape=5,data=dfel) +
-      geom_col(aes(x=Country,y=kWhPerCapTimes2),
-               data=dfel %>% filter(Country %in% c) %>% mutate(kWhPerCapTimes2=(TWh*1e9/Population)*2),
-               alpha=0.1,fill="red") +
+      {if (input$ieatarget) geom_col(aes(x=Country,y=kWhPerCapTimes2),
+               data=dfel %>% filter(Country %in% c) %>% mutate(Country=reorder(Country,desc(Population))) %>% mutate(kWhPerCapTimes2=(TWh*1e9/Population)*2),
+               alpha=0.5,fill="red") 
+        }+
+      {if (input$kwhpercap) geom_col(aes(x=Country,y=kWhPerCap),
+               data=dfel %>% filter(Country %in% c) %>% mutate(Country=reorder(Country,desc(Population))) %>% mutate(kWhPerCap=(TWh*1e9/Population)),
+               alpha=0.5,fill="bisque1") 
+      }+
+      geom_col(aes(x=Country,y=kWhPerCap,fill=Type)) + 
       scale_fill_manual(name="Technology",values=cols)+
-      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+      theme(axis.text.x = element_text(angle = 60, vjust = 0.5, hjust=1)) +
       theme(plot.margin=unit(c(1,0,0,0),"cm"))+
       ptheme +
       labs(x="",y="Annual low carabon\nkilowatt-hours per person",
-           title="Low carbon electricity+targets")
+           title="Per person low carbon electricity")
      ggplotly(p) %>% ggplconfig %>% layout(plot_bgcolor = "#e5ecf6") 
   })
   output$kwpercapwind<-renderPlot({
