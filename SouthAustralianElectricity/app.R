@@ -67,6 +67,9 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
   titlePanel("South Australia's excellent renewable adventure"),
   verticalLayout(
     mainPanel(
+      tabsetPanel(type="tabs",
+                  tabPanel("General",
+      markdownFile("intro1aa.txt"),
       fluidRow(
         column(width=12,
             plotlyOutput("wsbh")
@@ -78,7 +81,7 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
             checkboxInput("ieatarget",label="Show IEA Targets for 2050",value=FALSE),
             checkboxInput("cmpnr",label="Compare nuclear/solar+wind",value=FALSE),
             pickerInput("countrypick",choices=sort(countries$Country),selected=sort(c("South Australia","Australia","Germany")),multiple=TRUE,
-                          label = 'Top 20 Wind power countries',
+                          label = 'Top 20 countries by wind power output',
                         options = pickerOptions(
                           actionsBox = TRUE,
                           selectedTextFormat = 'static',
@@ -87,28 +90,37 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
             ) 
         ),
       ),
-      markdownFile("intro1a.txt"),
+      markdownFile("intro1ab.txt"),
       fluidRow(align="center",imageOutput("scaleissues2",height=400)),
       markdownFile("intro1ba.txt"),
       fluidRow(align="center",imageOutput("blacksummer",height=300)),
-      markdownFile("intro1bb.txt"),
+      markdownFile("intro1bba.txt")
+                  ),
+                  tabPanel("SA's grid",
+      markdownFile("intro1bbb.txt"),
       tableOutput("coal"),
       markdownFile("intro2.txt"),
-      tableOutput("interconnectors"),
-      markdownFile("intro3.txt"),
-#      fluidRow(align="center",imageOutput("scaleissues1",height=300)),
-      markdownFile("intro3b.txt"),
-#      fluidRow(align="center",imageOutput("scaleissues2b",height=400)),
-      markdownFile("intro3c.txt"),
       markdownFile("obw.txt"),
       plotOutput("kwpercapwind"),
       markdownFile("obs.txt"),
-      plotOutput("kwpercapsolar"),
+      plotOutput("kwpercapsolar")
+                  ),
+                  tabPanel("Interconnectors",
+      markdownFile("intro3aa.txt"),
+      tableOutput("interconnectors"),
+      markdownFile("intro3ab.txt"),
+      markdownFile("intro3b.txt"),
+      markdownFile("intro3c.txt")
+                  ),
+                  tabPanel("Inertia",
+      markdownFile("inertia.txt"),
       markdownFile("obwsbh.txt"),
       markdownFile("obwsbh2.txt"),
       markdownFile("ob0.txt"),
       fluidRow(align="center",imageOutput("weekpng",height=400)),
-      markdownFile("ob1.txt"),
+      markdownFile("ob1.txt")
+                  ),
+                  tabPanel("Grid Connections",
       markdownFile("connecta.txt"),
       fluidRow(align="center",imageOutput("connect",height=400)),
       markdownFile("connectb.txt"),
@@ -116,6 +128,8 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       markdownFile("connectc.txt"),
       plotOutput("shortfall"),
       plotOutput("facilities")
+                  )
+      )
     )
   )
 )
