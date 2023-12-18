@@ -70,12 +70,13 @@ dfdata<-read_csv("opennem-30-11-2023sa5.csv") %>%
   rename_with(~sub('  ',' ',.x))
 dfout<-dfdata %>% mutate(demand=select(.,`Battery (Charging) - MW`:`Solar (Rooftop) - MW`) %>% apply(1,sum)) 
 dfout<-dfout %>% mutate(flow=select(.,`Imports - MW`:`Exports - MW`) %>% apply(1,sum))
-
-dfcumshort<-dfout %>% mutate(short=demand-(`Solar (Utility) - MW`+`Solar (Rooftop) - MW`+`Wind - MW`),cumshortMWh=cumsum(short*5/60)) %>%
-  select(Time,demand,short,cumshortMWh)
+dfout<-dfout %>% mutate(short=demand-(`Solar (Utility) - MW`+`Solar (Rooftop) - MW`+`Wind - MW`),
+                             cumshortMWh=cumsum(short*5/60))
+dfcumshort<-dfout %>% select(Time,demand,short,cumshortMWh)
 dfcs<-dfcumshort %>% pivot_longer(cols=c("demand","short"),names_to="Level",values_to="MW") 
 coef<-3/28
-write_csv(dfcumshort,"shortfall.csv")
+write_csv(dfcumshort,"tmp-shortfall.csv")
+write_csv(dfout,"tmp-dfout.csv")
 #--------------------------------------------------------------------------
 # 
 #--------------------------------------------------------------------------
@@ -151,7 +152,7 @@ bcalc<-function(bmax,dfsum) {
   dfsum
 }
 bstatus<-bcalc(100,dfsum)
-write_csv(bstatus,"bstatus.csv")
+write_csv(bstatus,"tmp-bstatus.csv")
 
 
 
