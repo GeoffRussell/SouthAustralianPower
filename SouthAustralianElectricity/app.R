@@ -322,10 +322,10 @@ server<-function(input,output,session) {
       nperiods<-length(dfsum$Time)
       p<-dfcs %>% ggplot() + geom_line(aes(x=Time,y=MW,color=Level)) +  ptheme +
         {if (input$showShort)
-            geom_line(aes(x=Time,y=cumShortMWh*coef),linetype="dashed",data=dfsum)
+            geom_line(aes(x=Time,y=cumShortMWh*coef,linetype="dashed"),data=dfsum)
         }+
         {if (input$showCurtailed)
-        geom_line(aes(x=Time,y=cumThrowOutMWh*coef),linetype="dotted",data=dfsum)
+        geom_line(aes(x=Time,y=cumThrowOutMWh*coef,linetype="dotted"),data=dfsum)
         }+
         {if (input$showBatteryStatus)  
              geom_line(aes(x=Time,y=(batteryStatus/input$bsize)*1000),color="red",data=dfsum)
@@ -335,10 +335,11 @@ server<-function(input,output,session) {
         }+
         labs(color="MW",title="Demand and renewable shortfall,\nWeek ending November 29 2023")+
         scale_color_manual(values=colsshort)+
+        scale_linetype_manual(name=NULL,labels=c("Curtailment","Shortfall"),values=c("dotted","dashed"))+
         scale_y_continuous(
           name="MW",
           sec.axis = sec_axis(~./coef, name="Cumulative shortfall/curtailment in MWh")
-        )
+        )+theme(legend.direction="vertical",legend.box="vertical")
         p
   })
   output$facilities=renderPlot({
