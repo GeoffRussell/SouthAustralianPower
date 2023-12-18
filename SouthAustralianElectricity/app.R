@@ -15,6 +15,19 @@ markdownFile<-function(filename) {
   markdown(t)
 }
 options(scipen=999)
+colsfacilities<-c(
+  "Wind"="forestgreen",
+  "Solar (Utility),Wind"="cyan",
+  "Solar (Utility)"="yellow",
+  "Gas (Steam)"="bisque4",
+  "Gas (Reciprocating)"="bisque3",
+  "Gas (OCGT)"="bisque2",
+  "Gas (CCGT)"="bisque1",
+  "Distillate"="grey42",
+  "Bioenergy (Biogas)"="brown",
+  "Battery (Discharging),Solar(Utility)"="blue",
+  "Battery (Discharging)"="blue"
+)
 cols<-c(
   "Biomass"="brown",
   "Solar"="yellow",
@@ -56,10 +69,91 @@ dfdata<-read_csv("opennem-30-11-2023sa5.csv") %>%
   rename_with(~sub('date','Time',.x)) %>% 
   rename_with(~sub('  ',' ',.x))
 dfout<-dfdata %>% mutate(demand=select(.,`Battery (Charging) - MW`:`Solar (Rooftop) - MW`) %>% apply(1,sum)) 
+dfout<-dfout %>% mutate(flow=select(.,`Imports - MW`:`Exports - MW`) %>% apply(1,sum))
+
 dfcumshort<-dfout %>% mutate(short=demand-(`Solar (Utility) - MW`+`Solar (Rooftop) - MW`+`Wind - MW`),cumshortMWh=cumsum(short*5/60)) %>%
   select(Time,demand,short,cumshortMWh)
 dfcs<-dfcumshort %>% pivot_longer(cols=c("demand","short"),names_to="Level",values_to="MW") 
 coef<-3/28
+write_csv(dfcumshort,"shortfall.csv")
+#--------------------------------------------------------------------------
+# 
+#--------------------------------------------------------------------------
+dfac<-1
+dfsum <- dfout %>% mutate(
+  battuse=`Battery (Discharging) - MW`,
+  imports=`Imports - MW`,
+  diesel=`Distillate - MW`,
+  wind=`Wind - MW`,solar=`Solar (Rooftop) - MW`+`Solar (Utility) - MW`) %>% 
+  mutate(renew=wind+solar,dblrenew=dfac*(wind+solar)) %>% 
+  mutate(adj=ifelse(abs(dblrenew-demand)<200,demand,dblrenew),
+         diff2=ifelse(abs(dblrenew-demand)>0,dblrenew-demand,demand-dblrenew),
+         balance=cumsum(dblrenew-demand))  
+
+
+#---------------------------------------------------------------------------------------
+# Battery routines
+#---------------------------------------------------------------------------------------
+lastdfsum<-dfout
+bcalc<-function(bmax,dfsum) {
+  batteryMaxCapacity<-bmax
+  #-------------------
+  # start the battery full 
+  #-------------------
+  batteryStatus<-bmax
+  nperiods<-length(dfsum$demand)
+  dfsum$shortFall=rep(0,nperiods)
+  dfsum$netflow=sum(dfsum$flow/12)
+  dfsum$batteryStatus=rep(0,nperiods)
+  dfsum$throwOut=rep(0,nperiods)
+  lastdfsum<<-dfsum
+  totalBattuse<<-sum(lastdfsum$battuse/12)
+  maxNeed<-0
+  for(i in 1:nperiods) {
+    dfsum$shortFall[i]=0
+    # spareE is in MWh
+    spareE=(dfsum$dblrenew[i]-dfsum$demand[i])/12 
+    if (spareE>0) {  # Electricity exceeds demand ... add spare to battery if there is any capacity
+      if (batteryStatus<batteryMaxCapacity) { # battery isn't full
+        spareB=batteryMaxCapacity-batteryStatus
+        addE=min(spareE,spareB)
+        batteryStatus=batteryStatus+addE
+        leftOver=spareE-spareB
+        if (leftOver>0) {
+          dfsum$throwOut[i]=leftOver
+        }
+      }
+      else {   # battery is full, discard energy
+        dfsum$throwOut[i]=spareE
+      }
+    }
+    if (spareE<0) { # demand exceeds generation, get from battery if any available
+      needE=-spareE
+      if (needE>maxNeed) {
+        maxNeed<-needE
+      }
+      if (batteryStatus>0) {
+        if (batteryStatus>=needE) { # extract from battery
+          batteryStatus=batteryStatus-needE
+          dfsum$batteryStatus[i]=batteryStatus
+        }
+        else { # we have some in battery, but not enough
+          dfsum$shortFall[i]=needE-batteryStatus
+          batteryStatus=0
+        }
+      }
+      else { # battery empty
+          dfsum$shortFall[i]=needE
+      }
+    }
+    dfsum$batteryStatus[i]=batteryStatus
+  }
+  dfsum
+}
+bstatus<-bcalc(100,dfsum)
+write_csv(bstatus,"bstatus.csv")
+
+
 
 
 ui <- fluidPage(theme = shinytheme("cerulean"),
@@ -68,7 +162,7 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
   verticalLayout(
     mainPanel(
       tabsetPanel(type="tabs",
-                  tabPanel("General",
+                  tabPanel("Intro",
       markdownFile("intro1aa.txt"),
       fluidRow(
         column(width=12,
@@ -104,31 +198,42 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       markdownFile("obw.txt"),
       plotOutput("kwpercapwind"),
       markdownFile("obs.txt"),
-      plotOutput("kwpercapsolar")
-                  ),
-                  tabPanel("Interconnectors",
+      plotOutput("kwpercapsolar"),
       markdownFile("intro3aa.txt"),
       tableOutput("interconnectors"),
-      markdownFile("intro3ab.txt"),
-      markdownFile("intro3b.txt"),
-      markdownFile("intro3c.txt")
+      markdownFile("intro3ab.txt")
+      #markdownFile("intro3b.txt"),
+      #markdownFile("intro3c.txt")
                   ),
                   tabPanel("Inertia",
-      markdownFile("inertia.txt"),
-      markdownFile("obwsbh.txt"),
-      markdownFile("obwsbh2.txt"),
-      markdownFile("ob0.txt"),
-      fluidRow(align="center",imageOutput("weekpng",height=400)),
-      markdownFile("ob1.txt")
+      markdownFile("inertia.txt")
+      #markdownFile("obwsbh.txt"),
+      #markdownFile("obwsbh2.txt")
                   ),
-                  tabPanel("Grid Connections",
+                  tabPanel("Gridlock",
       markdownFile("connecta.txt"),
       fluidRow(align="center",imageOutput("connect",height=400)),
       markdownFile("connectb.txt"),
       fluidRow(align="center",imageOutput("connectgit",height=400)),
-      markdownFile("connectc.txt"),
+      markdownFile("connectc.txt")
+                  ),
+                  tabPanel("SA Data",
+      markdownFile("ob0.txt"),
+      fluidRow(align="center",imageOutput("weekpng",height=400)),
+      markdownFile("ob1a.txt"),
       plotOutput("shortfall"),
+      markdownFile("ob1b.txt"),
       plotOutput("facilities")
+                  ),
+                  tabPanel("About",
+                           markdown(paste0(
+                             "<br>",
+                             "<br>",
+                             "Data on this site comes either from the Statistical Review of World Energy, or OpenNEM.",
+                             "<br>",
+                             "Geoff Russell, 2023"
+                           )
+                         )
                   )
       )
     )
@@ -201,7 +306,7 @@ server<-function(input,output,session) {
   output$shortfall<-renderPlot({
       dfcs %>% ggplot() + geom_line(aes(x=Time,y=MW,color=Level)) +  ptheme +
         geom_line(aes(x=Time,y=cumshortMWh*coef))+
-        labs(color="MW",title="Demand and non-renewable shortfall, Week ending November 29 2023")+
+        labs(color="MW",title="Demand and renewable shortfall,\nWeek ending November 29 2023")+
         scale_y_continuous(
           name="MW",
           sec.axis = sec_axis(~./coef, name="Cumulative shortfall in MWh")
@@ -209,7 +314,10 @@ server<-function(input,output,session) {
   })
   output$facilities=renderPlot({
     dfpower %>% group_by(Technology) %>% summarise(MW=sum(`Generator Capacity (MW)`)) %>%
-      ggplot()+geom_col(aes(x=Technology,y=MW),width=0.6,fill="blue")+coord_flip() + ptheme 
+      ggplot()+geom_col(aes(x=Technology,y=MW,fill=Technology),width=0.6)+
+      ptheme  + geom_text(aes(x=Technology,y=MW,label=MW),hjust=-0.1)+ylim(0,3500)+
+      coord_flip()+labs(title="Power ratings of available \ngenerators in SA",x="",y="Megawatts")+ 
+      scale_fill_manual(name="Technology",values=colsfacilities)+guides(fill="none")
   })
   
 }
