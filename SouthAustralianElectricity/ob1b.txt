@@ -1,0 +1,22 @@
+LABEL(ob1b)
+
+
+### Fixing shortfalls with storage 
+
+This web document details a variety of ways in which wind and solar will break the grid, meaning that
+the most expensive part of our electricity supply will need to be significantly redesigned and rebuilt. But
+it is interesting to think about how much electricity storage you will need to fix the shortfall. 
+
+
+### Minimum amount of wind+solar 
+
+What's the minimum amount of renewable energy during the week? OpenNem allows you to specify the granularity of the
+data; 5 minutes, 30 minutes, day, week or month.
+
+
+
+
+
+
+
+

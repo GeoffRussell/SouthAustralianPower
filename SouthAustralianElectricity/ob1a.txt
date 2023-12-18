@@ -1,0 +1,82 @@
+LABEL(ob1a)
+
+
+### Understanding the graph
+
+This graph was produced using the [OpenNEM website](https://opennem.org.au/energy/sa1/?range=7d&interval=5m&view=discrete-time) on the 29th of November 2023. Did I select that date because of some special attributes in
+the data? No, it just happened to be when I started writing.
+
+If you visit the OpenNEM site now, you'll see a different image, because the make up of the 
+electricity supply is heavily dependent on the weather. 
+
+The OpenNem website graph is interactive, allowing you to explore features of the data in considerable detail. But the features software designers choose to measure and highlight never cover everything. 
+
+Look at the vertical axis, you can see 1,500 at the top left. That's 1,500 million watts, usually called mega-watts and abbreviated MW. As I mentioned, this is less than half of peak demand during a heat wave.
+
+The colours represent the different sources of electricity as explained in the legend below the graph; green is wind power. 
+
+### Explainer: Power and energy
+
+Skip this if you understand the difference between power and energy. 
+
+It's not really that complicated. Your electric jug
+will have a power rating on it somewhere which will give, obviously,
+it's power. Mine is 2,000 watts; which is pretty common. When I was 
+growing up, jugs were smaller and typically were about 1,000 watts. Boil
+an amount of water in 1,000 and 2,000 watt jugs and the
+second will boil it twice as fast.
+
+That's what more power does. Double the power used and the work takes half as long.
+
+But both jugs will use exactly the
+same amount of energy to do boil the same amount of water from a starting temperature. 
+Run a 2,000 watt jug for 1 hour
+and it will use 2,000 watt-hours of electricity. The term watt-hour
+is a unit of energy. What could be simpler? Run a power source for
+a given length of time and the energy used is just the power
+multiplied by the time. Writing it with a hyphen between them makes it
+ever so obvious what is happening.  100 kilowatt-hours of electricity
+is the quantity of energy used by running:
+
+1. One hundred 1,000 watt jugs for an hour or
+1. one huge 100,000 watt urn for an hour or
+1. one 1,000 watt jug for 100 hours.
+
+I'm assuming, of course, that most people get that
+"kilo" means a thousand; as in kilometre, 1,000 metres. 
+
+1. A *megawatt* (MW) is a thousand kilowatts, meaning a million watts, 
+1. A *gigawatt* (GW) is a thousand megawatts, a billion; 1,000,000,000.
+1. A *terawatt* (TW) is a thousand gigawatts, a trillion; 1 with 12 zeros after it.
+
+### Shortfall
+
+Australian grids operate in 5 minute planning intervals. Every 5 minutes decisions are made about which 
+generators or collectors will provide electricity for the next 5 minute slot. Suppliers bid to be selected. 
+
+Wind and solar farms don't need to bid a high enough amount to make money. They will receive *renewable 
+energy credits* for every MWh they supply, they can sell these to people wanting to offset carbon dioxide
+emissions. The market price for these is [typically over $40](https://www.cleanenergyregulator.gov.au/Infohub/Markets/Pages/qcmr/march-quarter-2022/Large-scale-generation-certificates-(LGCs).aspx).
+
+For any time slot, I'll assume that if there is wind power available, it will have been selected. Similarly
+for solar power. If you look at the image, you'll see that some of the time the colours drop 
+below the 0 MW line. These negative values mean power is being exported out across the interconnectors. 
+
+During the previous 12 months, SA was a net electricity importer; we imported 1,605 gigawatt-hours 
+and exported about half that, 821 gigawatt hours. 
+
+If you add up the difference between what renewables provided during each 5-minute slot and the demand
+during that slot, then you get an *accumulating shortfall*. This assumes, as I said above, that all wind and solar
+available gets used. For the week above, the accumulated shortfall at the end of the week is 40 GWh. Multiply that
+by 52 and you'd get the total shortfall for the year, if all weeks were the same; which they aren't.  But if this
+arbitrary week is representative then we'd expect to need about 2,000 GWh to cover the gap. The total amount 
+of Gas fired electricty over the previous 12 months was 3,138 GWh; meaning my arbitrary week was a good week for renewables; normally the shortfall was larger bigger. That 3,138 number comes from an OpenNEM chart. It is
+the equivalent of a single 360 MW gas plant running 24x7; a considerable reduction from 2016 when we had 760MW of coal. 
+
+The total output of our wind and solar plants over the past 12 months has been 10,141 GWh (OpenNEM again); that's
+about as much as a single full sized nuclear plant.  
+
+
+
+
+

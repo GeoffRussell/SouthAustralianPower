@@ -22,15 +22,40 @@ the slogans.
 
 1. "security risks" refer to risks of power failures and blackouts, not risk of espionage or hacking.
 2. "significant utility-scale storage" means much bigger batteries to prevent blackouts, I'll explain exactly what this means below.
-3. "retrofit ..." the electrical design specifications of inverters, particularly rooftop solar inverters, the 
-things connecting them to the grid, have been changed frequently as more and more flaws are discovered. The flaws often
-relate to the ability to handle power interruptions. For example, how does your inverter handle a fault when a
-tree falls on a power line. Suppose it just disconnects, a common response. This kind of disconnect can cascade through 
-the power system as nearby inverters detect a change. There are two problems here; solving the hard design problems and solving them at scale in cheap consumer grade electronics. 
+3. "retrofit ..." the electrical design specifications of inverters,
+particularly rooftop solar inverters, the things connecting them to
+the grid, have been changed frequently as more and more flaws are
+discovered. Mistakes and fixes are normal in any technology. But
+some of the flaws in inverters are very different. Ask yourself what
+your computer should do when it detects a fluctuation in the
+voltage that could wreck the motherboard. Disconnecting is
+quite reasonable. But what if an inverter does this when it is
+not just receiving power, but supplying it.
+
+   Think about it. You disconnect, this disconnection could be detected as a further
+voltage change by other nearby inverters; so they disconnect. It's called a cascade for
+obvious reasons. There are two problems here; solving
+some subtle design problems and solving them at scale in cheap consumer
+grade electronics. Inverter standards were changed in 2020 to try and prevent this problem. But
+a [2023 report](https://aemo.com.au/-/media/files/initiatives/der/2023/compliance-of-der-with-technical-settings.pdf?la=en) still find high levels of inverters behaving badly. The new standard became mandatory at the end of 2021. Prior to that you could still install inverters intended to comply with the 2015 standards. Not that it mattered much because 30-50% of inverters failed to comply with that standard.
+
+   The report found that the new standard seemed to perform well, meaning to handle faults without
+innappropriate disconnection. But more than 55% were installed with incorrect fault handling settings. 
+Some manufacturers were able to change settings remotely; some weren't. Other surveys cited
+in the report found that only 37% of inverters were installed with the right settings. 
+
+   As of 2019, inverters were also
+required to follow other standards concerned not with handling faults, but with handling high 
+levels of electricity exported to the grid. Mostly this is an SA problem and SA Power Networks has
+had the most experience with these inverter functions. The 2023 report found that some 70% of inverters didn't comply with the standards. 
+
 4. "resistor banks" ... more stuff to handle problems.
 5. "moratorium" ... everybody knows what this means! 
 
-At the time of the statewide blackout, 28 September 2016, the politics was 
+### That 2016 blackout in a little more detail
+
+Problems with the grid are deeply political. At the time of the statewide blackout, 
+28 September 2016, the politics was 
 intense. Premier Jay Weatherill and [renewable advocates working
 as journalists](https://www.theguardian.com/australia-news/2016/sep/29/south-australia-blackout-explained-renewables-not-to-blame) refusing to acknowledge the
 event as being caused by the level of renewables in SA. They hid behind a mountain of irrelevant details about wind
@@ -73,3 +98,4 @@ numerous new engineering "challenges" that needed solutions.
 Engineering "challenges" are different from political challenges, they
 can't be solved by sound bites or a new and cool "brand ambassador". 
 
+Which brings us to *inertia* (next Tab).
