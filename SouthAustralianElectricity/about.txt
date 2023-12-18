@@ -1,0 +1,5 @@
+LABEL(about)
+
+### Explainer: Power and energy
+
+Geoff Russell, December 2023
