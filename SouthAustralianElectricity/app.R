@@ -93,7 +93,7 @@ coef<-500*(3/28)
 # Battery routines
 #---------------------------------------------------------------------------------------
 lastdfsum<-dfout
-bcalc<-function(bmax,dfout,dfac) {
+bcalc<-function(bmax,dfout,dfac,icsize=0) {
   batteryMaxCapacity<-bmax
   dfsum <- dfout %>% mutate(
     battuse=`Battery (Discharging) - MW`,
@@ -109,6 +109,7 @@ bcalc<-function(bmax,dfout,dfac) {
   batteryStatus<-bmax
   nperiods<-length(dfsum$demand)
   dfsum$shortFall=rep(0,nperiods)
+  dfsum$icExport=rep(0,nperiods) # in MWh
   dfsum$batteryStatus=rep(0,nperiods)
   dfsum$throwOutMWh=rep(0,nperiods)
   lastdfsum<<-dfsum
@@ -125,10 +126,32 @@ bcalc<-function(bmax,dfout,dfac) {
         batteryStatus=batteryStatus+addE
         leftOver=spareE-spareB
         if (leftOver>0) {
-          dfsum$throwOutMWh[i]=leftOver
+             # send out interconnector
+             spareW=12*leftOver # convert to MW 
+             if (spareW>icsize) {
+               dfsum$icExport[i]=icsize/12
+               spareW=spareW-icsize
+               leftOver=spareW/12
+             } else {
+               dfsum$icExport[i]=spareW/12
+               spareW=0
+               leftOver=0
+             }
+             dfsum$throwOutMWh[i]=leftOver
         }
       }
       else {   # battery is full, discard energy
+               # or send out interconnector 
+        spareW=12*spareE # convert to MW 
+        if (spareW>icsize) {
+          dfsum$icExport[i]=icsize/12
+          spareW=spareW-icsize
+          spareE=spareW/12
+        }
+        else {
+           dfsum$icExport[i]=spareW/12
+           spareE=0
+        }
         dfsum$throwOutMWh[i]=spareE
       }
     }
@@ -153,7 +176,10 @@ bcalc<-function(bmax,dfout,dfac) {
     }
     dfsum$batteryStatus[i]=batteryStatus
   }
-  dfsum %>% mutate(cumShortMWh=cumsum(shortFall),cumThrowOutMWh=cumsum(throwOutMWh))
+  dfsum %>% mutate(cumShortMWh=cumsum(shortFall),
+                   cumThrowOutMWh=cumsum(throwOutMWh),
+                   cumIcExport=cumsum(icExport)
+                   )
 }
 
 
@@ -226,12 +252,14 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       fluidRow(
         column(width=6,
             sliderInput("dfac",label="Overbuild factor for wind+solar", min=1,max=3,step=0.1,value=1),
-            sliderInput("bsize",label="Battery size in MWh", min=100,max=5000,step=100,value=100)
+            sliderInput("bsize",label="Battery size in MWh", min=100,max=5000,step=100,value=100),
+            sliderInput("icsize",label="Interconnector size (MW)", min=0,max=2000,step=100,value=0)
         ),
         column(width=6,
-            checkboxInput("showShort",label="Show shortfall GWh",value=FALSE),
-            checkboxInput("showCurtailed",label="Show dumped energy GWh",value=FALSE),
-            checkboxInput("showBatteryStatus",label="Show batteryStatus (%)",value=FALSE)
+            checkboxInput("showShort",label="Show shortfall (GWh)",value=FALSE),
+            checkboxInput("showCurtailed",label="Show dumped energy (GWh)",value=FALSE),
+            checkboxInput("showBatteryStatus",label="Show batteryStatus (%)",value=FALSE),
+            checkboxInput("showInterconnector",label="Show interconnector flow (GWh)",value=FALSE)
         )
       ),
       fluidRow(
@@ -261,7 +289,7 @@ server<-function(input,output,session) {
   ptheme<-theme(plot.title=element_text(color="#008080",size=15,face="bold",family="Helvetica"),
                 axis.text=element_text(face="bold",size=12))+mtheme
   gendfsum<-reactive({
-       bstatus<-bcalc(input$bsize,dfout,input$dfac)
+       bstatus<-bcalc(input$bsize,dfout,input$dfac,input$icsize)
        bstatus
   })
     
@@ -341,12 +369,19 @@ server<-function(input,output,session) {
         lab=c(lab,"Curtailment")
         val=c(val,"dotted")
       }
+      if (input$showInterconnector) {
+        lab=c(lab,"Interconnector Export")
+        val=c(val,"twodash")
+      }
       p<-dfcs %>% ggplot() + geom_line(aes(x=Time,y=MW,color=Level)) +  ptheme +
         {if (input$showShort)
             geom_line(aes(x=Time,y=cumShortMWh*coef/1000,linetype="dashed"),data=dfsum)
         }+
         {if (input$showCurtailed)
         geom_line(aes(x=Time,y=cumThrowOutMWh*coef/1000,linetype="dotted"),data=dfsum)
+        }+
+        {if (input$showInterconnector)
+        geom_line(aes(x=Time,y=cumIcExport*coef/1000,linetype="twodash"),data=dfsum)
         }+
         {if (input$showBatteryStatus)  
              geom_line(aes(x=Time,y=(batteryStatus/input$bsize)*1000),color="red",data=dfsum)
