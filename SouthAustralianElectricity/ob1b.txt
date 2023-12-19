@@ -3,6 +3,18 @@ LABEL(ob1b)
 
 ### Fixing shortfalls with storage 
 
+Now let's look at how storage can smooth the intermittency of wind and solar.
+
+1. Click on the "Show Battery" tick box. The default battery is small, just 100MWh (the biggest battery
+in the world in 2016). The battery in the model isn't a real one, it has no power limit, just an energy storage capacity. If you've followed the instructions this far, you'll see 4 times during the week when the battery 
+is drained. It always begins the week full!
+
+   Now set the "Battery size" to 1,600 MWh (about three times the battery storage currently in SA). Now there are just two times during the week when it is drained. 
+   
+   Since, at this stage we have no interconnectors in the model, a drained battery and not enough wind+solar, means we blackout. It's that simple; even though we have double the level of wind+solar that supplies 72 percent on average. 
+   
+2. Now click on the "Show dumped energy" tick box. You'll see about 160 GWh of electricity is dumped. Meaning we generated it, but even with 1,600 MWh of battery capacity we had to dump it. 
+
 This web document details a variety of ways in which wind and solar will break the grid, meaning that
 the most expensive part of our electricity supply will need to be significantly redesigned and rebuilt. But
 it is interesting to think about how much electricity storage you will need to fix the shortfall. 

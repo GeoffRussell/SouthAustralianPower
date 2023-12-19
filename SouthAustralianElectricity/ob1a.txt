@@ -76,6 +76,36 @@ the equivalent of a single 360 MW gas plant running 24x7; a considerable reducti
 The total output of our wind and solar plants over the past 12 months has been 10,141 GWh (OpenNEM again); that's
 about as much as a single full sized nuclear plant.  
 
+### Getting a feel for the dynamics 
+
+The following chart is a simple model of the SA electricity system. It's simple enough 
+that anybody can play with it without an engineering degree. But complex enough to help
+train our intuition about power, energy, battery capacities and the like. 
+
+It takes the electricity demand in South Australia during a week and the wind+solar output
+during that week and displays them. Look at the graph and you can see the holes during the
+week where demand isn't met. It's one thing to say that SA gets 72 percent of its electricity
+from wind and solar **on average**, without understanding the size of the occasional gaps between
+demand and supply.
+
+Here's some exercises you can do with the model. The best way to learn from this model is to demolish
+it ... find all its flaws. That's really what it is for! 
+
+1. Don't do anything, just look at the Demand and Wind+Solar curves. They look very different from the chart at the top of the page, but they aren't, they've just been isolated from the interconnector and gas inputs. Notice that the **Overbuild** factor starts at 1 ... so you won't see anything for that at all.
+
+2. Focus on the "Overbuild" slider and set it to something big like 2. Meaning we aim to double the amount of wind and solar while keeping the same proportions. In the real world, the output of such a doubling wouldn't simply
+be double the current output, but it wouldn't be wildly different.  You will see a cyan curve appear on the graph. 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
