@@ -4,19 +4,25 @@ library(RcppRoll)
 df<-read_csv("bcalc-output.csv") %>% mutate(t=format(Time,format="%H:%M"))
 findBands<-function(df) {
   sunbreak=0.05*max(df$`Solar (Rooftop) - MW`)  # 5 percent of max is start of day
-  dark<-(df$`Solar (Rooftop) - MW`<sunbreak)
-  ldld<-which(dark[-1] != dark[-length(dark)])
+  dark<-(df$`Solar (Rooftop) - MW`<sunbreak)    # which periods are dark
+  ldld<-which(dark[-1] != dark[-length(dark)])  # where are the changes of state
   darkdf<-tribble(~t1,~t2)
-  for (i in seq(2,length(ldld),2)) {
+  st<-2                                         
+  if (dark[1]) {                                # are we starting in the night or the day?
+     tmp<-tibble(t1=df$Time[1],t2=df$Time[ldld[1]])
+     darkdf<-bind_rows(darkdf,tmp)
+     st<-3
+  }
+  for (i in seq(st,length(ldld),2)) {
     tmp<-tibble(t1=df$Time[ldld[i-1]],t2=df$Time[ldld[i]])
     darkdf<-bind_rows(darkdf,tmp)
   }
   darkdf
 }
-b<-findBands(df) %>% mutate(
-  gap=interval(t1,t2) %/% minutes(1),
-  p=as.period(interval(t1,t2))
-  )
+#b<-findBands(df) %>% mutate(
+#  gap=interval(t1,t2) %/% minutes(1),
+#  p=as.period(interval(t1,t2))
+#  )
 df %>% ggplot()+geom_line(aes(x=Time,y=demand)) +
   geom_rect(aes(xmin=t1,xmax=t2,ymin=0,ymax=Inf),data=findBands(df),alpha=0.2)
 

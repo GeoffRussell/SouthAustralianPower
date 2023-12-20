@@ -89,11 +89,17 @@ coef<-500*(3/28)
 # Find night time bands 
 #---------------------------------------------------------------------------------------
 findBands<-function(df) {
-  sunbreak<-0.05*max(df$`Solar (Rooftop) - MW`)  # 5 percent of max is start of day
-  dark<-(df$`Solar (Rooftop) - MW`<sunbreak)
-  ldld<-which(dark[-1] != dark[-length(dark)])
+  sunbreak=0.05*max(df$`Solar (Rooftop) - MW`)  # 5 percent of max is start of day
+  dark<-(df$`Solar (Rooftop) - MW`<sunbreak)    # which periods are dark
+  ldld<-which(dark[-1] != dark[-length(dark)])  # where are the changes of state
   darkdf<-tribble(~t1,~t2)
-  for (i in seq(2,length(ldld),2)) {
+  st<-2                                         
+  if (dark[1]) {                                # are we starting in the night or the day?
+     tmp<-tibble(t1=df$Time[1],t2=df$Time[ldld[1]])
+     darkdf<-bind_rows(darkdf,tmp)
+     st<-3
+  }
+  for (i in seq(st,length(ldld),2)) {
     tmp<-tibble(t1=df$Time[ldld[i-1]],t2=df$Time[ldld[i]])
     darkdf<-bind_rows(darkdf,tmp)
   }
