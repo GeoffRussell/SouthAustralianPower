@@ -1,0 +1,36 @@
+```{r}
+library(tidyverse)
+library(RcppRoll)
+df<-read_csv("bcalc-output.csv") %>% mutate(t=format(Time,format="%H:%M"))
+findBands<-function(df) {
+  sunbreak=0.05*max(df$`Solar (Rooftop) - MW`)  # 5 percent of max is start of day
+  dark<-(df$`Solar (Rooftop) - MW`<sunbreak)
+  ldld<-which(dark[-1] != dark[-length(dark)])
+  darkdf<-tribble(~t1,~t2)
+  for (i in seq(2,length(ldld),2)) {
+    tmp<-tibble(t1=df$Time[ldld[i-1]],t2=df$Time[ldld[i]])
+    darkdf<-bind_rows(darkdf,tmp)
+  }
+  darkdf
+}
+b<-findBands(df) %>% mutate(
+  gap=interval(t1,t2) %/% minutes(1),
+  p=as.period(interval(t1,t2))
+  )
+df %>% ggplot()+geom_line(aes(x=Time,y=demand)) +
+  geom_rect(aes(xmin=t1,xmax=t2,ymin=0,ymax=Inf),data=findBands(df),alpha=0.2)
+
+```
+```{r}
+dfc1<-df %>% filter(t=="19:30") %>% select(Time) %>% mutate(t1=Time)
+dfc2<-df %>% filter(t=="08:30") %>% select(Time) %>% mutate(t2=Time)
+dfnight<-bind_cols(dfc1,dfc2) %>% select(t1,t2)
+df %>% ggplot()+geom_line(aes(x=Time,y=demand)) + geom_rect(aes(xmin=t1,xmax=t2,ymin=0,ymax=Inf),data=dfnight,alpha=0.2)
+dfnight
+df$diff<-roll_sum((df$dblrenew-df$demand)/20,n=20,align="right",fill=0)
+df$sumdblrenew<-roll_sum(df$dblrenew/20,n=20,align="right",fill=0)
+df$sumdemand<-roll_sum(df$demand/20,n=20,align="right",fill=0)
+df %>% select(Time,sumdblrenew,sumdemand,diff,t) %>% slice_min(diff,n=30)
+```
+
+
