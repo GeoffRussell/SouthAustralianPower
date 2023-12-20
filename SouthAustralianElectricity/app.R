@@ -297,6 +297,8 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
                            markdown(paste0(
                              "<br>",
                              "<br>",
+                             "There is a GitHub [repository](https://github.com/GeoffRussell/SouthAustralianPower) for this website code, written in R and Shiny.",
+                             "<br>",
                              "Data on this site comes either from the Statistical Review of World Energy, or OpenNEM.",
                              "<br>",
                              "Geoff Russell, 2023"
