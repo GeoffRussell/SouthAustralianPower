@@ -12,6 +12,7 @@ library(RcppRoll)
 
 comma<-function(x) prettyNum(signif(x,digits=4),big.mark=",")
 markdownFile<-function(filename) {
+  #t<-read_file(pipe(paste0("cat m4defsnull.txt ",filename," | m4 ")))
   t<-read_file(pipe(paste0("cat m4defs.txt ",filename," | m4 ")))
   markdown(t)
 }
@@ -289,8 +290,8 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
                uiOutput("bcalcresult")
         )
       ),
-      markdownFile("ob1b.txt"),
-      plotOutput("facilities")
+      markdownFile("ob1b.txt")
+#      plotOutput("facilities")
                   ),
                   tabPanel("About",
                            markdown(paste0(
