@@ -1,7 +1,9 @@
 ```{r}
 library(tidyverse)
 library(RcppRoll)
-df<-read_csv("bcalc-output.csv") %>% mutate(t=format(Time,format="%H:%M"))
+```
+
+```{r}
 findBands<-function(df) {
   sunbreak=0.05*max(df$`Solar (Rooftop) - MW`)  # 5 percent of max is start of day
   dark<-(df$`Solar (Rooftop) - MW`<sunbreak)    # which periods are dark
@@ -19,6 +21,27 @@ findBands<-function(df) {
   }
   darkdf
 }
+
+```
+```{r}
+# some datasets have a different ordering of fields
+df<-read_csv("opennem-30-11-2023sa5.csv") %>% 
+  rename_with(~sub('date','Time',.x)) %>% 
+  rename_with(~sub('  ',' ',.x))
+dfout1<-df %>% mutate(demand=select(.,`Battery (Charging) - MW`:`Solar (Rooftop) - MW`) %>% apply(1,sum)) 
+dfout1 %>% ggplot()+geom_line(aes(x=Time,y=demand)) +
+  geom_rect(aes(xmin=t1,xmax=t2,ymin=0,ymax=Inf),data=findBands(df),alpha=0.2)
+
+df2<-read_csv("openNem-SA-21-12-19-7D.csv") %>% 
+  rename_with(~sub('date','Time',.x)) %>% 
+  rename_with(~sub('  ',' ',.x))
+dfout2<-df2 %>% mutate(demand=select(.,`Solar (Rooftop) - MW`:`Battery (Charging) - MW`) %>% apply(1,sum)) 
+dfout2 %>% ggplot()+geom_line(aes(x=Time,y=demand)) +
+  geom_rect(aes(xmin=t1,xmax=t2,ymin=0,ymax=Inf),data=findBands(df2),alpha=0.2)
+```
+
+```{r}
+df<-read_csv("bcalc-output.csv") %>% mutate(t=format(Time,format="%H:%M"))
 #b<-findBands(df) %>% mutate(
 #  gap=interval(t1,t2) %/% minutes(1),
 #  p=as.period(interval(t1,t2))
