@@ -1,5 +1,12 @@
 LABEL(ob1b)
 
+You can see a summary board under the chart. 
+
+Have a look at the night of the 24th of November. It was a *very* still night. Assuming you
+have dialled in a doubling of wind+solar, the summary board shows
+an accumulated shortfall over the night of 5,463, even with twice the renewables that we have now. Can
+we fix that shortfall with storage?
+
 
 ### Fixing shortfalls with storage 
 
@@ -20,15 +27,56 @@ the most expensive part of our electricity supply will need to be significantly 
 it is interesting to think about how much electricity storage you will need to fix the shortfall. 
 
 
-### Minimum amount of wind+solar 
+### What can you demonstrate with this kind of model? 
 
-What's the minimum amount of renewable energy during the week? OpenNem allows you to specify the granularity of the
-data; 5 minutes, 30 minutes, day, week or month.
+With a doubling of renewables, the shortfall on the night of 24th of November is considerable; 5,463 MWh. The summary
+box shows the maximum power needed during the 8 hours; 340 MW.
+Could you cover this particular shortfall with 16 batteries each with a maximum power output of 340MW and lasting
+for 1 hour? That will depend on: 
+
+1. exactly where you put them. They have to be fully charged at the start of the period and whether a battery
+gets charged depends on where it is relative to any excess electricity which happens to be available. Grids, like
+city streets can become congested.  
+
+2. exactly where the power is required. Again, congestion has to be carefully modelled to make claims about what
+is possible. 
+
+In summary, the model I've built is more to give people a feel for the problems. A professional model would 
+take the physical locations and capabilities into account of every piece of equipment. My little model shows what you **can't** do; you can't solve the problems posed by this still night of the 24th November with anything less than
+5,463 MWh of storage, but it doesn't show how much more you will need than this to cover real world complexity.
 
 
+## Concluding remarks
 
+A large electricity grid is an astonishing creation requiring a considerable set of skills from a large set
+of teams. Australia has stumbled into its decision to try and build a 100% renewable system as a direct consequence
+of not looking seriously at the alternative; namely, leaving the grid substantially alone and just swap out the
+thermal coal plants of thermal nuclear plants.
 
+The decision to not consider nuclear seriously is partly the fault of the nuclear industry itself. It never 
+really came to grips with the improved understanding of cancer that was emerging in the 1980s and is still
+developing. How bizarre is it that you can walk into supermarkets and bottleshops anywhere in Australia and
+buy potent carcinogenic foodstuffs, but we ban nuclear power? 
 
+Anybody over 50 in Australia can get a [free bowel cancer screening kit](https://www.health.gov.au/our-work/national-bowel-cancer-screening-program). You get a little booklet which tells you:
 
+> *"People who smoke, are overweight, have a diet low in fresh vegetables and fruit, and high in red and processed meats, are at increased risk of **several cancers**" [emphasis added]
 
+That's about as good an example as you get of bolting the stable door a couple of decades after the horses have left.
+
+We have a myriad of organisations in Australia whose hands and lips are arc-welded to 
+both traditional anti-nuclear policies and traditional cancer causing foods; giving us a position near the
+top of the per person global cancer tables. 
+
+The idea that a plane could fly into a nuclear plant and unleash a disaster
+is a given for these groups and, I suspect, for the industry itself. 
+
+But could any such accident rival the cancer impacts of alcohol, red and processed 
+meat and tobacco? Impossible. The death toll from flying a plane into an office block would be
+considerably higher, so why don't we demand they be safe in the face of such attacks? Because that would stop the
+office block building in its tracks. The biggest impact of a successful attack on a nuclear plant has always
+been the direct impacts on the staff and the withdrawal of the service; the electricity. 
+Nevertheless the nuclear regulatory ratchet, tightened by fierce campaigning
+based on information now known to be false, remains just as tight as it has ever been. Leading to an industry
+bogged down by regulators and its own failure to push-back and unroll the barriers. 
 

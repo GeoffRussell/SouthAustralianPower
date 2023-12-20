@@ -4,7 +4,9 @@ LABEL(ob1a)
 ### Understanding the graph
 
 This graph was produced using the [OpenNEM website](https://opennem.org.au/energy/sa1/?range=7d&interval=5m&view=discrete-time) on the 29th of November 2023. Did I select that date because of some special attributes in
-the data? No, it just happened to be when I started writing.
+the data? I did notice the small choke point on the evening of the 24th of November, but hadn't quantified
+it. I'd had the idea for this project for some time and just happened to make a start on that evening and so used
+that week's data. 
 
 If you visit the OpenNEM site now, you'll see a different image, because the make up of the 
 electricity supply is heavily dependent on the weather. 
