@@ -8,6 +8,7 @@ library(shinythemes)
 library(tidyverse)
 library(markdown)
 library(plotly)
+library(RcppRoll)
 
 comma<-function(x) prettyNum(signif(x,digits=4),big.mark=",")
 markdownFile<-function(filename) {
@@ -79,21 +80,29 @@ dfdata<-read_csv("opennem-30-11-2023sa5.csv") %>%
   rename_with(~sub('date','Time',.x)) %>% 
   rename_with(~sub('  ',' ',.x))
 dfout<-dfdata %>% mutate(demand=select(.,`Battery (Charging) - MW`:`Solar (Rooftop) - MW`) %>% apply(1,sum)) 
-#dfout<-dfout %>% mutate(short=demand-(`Solar (Utility) - MW`+`Solar (Rooftop) - MW`+`Wind - MW`))
-#                             cumShortMWh=cumsum(short*5/60))
-#dfcumshort<-dfout %>% select(Time,demand,short,cumShortMWh)
-#dfcs<-dfcumshort %>% pivot_longer(cols=c("demand","short"),names_to="Level",values_to="MW") 
-#write_csv(dfcumshort,"tmp-shortfall.csv")
-#write_csv(dfout,"tmp-dfout.csv")
 #--------------------------------------------------------------------------
 # coef is arbitrary ... just scales the second axis on the graph 
 #--------------------------------------------------------------------------
 coef<-500*(3/28)
 #---------------------------------------------------------------------------------------
-# Battery routines
+# Find night time bands 
+#---------------------------------------------------------------------------------------
+findBands<-function(df) {
+  sunbreak<-0.05*max(df$`Solar (Rooftop) - MW`)  # 5 percent of max is start of day
+  dark<-(df$`Solar (Rooftop) - MW`<sunbreak)
+  ldld<-which(dark[-1] != dark[-length(dark)])
+  darkdf<-tribble(~t1,~t2)
+  for (i in seq(2,length(ldld),2)) {
+    tmp<-tibble(t1=df$Time[ldld[i-1]],t2=df$Time[ldld[i]])
+    darkdf<-bind_rows(darkdf,tmp)
+  }
+  darkdf
+}
+#---------------------------------------------------------------------------------------
+# Battery handling
 #---------------------------------------------------------------------------------------
 lastdfsum<-dfout
-bcalc<-function(bmax,dfout,dfac,icsize=0) {
+bcalc<-function(bmax,dfout,ofac,icsize=0) {
   batteryMaxCapacity<-bmax
   dfsum <- dfout %>% mutate(
     battuse=`Battery (Discharging) - MW`,
@@ -101,20 +110,23 @@ bcalc<-function(bmax,dfout,dfac,icsize=0) {
     diesel=`Distillate - MW`,
     wind=`Wind - MW`,
     solar=`Solar (Rooftop) - MW`+`Solar (Utility) - MW`) %>% 
-      mutate(renew=wind+solar,dblrenew=dfac*(wind+solar)) %>% 
+      mutate(renew=wind+solar,dblrenew=ofac*(wind+solar)) %>% 
       mutate(noBattShortfall=dblrenew-demand,cumNoBattShortfall=cumsum(dblrenew-demand))  
   #-------------------
-  # start the battery full 
+  # start with battery full 
   #-------------------
   batteryStatus<-bmax
   nperiods<-length(dfsum$demand)
   dfsum$shortFall=rep(0,nperiods)
-  dfsum$icExport=rep(0,nperiods) # in MWh
+  dfsum$icExpMWh=rep(0,nperiods) # in MWh
   dfsum$batteryStatus=rep(0,nperiods)
+  dfsum$batterySupplied=rep(0,nperiods) # MWh
   dfsum$throwOutMWh=rep(0,nperiods)
   lastdfsum<<-dfsum
   totalBattuse<<-sum(lastdfsum$battuse/12)
   maxNeed<-0
+  dfsum$minroll20<-roll_sum(dfsum$dblrenew,n=20,fill=0)
+  #write_csv(dfsum,"xxx.csv")
   for(i in 1:nperiods) {
     dfsum$shortFall[i]=0
     # spareE is in MWh
@@ -129,11 +141,11 @@ bcalc<-function(bmax,dfout,dfac,icsize=0) {
              # send out interconnector
              spareW=12*leftOver # convert to MW 
              if (spareW>icsize) {
-               dfsum$icExport[i]=icsize/12
+               dfsum$icExpMWh[i]=icsize/12
                spareW=spareW-icsize
                leftOver=spareW/12
              } else {
-               dfsum$icExport[i]=spareW/12
+               dfsum$icExpMWh[i]=spareW/12
                spareW=0
                leftOver=0
              }
@@ -144,12 +156,12 @@ bcalc<-function(bmax,dfout,dfac,icsize=0) {
                # or send out interconnector 
         spareW=12*spareE # convert to MW 
         if (spareW>icsize) {
-          dfsum$icExport[i]=icsize/12
+          dfsum$icExpMWh[i]=icsize/12
           spareW=spareW-icsize
           spareE=spareW/12
         }
         else {
-           dfsum$icExport[i]=spareW/12
+           dfsum$icExpMWh[i]=spareW/12
            spareE=0
         }
         dfsum$throwOutMWh[i]=spareE
@@ -164,9 +176,11 @@ bcalc<-function(bmax,dfout,dfac,icsize=0) {
         if (batteryStatus>=needE) { # extract from battery
           batteryStatus=batteryStatus-needE
           dfsum$batteryStatus[i]=batteryStatus
+          dfsum$batterySupplied[i]=needE
         }
         else { # we have some in battery, but not enough
           dfsum$shortFall[i]=needE-batteryStatus
+          dfsum$batterySupplied[i]=batteryStatus
           batteryStatus=0
         }
       }
@@ -178,13 +192,17 @@ bcalc<-function(bmax,dfout,dfac,icsize=0) {
   }
   dfsum %>% mutate(cumShortMWh=cumsum(shortFall),
                    cumThrowOutMWh=cumsum(throwOutMWh),
-                   cumIcExport=cumsum(icExport)
+                   cumIcExpMWh=cumsum(icExpMWh)
                    )
 }
 
 
 
 ui <- fluidPage(theme = shinytheme("cerulean"),
+  tags$head(tags$style(".standout-container {margin: 20px 0; padding: 20px; font-weight: bold; background-color: Teal; color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                       }")), 
+                
   # Application title
   titlePanel("South Australia's excellent renewable adventure"),
   verticalLayout(
@@ -251,9 +269,10 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       markdownFile("ob1a.txt"),
       fluidRow(
         column(width=6,
-            sliderInput("dfac",label="Overbuild factor for wind+solar", min=1,max=3,step=0.1,value=1),
+            sliderInput("ofac",label="Overbuild factor for wind+solar", min=1,max=3,step=0.1,value=1),
             sliderInput("bsize",label="Battery size in MWh", min=100,max=5000,step=100,value=100),
-            sliderInput("icsize",label="Interconnector size (MW)", min=0,max=2000,step=100,value=0)
+            sliderInput("icsize",label="Interconnector size (MW)", min=0,max=2000,step=100,value=0),
+#            sliderInput("dfac",label="Electricity expansion factor", min=1,max=2,step=0.2,value=1),
         ),
         column(width=6,
             checkboxInput("showShort",label="Show shortfall (GWh)",value=FALSE),
@@ -265,6 +284,9 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       fluidRow(
         column(width=12,
             plotOutput("shortfall")
+        ),
+        column(width=12,
+               uiOutput("bcalcresult")
         )
       ),
       markdownFile("ob1b.txt"),
@@ -289,10 +311,46 @@ server<-function(input,output,session) {
   ptheme<-theme(plot.title=element_text(color="#008080",size=15,face="bold",family="Helvetica"),
                 axis.text=element_text(face="bold",size=12))+mtheme
   gendfsum<-reactive({
-       bstatus<-bcalc(input$bsize,dfout,input$dfac,input$icsize)
+       bstatus<-bcalc(input$bsize,dfout,input$ofac,input$icsize)
+       #write_csv(bstatus,"bcalc-output.csv")
        bstatus
   })
     
+  output$bcalcresult<-renderUI({
+    dfsum<-gendfsum()
+    sh<-dfsum %>% summarise(max(cumShortMWh))
+    curt<-dfsum %>% summarise(max(cumThrowOutMWh))
+    bsup<-dfsum %>% summarise(sum(batterySupplied))
+    bmax<-dfsum %>% summarise(max(batterySupplied*12))
+    dmand<-dfsum %>% summarise(sum(dblrenew/12))
+    
+    hrs<-8
+    dfsum$diff<-roll_sum((dfsum$dblrenew-dfsum$demand)/20,n=20*hrs,align="right",fill=0)
+    #write_csv(dfsum,"tmp-dfsum.csv")
+    dfsum$sumdblrenew<-roll_sum(dfsum$dblrenew/20,n=20*hrs,align="right",fill=0)
+    dfsum$sumdemand<-roll_sum(dfsum$demand/20,n=20*hrs,align="right",fill=0)
+    r<-dfsum %>% select(Time,sumdblrenew,sumdemand,diff) %>% slice_min(diff)
+    #write_csv(r,"tmp-r.csv")
+    
+    nperiods<-length(dfsum$Time)
+    tags$div(class="standout-container",
+      p("Period length: ",comma((nperiods/12)/24)," days"),
+      p("Overbuild factor: ",comma(input$ofac),""),
+#     p("Electrification expansion factor: ",comma(input$dfac),""),
+      p("Interconnector export size: ",comma(input$icsize)," MWh"),
+      p("Shortfall over period: ",comma(sh/1000)," GWh"),
+      p("Curtailment: ",comma(curt/1000)," GWh"),
+      p("Curtailment percentage: ",comma(100*curt/dmand),"%"),
+      p("Battery energy storage size: ",comma(input$bsize)," MWh"),
+      p("Battery energy supplied: ",comma(bsup/1000)," GWh"),
+      p("Max battery power: ",comma(bmax)," MW"),
+      p("Battery capacity factor: ",comma(100*bsup/((bmax/12)*nperiods)),"%"),
+      {if (length(r$diff)==1) {
+      p("Max ",comma(hrs),"hr shortage (endpoint) ",r$Time,": ",comma(-r$diff),"MWh")
+      }},
+      p("")
+    )
+  })
   output$interconnectors<-renderTable(
     tribble(
       ~Interconnector, ~Capacity, ~Status, ~Type,
@@ -354,9 +412,9 @@ server<-function(input,output,session) {
   })
   output$shortfall<-renderPlot({
       dfsum<-gendfsum()
-      write_csv(dfsum,"xxx1.csv")
+      #write_csv(dfsum,"xxx1.csv")
       dfcumshort<-dfsum %>% select(Time,batteryStatus,demand,cumShortMWh,renew,dblrenew,cumThrowOutMWh)
-      write_csv(dfcumshort,"xxx2.csv")
+      #write_csv(dfcumshort,"xxx2.csv")
       dfcs<-dfcumshort %>% pivot_longer(cols=c("demand","renew","dblrenew"),names_to="Level",values_to="MW") 
       nperiods<-length(dfsum$Time)
       lab<-c()
@@ -373,6 +431,7 @@ server<-function(input,output,session) {
         lab=c(lab,"Interconnector Export")
         val=c(val,"twodash")
       }
+      nightbands<-findBands(dfsum)
       p<-dfcs %>% ggplot() + geom_line(aes(x=Time,y=MW,color=Level)) +  ptheme +
         {if (input$showShort)
             geom_line(aes(x=Time,y=cumShortMWh*coef/1000,linetype="dashed"),data=dfsum)
@@ -381,7 +440,7 @@ server<-function(input,output,session) {
         geom_line(aes(x=Time,y=cumThrowOutMWh*coef/1000,linetype="dotted"),data=dfsum)
         }+
         {if (input$showInterconnector)
-        geom_line(aes(x=Time,y=cumIcExport*coef/1000,linetype="twodash"),data=dfsum)
+        geom_line(aes(x=Time,y=cumIcExpMWh*coef/1000,linetype="twodash"),data=dfsum)
         }+
         {if (input$showBatteryStatus)  
              geom_line(aes(x=Time,y=(batteryStatus/input$bsize)*1000),color="red",data=dfsum)
@@ -389,7 +448,8 @@ server<-function(input,output,session) {
         {if (input$showBatteryStatus)  
             annotate('text',x=dfcs$Time[nperiods/2],y=1000,label="100% full",color="red",vjust=-0.2,hjust=0)
         }+
-        labs(color="MW",title="Demand and renewable shortfall,\nWeek ending November 29 2023")+
+        geom_rect(aes(xmin=t1,xmax=t2,ymin=0,ymax=Inf),data=nightbands,alpha=0.2)+
+        labs(color="Megawatts",title="Demand and renewable shortfall,\nWeek ending November 29 2023")+
         scale_color_manual(labels=labsshort,values=colsshort)+
         scale_linetype_manual(name="Gigawatt-hours",labels=lab,values=val)+
         scale_y_continuous(
