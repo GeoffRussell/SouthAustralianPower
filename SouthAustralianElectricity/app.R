@@ -70,6 +70,17 @@ write_csv(dfel,"electricityByCountry.csv")
 dfwsbh<-dfwsbh %>% group_by(Country) %>% summarise(sum=sum(kWhPerCap)) %>% ungroup() %>% inner_join(dfwsbh)
 write_csv(dfwsbh,"tmpwsbh.csv")
 
+dataSets<-c(
+  "WE 30 November 2023"="opennem-30-11-2023sa5.csv",
+  "First heatwave, Dec 2019"="openNem-SA-21-12-19-7D.csv",
+  "Second heatwave, Dec 2019"="openNem-SA-28-12-19-7D.csv"
+)
+dataSetTitles<-c(
+  "WE 30 November 2023"="Electricity renewable/demand/curtailment/shortfall\nWE 30 November 2023",
+  "First heatwave, Dec 2019"="Electricity renewable/demand/curtailment/shortfall\nHeatwave, WE 21 December 2019",
+  "Second heatwave, Dec 2019"="Electricity renewable/demand/curtailment/shortfall\nHeatwave, WE 28 December 2019"
+)
+
 dfsa<-tribble(
   ~Country,~"2022",~Population,~MW,~kwPerCap,
   "South Australia",3443,1.7e6,3442,(3442000/1.7e6)
@@ -77,10 +88,17 @@ dfsa<-tribble(
 dfkwPerCapWind<-bind_rows(dfkwPerCapWind,dfsa)
 dfkwPerCapWind <- dfkwPerCapWind %>% mutate(Group=case_when(Country=="South Australia" ~ "XX",.default = "YY"))
 dfpower<-read_csv("facilities.csv")
-dfdata<-read_csv("opennem-30-11-2023sa5.csv") %>% 
+fields<-c("Battery (Charging) - MW","Imports - MW","Distillate - MW","Gas (Steam) - MW","Gas (CCGT) - MW", "Gas (OCGT) - MW","Gas (Reciprocating) - MW","Battery (Discharging) - MW","Wind - MW","Solar (Utility) - MW","Solar (Rooftop) - MW")
+renewfields<-c("Wind - MW","Solar (Utility) - MW","Solar (Rooftop) - MW")
+
+readDataSet<-function(n) {
+  print(n)
+  dfdata<-read_csv(dataSets[n]) %>% 
   rename_with(~sub('date','Time',.x)) %>% 
   rename_with(~sub('  ',' ',.x))
-dfout<-dfdata %>% mutate(demand=select(.,`Battery (Charging) - MW`:`Solar (Rooftop) - MW`) %>% apply(1,sum)) 
+  dfdata %>% mutate(demand=select(.,fields) %>% apply(1,sum)) 
+}
+dfout<-readDataSet("WE 30 November 2023")
 #--------------------------------------------------------------------------
 # coef is arbitrary ... just scales the second axis on the graph 
 #--------------------------------------------------------------------------
@@ -109,7 +127,9 @@ findBands<-function(df) {
 # Battery handling
 #---------------------------------------------------------------------------------------
 lastdfsum<-dfout
-bcalc<-function(bmax,dfout,ofac,icsize=0) {
+bcalc<-function(bmax,dfout,ofac,icsize=0,dspick) {
+  print(dataSets[dspick])
+  dfout<-readDataSet(dspick)
   batteryMaxCapacity<-bmax
   dfsum <- dfout %>% mutate(
     battuse=`Battery (Discharging) - MW`,
@@ -280,6 +300,14 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
             sliderInput("bsize",label="Battery size in MWh", min=100,max=5000,step=100,value=100),
             sliderInput("icsize",label="Interconnector size (MW)", min=0,max=2000,step=100,value=0),
 #            sliderInput("dfac",label="Electricity expansion factor", min=1,max=2,step=0.2,value=1),
+            pickerInput("datasetpick",choices=sort(names(dataSets)),selected=c("WE 30 November 2023"),multiple=FALSE,
+                          label = 'Alternative datasets',
+                        options = pickerOptions(
+                          actionsBox = TRUE,
+                          selectedTextFormat = 'static',
+                          noneSelectedText = 'Select',
+                        )
+            ) 
         ),
         column(width=6,
             checkboxInput("showShort",label="Show shortfall (GWh)",value=FALSE),
@@ -320,7 +348,8 @@ server<-function(input,output,session) {
   ptheme<-theme(plot.title=element_text(color="#008080",size=15,face="bold",family="Helvetica"),
                 axis.text=element_text(face="bold",size=12))+mtheme
   gendfsum<-reactive({
-       bstatus<-bcalc(input$bsize,dfout,input$ofac,input$icsize)
+       print(input$datasetpick)
+       bstatus<-bcalc(input$bsize,dfout,input$ofac,input$icsize,input$datasetpick)
        #write_csv(bstatus,"bcalc-output.csv")
        bstatus
   })
@@ -458,7 +487,7 @@ server<-function(input,output,session) {
             annotate('text',x=dfcs$Time[nperiods/2],y=1000,label="100% full",color="red",vjust=-0.2,hjust=0)
         }+
         geom_rect(aes(xmin=t1,xmax=t2,ymin=0,ymax=Inf),data=nightbands,alpha=0.2)+
-        labs(color="Megawatts",title="Demand and renewable shortfall,\nWeek ending November 29 2023")+
+        labs(color="Megawatts",title=dataSetTitles[input$datasetpick])+
         scale_color_manual(labels=labsshort,values=colsshort)+
         scale_linetype_manual(name="Gigawatt-hours",labels=lab,values=val)+
         scale_y_continuous(
