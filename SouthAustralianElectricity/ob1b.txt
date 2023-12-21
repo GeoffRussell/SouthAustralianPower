@@ -25,9 +25,11 @@ Now let's look at how storage can smooth the intermittency of wind and solar.
 in the world in 2016). The battery in the model isn't a real one, it has no power limit, just an energy storage capacity. If you've followed the instructions this far, you'll see 4 times during the week when the battery 
 is drained. It always begins the week full!
 
-   Now set the "Battery size" to 1,600 MWh (about three times the battery storage currently in SA). Now there are just two times during the week when it is drained. 
+   Now set the "Battery size" to 1,600 MWh. Now there are just two times during the week when it is drained. Currently, December 2023, SA has 511 MW of battery power a similar amount of energy storage; meaning that using 511 MW for an hour will drain almost everything. The biggest battery now is the Torrens BESS with 1 hour at 250MW. Then we have the original "World's biggest battery" installed after the blackout. It is 150MW and will run for a bit over an hour (194MWh). The other batteries are much smaller, 30MW, 25MW, 50MW and 6.3MW. 
    
-   Since, at this stage we have no interconnectors in the model, a drained battery and not enough wind+solar, means we blackout. It's that simple; even though we have double the level of wind+solar that supplies 72 percent on average. 
+   Since, at this stage we have no interconnectors in the model, a drained battery during a period of where wind+solar is less than the demand means a blackout. It's that simple; even when we assume double the level of wind+solar 
+   that supplies 72 percent on average. Think about that. We have 72% from wind+solar, double that amount and we'd 
+   still be blacked out during a significant part of the week ending 30th November; without Victorian coal.
    
 2. Now click on the "Show dumped energy" tick box. You'll see about 160 GWh of electricity is dumped. Meaning we generated it, but even with 1,600 MWh of battery capacity we had to dump it. 
 
