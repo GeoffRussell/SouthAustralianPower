@@ -137,7 +137,7 @@ bcalc<-function(bmax,dfout,ofac,icsize=0,dspick) {
     diesel=`Distillate - MW`,
     wind=`Wind - MW`,
     solar=`Solar (Rooftop) - MW`+`Solar (Utility) - MW`) %>% 
-      mutate(renew=wind+solar,dblrenew=ofac*(wind+solar)) %>% 
+      mutate(renew=wind+solar-`Exports - MW`,dblrenew=ofac*renew) %>% 
       mutate(noBattShortfall=dblrenew-demand,cumNoBattShortfall=cumsum(dblrenew-demand))  
   #-------------------
   # start with battery full 
@@ -326,19 +326,10 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       ),
       markdownFile("ob1b.txt")
 #      plotOutput("facilities")
-                  ),
-                  tabPanel("About",
-                           markdown(paste0(
-                             "<br>",
-                             "<br>",
-                             "There is a GitHub [repository](https://github.com/GeoffRussell/SouthAustralianPower) for this website code, written in R and Shiny.",
-                             "<br>",
-                             "Data on this site comes either from the Statistical Review of World Energy, or OpenNEM.",
-                             "<br>",
-                             "Geoff Russell, 2023"
-                           )
-                         )
-                  )
+      ),
+      tabPanel("About",
+          markdownFile("about.txt")
+         )
       )
     )
   )

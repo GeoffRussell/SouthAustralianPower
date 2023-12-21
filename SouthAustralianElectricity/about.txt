@@ -1,5 +1,41 @@
 LABEL(about)
 
-### Explainer: Power and energy
+The source code for this website is available on [GitHub](https://github.com/GeoffRussell/SouthAustralianPower). It
+is written in Shiny R.
+
+Data on this site comes either from the Statistical Review of World Energy, or OpenNEM.
+
+## Technical details about the OpenNEM data
+
+1. Demand is taken to be the sum of the following fields, basically everything except the "Exports - MW" field 
+
+- Battery (Charging) - MW
+- Imports - MW
+- Distillate - MW
+- Gas (Steam) - MW
+- Gas (CCGT) - MW
+- Gas (OCGT) - MW
+- Gas (Reciprocating) - MW
+- Battery (Discharging) - MW
+- Wind - MW
+- Solar (Utility) - MW
+- Solar (Rooftop) - MW
+
+2. Renewable generation is assumed to be the two solar fiels + the wind field + the amount exported. 
+ie., the negative of the "Exports - MW". Note that the export field has a negative sign. 
+This assumption implies that all of the exported electricity is from the renewable sources. This
+may well be false, but it a fairly *renewable-generous* assumption.
+
+3. I assume that any interconnector capacity is only used for export. Currently, most of what is coming
+from Victoria will be coal based, but in future, this may not be true. The purpose of the model, as a whole
+is to consider the implications of 100% renewables in Australia. In such a situation, the national grid won't
+have interconnectors from elsewhere to bail it out when we are short. We can only shift electricity around, not
+get any more. As Victoria and NSW get more wind and solar, any excess they have will compete for local
+excesses in SA. Will it be windy everywhere or will wind in one geographical region help bail out other
+regions? Perhaps I'll work out a way to usefully augment the model with interconnectors as inputs. In one
+sense an interconnector is just like a battery with a very large capacity. 
+
+
+
 
 Geoff Russell, December 2023
