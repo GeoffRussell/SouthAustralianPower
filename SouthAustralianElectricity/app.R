@@ -17,8 +17,16 @@ markdownFile<-function(filename) {
   markdown(t)
 }
 options(scipen=999)
+colswind<-c(
+  "demand"="brown",
+  "wind"="forestgreen"
+)
+labswind<-c(
+  "Demand",
+  "Wind"
+)
 colsshort<-c(
-  "renew"="forestgreen",
+  "renew"="purple",
   "dblrenew"="cyan",
   "demand"="brown"
 )
@@ -313,7 +321,8 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
             checkboxInput("showShort",label="Show shortfall (GWh)",value=FALSE),
             checkboxInput("showCurtailed",label="Show dumped energy (GWh)",value=FALSE),
             checkboxInput("showBatteryStatus",label="Show batteryStatus (%)",value=FALSE),
-            checkboxInput("showInterconnector",label="Show interconnector flow (GWh)",value=FALSE)
+            checkboxInput("showInterconnector",label="Show interconnector flow (GWh)",value=FALSE),
+            checkboxInput("showWindDemand",label="Show wind vs demand",value=FALSE)
         )
       ),
       fluidRow(
@@ -395,7 +404,7 @@ server<-function(input,output,session) {
   output$batheat<-renderImage(list(src="suzanne-bat.jpg",height=400),deleteFile=FALSE)
   output$connectgit<-renderImage(list(src="aemo-kuhlmann-git.png",height=300),deleteFile=FALSE)
   output$connect<-renderImage(list(src="modelling-rms-vs-emt.png",height=300),deleteFile=FALSE)
-  output$blacksummer<-renderImage(list(src="black-summer-2019.png",height=300),deleteFile=FALSE)
+  output$blacksummer<-renderImage(list(src="wind-vs-demand-heatwave-2019.png",height=300),deleteFile=FALSE)
   output$scaleissues1<-renderImage(list(src="renewable-scaleissues.jpg",height=300),deleteFile=FALSE)
   output$scaleissues2<-renderImage(list(src="renewable-scaleissues-mod.png",height=400),deleteFile=FALSE)
 #  output$scaleissues2b<-renderImage(list(src="renewable-scaleissues-mod.png",height=400),deleteFile=FALSE)
@@ -442,9 +451,20 @@ server<-function(input,output,session) {
   output$shortfall<-renderPlot({
       dfsum<-gendfsum()
       #write_csv(dfsum,"xxx1.csv")
-      dfcumshort<-dfsum %>% select(Time,batteryStatus,demand,cumShortMWh,renew,dblrenew,cumThrowOutMWh)
+      dfcumshort<-dfsum %>% select(Time,batteryStatus,wind,demand,cumShortMWh,renew,dblrenew,cumThrowOutMWh)
       #write_csv(dfcumshort,"xxx2.csv")
+      thecols=colsshort
+      thelabs=labsshort
       dfcs<-dfcumshort %>% pivot_longer(cols=c("demand","renew","dblrenew"),names_to="Level",values_to="MW") 
+      thetitle=dataSetTitles[input$datasetpick]
+      if (input$showWindDemand) {
+          dfcs<-dfcumshort %>% pivot_longer(cols=c("demand","wind"),names_to="Level",values_to="MW") 
+          x<-str_split_1(thetitle,"\n")
+          print(x)
+          thetitle<-paste0("Electricity demand vs wind\n",x[2])
+          thecols=colswind
+          thelabs=labswind
+      }
       nperiods<-length(dfsum$Time)
       lab<-c()
       val<-c()
@@ -461,7 +481,9 @@ server<-function(input,output,session) {
         val=c(val,"twodash")
       }
       nightbands<-findBands(dfsum)
-      p<-dfcs %>% ggplot() + geom_line(aes(x=Time,y=MW,color=Level)) +  ptheme +
+      p<-dfcs %>% ggplot() + 
+        geom_line(aes(x=Time,y=MW,color=Level)) +  
+        ptheme +
         {if (input$showShort)
             geom_line(aes(x=Time,y=cumShortMWh*coef/1000,linetype="dashed"),data=dfsum)
         }+
@@ -478,8 +500,8 @@ server<-function(input,output,session) {
             annotate('text',x=dfcs$Time[nperiods/2],y=1000,label="100% full",color="red",vjust=-0.2,hjust=0)
         }+
         geom_rect(aes(xmin=t1,xmax=t2,ymin=0,ymax=Inf),data=nightbands,alpha=0.2)+
-        labs(color="Megawatts",title=dataSetTitles[input$datasetpick])+
-        scale_color_manual(labels=labsshort,values=colsshort)+
+        labs(color="Megawatts",title=thetitle)+
+        scale_color_manual(labels=thelabs,values=thecols)+
         scale_linetype_manual(name="Gigawatt-hours",labels=lab,values=val)+
         scale_y_continuous(
           name="Megawatts",
