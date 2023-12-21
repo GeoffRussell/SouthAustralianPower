@@ -7,6 +7,15 @@ have dialled in a doubling of wind+solar, the summary board shows
 an accumulated shortfall over the night of 5,463, even with twice the renewables that we have now. Can
 we fix that shortfall with storage?
 
+### Alternative datasets 
+
+The "Alternative datasets" button lists other weeks of data. At present I just have the dual heatwaves of 
+2019 that delivered so much suffering in South Australia.
+
+### Wind vs Demand 
+
+There is a click box to show wind vs demand for the currently selected dataset. It may not "play well" with other
+selections ... it won't show any Overbuild renewable generation if you have some selected.
 
 ### Fixing shortfalls with storage 
 

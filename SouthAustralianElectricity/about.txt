@@ -35,7 +35,6 @@ excesses in SA. Will it be windy everywhere or will wind in one geographical reg
 regions? Perhaps I'll work out a way to usefully augment the model with interconnectors as inputs. In one
 sense an interconnector is just like a battery with a very large capacity. 
 
-
-
-
 Geoff Russell, December 2023
+
+
