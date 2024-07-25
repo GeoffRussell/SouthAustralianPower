@@ -1,6 +1,31 @@
+## Note that this file and ../auxfunctions.Rmd are different ... I should merge them and remove one.
+
+
 ```{r}
 library(tidyverse)
 library(RcppRoll)
+```
+
+```{rcomm}
+df<-read_csv("xxx1.csv") %>% select(Time,wind,wind5,isup,isdown) %>%
+  mutate(isup=wind5>0,isdown=wind5<0,rampup=0,rampdown=0,rampupperiods=0)
+wind5<-df$wind5
+isup<-df$isup
+isdown<-df$isdown
+rampup<-df$rampup
+rampdown<-df$rampdown
+rampupperiods<-df$rampupperiods
+for(i in 3:(nrow(df)-1)) {
+  if (isup[i]) { 
+    x=if (wind5[i-1]>0) rampup[i-1] else  0
+    rampup[i]=wind5[i] + x
+    if (rampupperiods[i-1]==0) { rampupperiods[i-1]=1 }
+    rampupperiods[i]=rampupperiods[i-1]+1
+  }
+}
+df$rampdown=rampdown
+df$rampup=rampup
+df$rampperiods=rampupperiods
 ```
 
 ```{r}
@@ -11,12 +36,12 @@ findBands<-function(df) {
   darkdf<-tribble(~t1,~t2)
   st<-2                                         
   if (dark[1]) {                                # are we starting in the night or the day?
-     tmp<-tibble(t1=df$Time[1],t2=df$Time[ldld[1]])
+     tmp<-tibble(t1=df$Time[1],t2=df$Time[ldld[1]],r1=1,r2=ldld[1])
      darkdf<-bind_rows(darkdf,tmp)
      st<-3
   }
   for (i in seq(st,length(ldld),2)) {
-    tmp<-tibble(t1=df$Time[ldld[i-1]],t2=df$Time[ldld[i]])
+    tmp<-tibble(t1=df$Time[ldld[i-1]],t2=df$Time[ldld[i]],r1=ldld[i-1],r2=ldld[i])
     darkdf<-bind_rows(darkdf,tmp)
   }
   darkdf
@@ -38,8 +63,56 @@ dfout2<-df %>% mutate(demand=select(.,fields) %>% apply(1,sum))
 ```
 
 ```{r}
+sunbreak=0.05*max(dfout1$`Solar (Rooftop) - MW`)  # 5 percent of max is start of day
+dfnew<-dfout1 %>% mutate(dark=ifelse(`Solar (Rooftop) - MW`<sunbreak,1,0)) %>%
+  mutate(wind=`Wind - MW`,wshort=ifelse(dark==1,(demand-wind),0)) 
+plus=1
+for(i in 2:nrow(dfnew)) {
+  if (dfnew$dark[i]==0 && dfnew$dark[i-1]>=1) {
+    plus=plus+1
+  } 
+  if (dfnew$dark[i]==1) {
+    dfnew$dark[i]=plus
+  } 
+}
+dfsum<-dfnew %>% group_by(dark) %>% summarise(shortmwh=sum(wshort/20))
+write_csv(dfnew %>% filter(dark>0) %>% select(Time,dark,wind,demand,wshort),"sumshort0.csv")
+write_csv(dfsum,"sumshort.csv")
+```
+                       
+```{r}
+dfw<-dfout1 %>% mutate(wind=`Wind - MW`,wperc=wind/demand,wshort=demand-wind) 
 dfout1 %>% ggplot()+geom_line(aes(x=Time,y=demand)) +
   geom_rect(aes(xmin=t1,xmax=t2,ymin=0,ymax=Inf),data=findBands(df),alpha=0.2)
+dddd<-findBands(df) 
+dfwout=tibble()
+for(i in 1:nrow(dddd)) {
+  rs<-dfw %>% slice(dddd$r1[i]:dddd$r2[i]) %>% mutate(dark=i)
+  dfwout<-bind_rows(dfwout,rs)
+}
+x<-dfwout %>% group_by(dark) %>% summarise(short=sum(wshort))
+
+dfwout2=tibble()
+for(i in 1:nrow(dddd)) {
+  rs<-dfw %>% filter(between(row_number(),dddd$r1[i],dddd$r2[i])) %>% mutate(dark=i)
+  dfwout2<-bind_rows(dfwout2,rs)
+}
+
+```
+
+## Get fields for VIC data
+```{r}
+fieldsVIC<-c("Battery (Charging) - MW","Imports - MW","Coal (Brown) - MW","Gas (OCGT) - MW",
+             "Hydro - MW","Wind - MW","Solar (Utility) - MW","Solar (Rooftop) - MW")
+flds<-fieldsVIC
+dfvic<-read_csv("openNem-VIC-25-01-24-7D.csv")
+colnames(dfvic)
+dfvic<-dfvic %>%
+  rename_with(~sub('date','Time',.x)) %>% 
+  rename_with(~sub('  ',' ',.x))
+colnames(dfvic)
+dfvic %>% mutate(demand=select(.,flds) %>% apply(1,sum)) 
+
 ```
 
 ```{r}

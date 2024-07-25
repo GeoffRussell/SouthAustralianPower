@@ -12,6 +12,17 @@ we fix that shortfall with storage?
 The "Alternative datasets" button lists other weeks of data. At present I just have the dual heatwaves of 
 2019 that delivered so much suffering in South Australia.
 
+### And in January 2024
+
+I've added two datasets for January 2024, the week ending on the 25th. They show the
+extraordinarily low wind during the nights of the 23rd and 24th of January. The 8 hours ending at 2am on the 24th
+had a wind+solar shortfall of 11,970 MWh; rather more than the 511 MWh we have at present. I subsequently downloaded
+data for Victoria; where we got the electricity to keep the lights on during these nights. 
+
+If you select the VIC dataset, you'll see that the night of the 24th was an extraordinarily low wind night, similar
+to that in South Australia. In a high penetration wind+solar system, they'd have been hard put to 
+be sending us anything. 
+
 ### Wind vs Demand 
 
 There is a click box to show wind vs demand for the currently selected dataset. It may not "play well" with other

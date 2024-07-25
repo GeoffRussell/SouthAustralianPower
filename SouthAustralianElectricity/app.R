@@ -81,14 +81,32 @@ dfwsbh<-dfwsbh %>% group_by(Country) %>% summarise(sum=sum(kWhPerCap)) %>% ungro
 write_csv(dfwsbh,"tmpwsbh.csv")
 
 dataSets<-c(
+  "(VIC) WE 25 January 2024"="openNem-VIC-25-01-24-7D.csv",
+  "WE 16 May 2024"="openNem-SA-16-05-24-7D.csv",
+  "WE 14 May 2024"="openNem-SA-14-05-24-7D.csv",
+  "(VIC) WE 16 May 2024"="openNem-VIC-16-05-24-7D.csv",
+  "(NEM) WE 16 May 2024"="openNem-NEM-16-05-24-7D.csv",
+  "June 2024"="openNEMMerge-June-2024.csv",
+  "WE 30 January 2024"="openNem-SA-30-01-24-7D.csv",
+  "WE 25 January 2024"="openNem-SA-25-01-24-7D.csv",
   "WE 30 November 2023"="opennem-30-11-2023sa5.csv",
   "First heatwave, Dec 2019"="openNem-SA-21-12-19-7D.csv",
-  "Second heatwave, Dec 2019"="openNem-SA-28-12-19-7D.csv"
+  "Second heatwave, Dec 2019"="openNem-SA-28-12-19-7D.csv",
+  "March heatwave, 2024"="openNem-SA-12-03-24-7D.csv"
 )
 dataSetTitles<-c(
-  "WE 30 November 2023"="Electricity renewable/demand/curtailment/shortfall\nWE 30 November 2023",
+  "(VIC) WE 25 January 2024"="Electricity renewable/demand/curtailment/shortfall\n(Victoria) Week ending 25 Jan 2024",
+  "WE 16 May 2024"="Electricity renewable/demand/curtailment/shortfall\nWeek ending 16 May 2024",
+  "WE 14 May 2024"="Electricity renewable/demand/curtailment/shortfall\nWeek ending 14 May 2024",
+  "(VIC) WE 16 May 2024"="Electricity renewable/demand/curtailment/shortfall\nVIC Week ending 16 May 2024",
+  "(NEM) WE 16 May 2024"="Electricity renewable/demand/curtailment/shortfall\nNEM Week ending 16 May 2024",
+  "June 2024"="Electricity renewable/demand/shortfall\nJune 2024",
+  "WE 30 January 2024"="Electricity renewable/demand/curtailment/shortfall\nWeek ending 30 Jan 2024",
+  "WE 25 January 2024"="Electricity renewable/demand/curtailment/shortfall\nWeek ending 25 Jan 2024",
+  "WE 30 November 2023"="Electricity renewable/demand/curtailment/shortfall\nWeek ending 30 November 2023",
   "First heatwave, Dec 2019"="Electricity renewable/demand/curtailment/shortfall\nHeatwave, WE 21 December 2019",
-  "Second heatwave, Dec 2019"="Electricity renewable/demand/curtailment/shortfall\nHeatwave, WE 28 December 2019"
+  "Second heatwave, Dec 2019"="Electricity renewable/demand/curtailment/shortfall\nHeatwave, WE 28 December 2019",
+  "March heatwave, 2024"="Electricity renewable/demand/curtailment/shortfall\nHeatwave, WE 12 March 2024"
 )
 
 dfsa<-tribble(
@@ -99,14 +117,41 @@ dfkwPerCapWind<-bind_rows(dfkwPerCapWind,dfsa)
 dfkwPerCapWind <- dfkwPerCapWind %>% mutate(Group=case_when(Country=="South Australia" ~ "XX",.default = "YY"))
 dfpower<-read_csv("facilities.csv")
 fields<-c("Battery (Charging) - MW","Imports - MW","Distillate - MW","Gas (Steam) - MW","Gas (CCGT) - MW", "Gas (OCGT) - MW","Gas (Reciprocating) - MW","Battery (Discharging) - MW","Wind - MW","Solar (Utility) - MW","Solar (Rooftop) - MW")
-renewfields<-c("Wind - MW","Solar (Utility) - MW","Solar (Rooftop) - MW")
+fieldsVIC<-c("Battery (Charging) - MW","Imports - MW","Coal (Brown) - MW","Gas (OCGT) - MW",
+             "Hydro - MW","Wind - MW","Solar (Utility) - MW","Solar (Rooftop) - MW")
+fieldsNEM<-c("Battery (Charging) - MW","Coal (Brown) - MW","Gas (OCGT) - MW",
+             "Hydro - MW","Wind - MW","Solar (Utility) - MW","Solar (Rooftop) - MW")
 
+renewfields<-c("Wind - MW","Solar (Utility) - MW","Solar (Rooftop) - MW")
+renewfieldsVIC<-c("Hydro - MW","Wind - MW","Solar (Utility) - MW","Solar (Rooftop) - MW")
+renewfieldsNEM<-c("Hydro - MW","Wind - MW","Solar (Utility) - MW","Solar (Rooftop) - MW")
+annual<-p("SA - annual avg power 1.58GW (2023/4)")
+
+isnem<-function(f) {
+  str_detect(f,"NEM")
+}
+isvic<-function(f) {
+  str_detect(f,"VIC")
+}
 readDataSet<-function(n) {
   print(n)
+  flds<-fields
+  annual<<-p("SA - annual avg power 1.58GW (2023/4)")
+  avgpower<<-1.58
+  if (isnem(n)) {
+    annual<<-p("NEM- annual avg power 23.9GW (2023/4)")
+    avgpower<<-23.9
+    flds<-fieldsNEM
+  }
+  if (isvic(n)) {
+    annual<<-p("VIC - annual avg power 5.4GW (2023/4)")
+    avgpower<<-5.4
+    flds<-fieldsVIC
+  }
   dfdata<-read_csv(dataSets[n]) %>% 
   rename_with(~sub('date','Time',.x)) %>% 
   rename_with(~sub('  ',' ',.x))
-  dfdata %>% mutate(demand=select(.,fields) %>% apply(1,sum)) 
+  dfdata %>% mutate(demand=select(.,all_of(flds)) %>% apply(1,sum)) 
 }
 dfout<-readDataSet("WE 30 November 2023")
 #--------------------------------------------------------------------------
@@ -133,6 +178,7 @@ findBands<-function(df) {
   }
   darkdf
 }
+
 #---------------------------------------------------------------------------------------
 # Battery handling
 #---------------------------------------------------------------------------------------
@@ -143,12 +189,21 @@ bcalc<-function(bmax,dfout,ofac,icsize=0,dspick) {
   batteryMaxCapacity<-bmax
   dfsum <- dfout %>% mutate(
     battuse=`Battery (Discharging) - MW`,
-    imports=`Imports - MW`,
-    diesel=`Distillate - MW`,
+    #imports=`Imports - MW`,
+    #diesel=`Distillate - MW`,
     wind=`Wind - MW`,
-    solar=`Solar (Rooftop) - MW`+`Solar (Utility) - MW`) %>% 
-      mutate(renew=wind+solar-`Exports - MW`,dblrenew=ofac*renew) %>% 
-      mutate(noBattShortfall=dblrenew-demand,cumNoBattShortfall=cumsum(dblrenew-demand))  
+    solar=`Solar (Rooftop) - MW`+`Solar (Utility) - MW`) 
+  
+  if (isnem(dspick)) {
+    dfsum<-dfsum %>% mutate(renew=wind+solar,dblrenew=ofac*renew)
+  }
+  else if (isvic(dspick)) {
+    dfsum<-dfsum %>% mutate(renew=wind+solar,dblrenew=ofac*renew)
+  }
+  else { # in SA most exports are of excess wind/solar
+    dfsum<-dfsum %>% mutate(renew=wind+solar-`Exports - MW`,dblrenew=ofac*renew) 
+  }
+  dfsum<-dfsum %>% mutate(noBattShortfall=dblrenew-demand,cumNoBattShortfall=cumsum(dblrenew-demand))  
   #-------------------
   # start with battery full 
   #-------------------
@@ -159,11 +214,12 @@ bcalc<-function(bmax,dfout,ofac,icsize=0,dspick) {
   dfsum$batteryStatus=rep(0,nperiods)
   dfsum$batterySupplied=rep(0,nperiods) # MWh
   dfsum$throwOutMWh=rep(0,nperiods)
+  dfsum$addedToBattery=rep(0,nperiods)
   lastdfsum<<-dfsum
   totalBattuse<<-sum(lastdfsum$battuse/12)
   maxNeed<-0
   dfsum$minroll20<-roll_sum(dfsum$dblrenew,n=20,fill=0)
-  #write_csv(dfsum,"xxx.csv")
+  write_csv(dfsum,"xxx.csv")
   for(i in 1:nperiods) {
     dfsum$shortFall[i]=0
     # spareE is in MWh
@@ -173,6 +229,7 @@ bcalc<-function(bmax,dfout,ofac,icsize=0,dspick) {
         spareB=batteryMaxCapacity-batteryStatus
         addE=min(spareE,spareB)
         batteryStatus=batteryStatus+addE
+        dfsum$addedToBattery[i]=addE
         leftOver=spareE-spareB
         if (leftOver>0) {
              # send out interconnector
@@ -229,10 +286,15 @@ bcalc<-function(bmax,dfout,ofac,icsize=0,dspick) {
   }
   dfsum %>% mutate(cumShortMWh=cumsum(shortFall),
                    cumThrowOutMWh=cumsum(throwOutMWh),
-                   cumIcExpMWh=cumsum(icExpMWh)
+                   cumIcExpMWh=cumsum(icExpMWh),
+                   maxShortMW=max(shortFall)*12
                    )
 }
 
+#------------------------------------------------------------
+# Constants
+#------------------------------------------------------------
+avgpower<-1.58 # giga watts
 
 
 ui <- fluidPage(theme = shinytheme("cerulean"),
@@ -264,7 +326,7 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       ),
       fluidRow(
         column(width=12,
-            plotlyOutput("wsbh",height="500px",width="100%")
+            plotOutput("wsbh",height="500px",width="100%")
         )
       ),
       markdownFile("intro1ab.txt"),
@@ -307,7 +369,7 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       fluidRow(
         column(width=6,
             sliderInput("ofac",label="Overbuild factor for wind+solar", min=1,max=3,step=0.1,value=1),
-            sliderInput("bsize",label="Battery size in MWh", min=100,max=5000,step=100,value=100),
+            sliderInput("bsize",label="Battery size in MWh", min=100,max=100000,step=100,value=100),
             sliderInput("icsize",label="Interconnector size (MW)", min=0,max=2000,step=100,value=0),
 #            sliderInput("dfac",label="Electricity expansion factor", min=1,max=2,step=0.2,value=1),
             pickerInput("datasetpick",choices=sort(names(dataSets)),selected=c("WE 30 November 2023"),multiple=FALSE,
@@ -352,42 +414,82 @@ server<-function(input,output,session) {
   gendfsum<-reactive({
        print(input$datasetpick)
        bstatus<-bcalc(input$bsize,dfout,input$ofac,input$icsize,input$datasetpick)
-       #write_csv(bstatus,"bcalc-output.csv")
+       dfile<-bstatus %>%  mutate(diffE=(dblrenew-demand)/12) %>% select(Time,dblrenew,demand,diffE,batteryStatus,batterySupplied,shortFall,addedToBattery) 
+       write_csv(dfile,"bcalc-output.csv")
        bstatus
   })
     
   output$bcalcresult<-renderUI({
     dfsum<-gendfsum()
+    totdemand<-dfsum %>% summarise(totdemand=sum(demand/12))
     sh<-dfsum %>% summarise(max(cumShortMWh))
     curt<-dfsum %>% summarise(max(cumThrowOutMWh))
     bsup<-dfsum %>% summarise(sum(batterySupplied))
     bmax<-dfsum %>% summarise(max(batterySupplied*12))
     dmand<-dfsum %>% summarise(sum(dblrenew/12))
+    shortMW<-dfsum %>% summarise(max(maxShortMW))
     
     hrs<-8
-    dfsum$diff<-roll_sum((dfsum$dblrenew-dfsum$demand)/20,n=20*hrs,align="right",fill=0)
+    dfsum$diff<-roll_sum((dfsum$dblrenew-dfsum$demand)/12,n=12*hrs,align="right",fill=0)
     #write_csv(dfsum,"tmp-dfsum.csv")
-    dfsum$sumdblrenew<-roll_sum(dfsum$dblrenew/20,n=20*hrs,align="right",fill=0)
-    dfsum$sumdemand<-roll_sum(dfsum$demand/20,n=20*hrs,align="right",fill=0)
+    dfsum$sumdblrenew<-roll_sum(dfsum$dblrenew/12,n=12*hrs,align="right",fill=0)
+    dfsum$sumdemand<-roll_sum(dfsum$demand/12,n=12*hrs,align="right",fill=0)
     r<-dfsum %>% select(Time,sumdblrenew,sumdemand,diff) %>% slice_min(diff)
-    #write_csv(r,"tmp-r.csv")
+    rnights<-dfsum %>% select(Time,sumdblrenew,sumdemand,diff) %>% filter(hour(Time)*60+minute(Time)==9*60) 
+    #write_csv(rnights,"tmp-rnights.csv")
+    maxwind<-max(dfsum$wind)
+    minwind<-min(dfsum$wind)
+    
+  dfsum$windhr<-roll_sum(dfsum$wind/12,n=12,fill=0)
+  dfsum$wind8hr<-roll_sum(dfsum$wind/12,n=12*8,fill=0)
+  minwindhr<-min(dfsum$windhr[dfsum$windhr>0])
+  maxwindhr<-max(dfsum$windhr)
+  minwind8hr<-min(dfsum$wind8hr[dfsum$wind8hr>0])
+  maxwind8hr<-max(dfsum$wind8hr)
+  print(paste0("MinWindHr ",minwindhr))
+  print(paste0("MaxWindHr ",maxwindhr))
+  print(paste0("MinWind8Hr ",minwind8hr))
+  print(paste0("MaxWind8Hr ",maxwind8hr))
+  write_csv(dfsum,"xxx1.csv")
+  
+#      p("NSW - annual avg power 8.5GW (2023/4)"),
+#      p("QLD - annual avg power 7.1GW (2023/4)"),
+    onshortages<-""
+    onbattmult<-""
+    for(i in 1:nrow(rnights)) {
+      d<-rnights$diff[i]
+      t<-day(rnights$Time[i])
+      if (d<0) {
+        onshortages<-paste0(onshortages," ",t,":",comma(-d)," MWh ")
+        onbattmult<-paste0(onbattmult," ",t,":",comma(-d/input$bsize),"x ")
+      }
+    }
+    
     
     nperiods<-length(dfsum$Time)
     tags$div(class="standout-container",
+      annual,
+      p("Total Period Demand: ",comma(totdemand/1000)," GWh"),
       p("Period length: ",comma((nperiods/12)/24)," days"),
       p("Overbuild factor: ",comma(input$ofac),""),
 #     p("Electrification expansion factor: ",comma(input$dfac),""),
       p("Interconnector export size: ",comma(input$icsize)," MWh"),
-      p("Shortfall over period: ",comma(sh/1000)," GWh"),
-      p("Curtailment: ",comma(curt/1000)," GWh"),
-      p("Curtailment percentage: ",comma(100*curt/dmand),"%"),
-      p("Battery energy storage size: ",comma(input$bsize)," MWh"),
+      p("Shortfall over period: ",comma(sh/1000)," GWh (wind+solar+batteries=",comma((totdemand-sh)/totdemand*100),"%)"),
+      p("Curtailment: ",comma(curt/1000)," GWh (",comma(100*curt/dmand),"percent)"),
+      p("Max MW shortage: ",comma(shortMW)," dispatchable MW"),
+      p("Battery energy storage size: ",comma(input$bsize)," MWh (",comma((input$bsize*1e6)/(avgpower*1e9))," hrs)" ),
       p("Battery energy supplied: ",comma(bsup/1000)," GWh"),
       p("Max battery power: ",comma(bmax)," MW"),
+      p("Max wind power(5 min): ",comma(maxwind)," MW (Min ",comma(minwind),"MW",comma(minwind/maxwind*100),"%)"),
+      p("Max wind energy(60 min): ",comma(maxwindhr)," MWh (Min ",comma(minwindhr),"MWh",comma(minwindhr/maxwindhr*100),"%)"),
+      p("Max wind energy(8 hrs): ",comma(maxwind8hr)," MWh (Min ",comma(minwind8hr),"MWh",comma(minwind8hr/maxwind8hr*100),"%)"),
       p("Battery capacity factor: ",comma(100*bsup/((bmax/12)*nperiods)),"%"),
       {if (length(r$diff)==1) {
       p("Max ",comma(hrs),"hr shortage (endpoint) ",r$Time,": ",comma(-r$diff),"MWh")
       }},
+      p("Overnight Shortages: ",onshortages),
+      p("Battery shortfallss: ",onbattmult),
+      p("(Battery shortfalls ... the multiple of configured batterysizes to supply the shortfall)"),
       p("")
     )
   })
@@ -418,7 +520,7 @@ server<-function(input,output,session) {
       ptheme +
       labs(x="",y="kilowatts per person",title="Solar: Top 20 countries by kilowatts per person")
   })
-  output$wsbh<-renderPlotly({
+  output$wsbh<-renderPlot({
     c<-input$countrypick
     print(c)
     p<-dfwsbh %>% filter(Country %in% c) %>% 
@@ -435,15 +537,15 @@ server<-function(input,output,session) {
                alpha=1) 
       }+
       geom_col(aes(x=Country,y=kWhPerCap,fill=Type),width=0.5) + 
-      scale_fill_manual(name="Technology",values=cols)+
-      theme(axis.text.x = element_text(angle = 60, vjust = 0.5, hjust=1)) +
-#      theme(plot.margin=unit(c(1,0,0,0),"cm"))+
+      scale_fill_manual(name="Technology",values=cols) +
+      theme(axis.text.x = element_text(angle = 60, vjust = 0.5, hjust=0.6)) +
+      theme(plot.margin=unit(c(1,0,0,0),"cm")) +
       theme(legend.key.size = unit(7, 'mm')) +
       ptheme +
-      labs(x="",y="Annual low carabon\nkilowatt-hours per person",
-           title="Per person low carbon electricity")
-     ggplotly(p) %>% ggplconfig %>% layout(plot_bgcolor = "#e5ecf6") 
-    
+      labs(x="",y="Annual low carbon\nkilowatt-hours per person",
+           title="Per person low carbon electricity 2022")
+      p
+      #ggplotly(p) %>% ggplconfig %>% layout(plot_bgcolor = "#e5ecf6")
   })
   output$kwpercapwind<-renderPlot({
       dfkwPerCapWind %>% ggplot() + geom_col(aes(x=reorder(Country,kwPerCap),y=kwPerCap,fill=Group),width=0.6) + 
@@ -455,7 +557,8 @@ server<-function(input,output,session) {
   output$shortfall<-renderPlot({
       dfsum<-gendfsum()
       #write_csv(dfsum,"xxx1.csv")
-      dfcumshort<-dfsum %>% select(Time,batteryStatus,wind,demand,cumShortMWh,renew,dblrenew,cumThrowOutMWh)
+      dfcumshort<-dfsum %>% select(Time,batteryStatus,wind,demand,cumShortMWh,maxShortMW,renew,dblrenew,cumThrowOutMWh)
+      
       #write_csv(dfcumshort,"xxx2.csv")
       thecols=colsshort
       thelabs=labsshort
@@ -485,6 +588,11 @@ server<-function(input,output,session) {
         val=c(val,"twodash")
       }
       nightbands<-findBands(dfsum)
+      for(i in 1:nrow(nightbands)) {
+        cat(paste0())
+      }
+      bfac=input$bsize
+      if (bfac==0) bfac=1000
       p<-dfcs %>% ggplot() + 
         geom_line(aes(x=Time,y=MW,color=Level)) +  
         ptheme +
@@ -498,10 +606,10 @@ server<-function(input,output,session) {
         geom_line(aes(x=Time,y=cumIcExpMWh*coef/1000,linetype="twodash"),data=dfsum)
         }+
         {if (input$showBatteryStatus)  
-             geom_line(aes(x=Time,y=(batteryStatus/input$bsize)*1000),color="red",data=dfsum)
+             geom_line(aes(x=Time,y=(batteryStatus/input$bsize)*bfac),color="red",data=dfsum)
         }+
         {if (input$showBatteryStatus)  
-            annotate('text',x=dfcs$Time[nperiods/2],y=1000,label="100% full",color="red",vjust=-0.2,hjust=0)
+            annotate('text',x=dfcs$Time[nperiods/2],y=input$bsize,label="100% full",color="red",vjust=-0.2,hjust=0)
         }+
         geom_rect(aes(xmin=t1,xmax=t2,ymin=0,ymax=Inf),data=nightbands,alpha=0.2)+
         labs(color="Megawatts",title=thetitle)+

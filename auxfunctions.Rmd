@@ -5,11 +5,81 @@ date: "2023-11-29"
 output: html_document
 ---
 
+## Note that this file and SouthAustralianElectricity/auxfunction.Rmd are different ... I should merge them and remove one.
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(readxl)
 library(wbstats)
+```
+
+```{r}
+dfm<-read_csv("openNEMMerge-25-05-2024-9D.csv") %>% mutate(demand=select(.,`Battery (Charging) - MW`:`Solar (Rooftop) - MW`) %>% apply(1,sum)) 
+```
+
+```{r}
+removeIncomplete<-function(df) {
+  ix1=0
+  ix2=0
+  for(i in 1:nrow(df)) {
+    d<-as.character(df$date[i])
+    if (ix1==0 & str_length(d)==10) {
+#      cat(paste0("gotit1\n"))
+      ix1=i
+      break
+    }
+  }
+  s=seq(nrow(df),1,-1)
+  for(i in s) {
+    d<-as.character(df$date[i])
+#    cat(paste0(i," d:",d," ",nrow(df)," ",str_length(d),"\n"))
+    if (ix2==0 & str_length(d)==10) {
+#      cat(paste0("gotit2\n"))
+      ix2=i-1
+      break
+    }
+  }
+#  cat(paste0("\nix1:",ix1," ix2:",ix2,"\n"))
+  dfout<-df[ix1:ix2,]
+}
+# build the demand and also a second demand without Battery discharging
+dfm<-read_csv("openNem-SA-30-05-24-7D.csv") %>% 
+  mutate(demand=select(.,`Battery (Charging) -  MW`:`Solar (Rooftop) -  MW`) %>% apply(1,sum))  %>%
+  mutate(d2=select(.,`Battery (Charging) -  MW`:`Solar (Rooftop) -  MW`) %>% 
+           select(-`Battery (Discharging) -  MW`,-`Battery (Charging) -  MW`) %>% apply(1,sum)) 
+# remove incomplete days
+dfm2<-removeIncomplete(dfm) %>% mutate(dd=substr(as.character(date),9,10)) 
+
+dfmout<-dfm2 %>% group_by(dd) %>% 
+  summarise(pvwa=sum(demand*`Price - AUD/MWh`)/sum(demand),
+            pavc=mean(`Price - AUD/MWh`),
+            pvwa2=sum(d2*`Price - AUD/MWh`)/sum(d2),
+            pavc2=mean(`Price - AUD/MWh`))
+```
+
+```{r}
+findBands<-function(df) {
+  sunbreak=0.05*max(df$`Solar (Rooftop) - MW`)  # 5 percent of max is start of day
+  dark<-(df$`Solar (Rooftop) - MW`<sunbreak)    # which periods are dark
+  ldld<-which(dark[-1] != dark[-length(dark)])  # where are the changes of state
+  darkdf<-tribble(~t1,~t2)
+  st<-2                                         
+  if (dark[1]) {                                # are we starting in the night or the day?
+     tmp<-tibble(t1=df$Time[1],t2=df$Time[ldld[1]],r1=1,r2=ldld[1])
+     darkdf<-bind_rows(darkdf,tmp)
+     st<-3
+  }
+  for (i in seq(st,length(ldld),2)) {
+    tmp<-tibble(t1=df$Time[ldld[i-1]],t2=df$Time[ldld[i]],r1=ldld[i-1],r2=ldld[i])
+    darkdf<-bind_rows(darkdf,tmp)
+  }
+  darkdf
+}
+
+```
+
+```{r}
 d<-"SouthAustralianElectricity/"
 # very annoying different columns in wind and solar sheets
 lookups<-c(
