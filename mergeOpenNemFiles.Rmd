@@ -1,0 +1,82 @@
+---
+title: "mergeOpenNemFiles"
+author: "GeoffRussell"
+date: "2024-02-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+```{r merge}
+mergeFiles<-function(flist) {
+  thestate<-""
+  thisstate<-""
+  n=0;
+  for (f in flist) {
+    n=n+1
+    fin<-read_csv(f) %>%  rename_with(~sub('Time','date',.x)) %>% rename_with(~sub('  ',' ',.x))
+    if (n==1) {
+      thestate<-str_match(f,".*/openNem-([A-Z]+)-.*.csv")
+      print(paste0('State:',thestate[2]))
+      df<-fin %>% distinct(date,.keep_all=TRUE) 
+    }
+    else {
+      thisstate<-str_match(f,".*/openNem-([A-Z]+)-.*.csv")
+      print(paste0('State:',thisstate[2]))
+      str(thisstate)
+      if (thisstate[2] != thestate[2]) {
+        print(paste0("OOps ... mixing states ",thisstate[2]," ",thestate[2]))
+        return (df[1,])
+      }
+      df<-bind_rows(df,fin) %>% distinct(date,.keep_all=TRUE) 
+    }
+  }
+  df %>% arrange(date)
+}
+dfx<-mergeFiles(Sys.glob("~/ARTICLES/STATS/RBatteries/openNem-SA-*-05-24-7D.csv")) %>% mutate(diff=date-lag(date))
+dfx<-mergeFiles(Sys.glob("~/ARTICLES/STATS/RBatteries/openNem-SA-*-24-7D.csv")) %>% mutate(diff=date-lag(date))
+```
+```{r}
+createMergedCsvs(dfx)
+```
+
+```{r}
+                  
+dfm<-mergeFiles(c("SouthAustralianElectricity/openNem-SA-21-12-19-7D.csv",
+                  "SouthAustralianElectricity/openNem-SA-30-01-24-7D.csv",
+                  "SouthAustralianElectricity/openNem-SA-25-01-24-7D.csv",
+#                  "SouthAustralianElectricity/openNem-VIC-25-01-24-7D.csv", 
+                  "SouthAustralianElectricity/openNem-SA-4-11-23-7D.csv",
+                  "SouthAustralianElectricity/openNem-SA-10-01-24-7D.csv"
+                  )) %>% mutate(diff=date-lag(date))
+#----------------------------------------------------
+# find the discontinuities, the places with missing days 
+# produce a new file for each set of sequential 5 minute periods
+#----------------------------------------------------
+createMergedCsvs<-function(dfm) {
+  if (nrow(dfm)==1) {
+    print("Check files ... looks like mixed states")
+    return();
+  }
+  dcol<-dfm$diff
+  ldld<-c(1,which(dcol[-1]!=dcol[-length(dcol)]),length(dcol))
+  dfix<-tribble(~x,~y)
+  for (i in seq(1,length(ldld),2)) {
+    dfix<-bind_rows(dfix,tibble(x=ldld[i],y=ldld[i+1]))
+  }
+  for (i in 1:nrow(dfix)) {
+    range<-dfm[dfix$x[i]:dfix$y[i],]
+    yy<-year(range$date[nrow(range)])
+    mm<-month(range$date[nrow(range)])
+    dd<-day(range$date[nrow(range)])
+    ndays=as.integer(nrow(range)/288)
+    name=sprintf("openNEMMerge-%02d-%02d-%04d-%dD.csv",dd,mm,yy,ndays)
+    print(name)
+    write_csv(range %>% select(-diff),name)
+  }
+}
+createMergedCsvs(dfx)
+```

@@ -1,0 +1,12 @@
+```{r}
+library(tidyverse)
+
+df<-tribble(
+  ~Country,~Population,
+  "Australia", 26e6,
+  "USA", 331e6,
+  "New Zealand", 5.1e6
+)
+
+df %>% ggplot()+geom_col(aes(x=Country,y=Population/1e6)) + coord_flip()+labs(y="Population (million)",x="")
+```
