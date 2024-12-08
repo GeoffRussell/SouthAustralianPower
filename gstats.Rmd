@@ -1,0 +1,83 @@
+---
+title: "Short version of RglobalStats.Rmd"
+author: "GeoffRussell"
+date: "1/1/2024"
+output: html_document
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(modelr)
+library(readxl)
+library(plotly)
+library(ggrepel)
+comma<-function(x) prettyNum(signif(x,digits=4),big.mark=",")
+comma3<-function(x) prettyNum(signif(x,digits=3),big.mark=",")
+comma2<-function(x) prettyNum(signif(x,digits=2),big.mark=",")
+theyear<-"2023D"
+theyearonly<-"2023"
+```
+
+
+```{r}
+makeRollingGraph<-function(rp,ntop=30,rmTypes=c("SolarPlusWindPlusBio","Clean")) {
+    rdsfile<-paste0("growthtables",theyear,"-",rp,".rds")
+    if (file.exists(rdsfile)) {
+        mnstmax<-readRDS(rdsfile)
+    }
+    else {
+      print(paste0("No such file: ",rdsfile))
+      return();
+    }
+    topn<-mnstmax %>% filter(!Type %in% rmTypes) %>% 
+      arrange(desc(Max)) %>% 
+      select(Country,Type,MaxYear,Max,MaxPop,cleanMWhPerCap,totalMWhPerCap) %>% ungroup() %>% 
+        slice_head(n=ntop) %>% 
+        mutate(Rank=rank(desc(Max))) 
+    colorVals=c("darkolivegreen3","black","grey","#3399FF","green","burlywood4","#FFFF00","#FFFF99")
+    if (length(rmTypes)>2) {
+      colorVals=c("darkolivegreen3","#3399FF","green","#FFFF00","#FFFF99")
+    }
+    p<-topn %>% mutate(Key=paste0(Rank,". ",Country,", ",MaxYear,", ",comma2(as.numeric(MaxPop)/1e6),"m")) %>%
+      mutate(therow=reorder(Key,Max)) %>%
+      ggplot(aes(x=therow,y=Max))+
+      geom_col(alpha=1,aes(fill=Type))+
+      geom_point(aes(y=totalMWhPerCap*2,shape="2050 Target"),alpha=0.8,size=2) +
+      geom_point(aes(y=totalMWhPerCap,shape="Current MWh/Cap"),alpha=0.8,size=1) +
+      geom_point(aes(y=cleanMWhPerCap,shape="Current Clean"),alpha=0.8,size=1) +
+      geom_text(aes(y=Max+1,label=paste0(comma2(Max)),hjust=0),size=3)+ 
+      coord_flip()+
+      scale_fill_manual(values=colorVals)+
+      labs(x="",title=paste0("Highest megawatt-hours per person added in ",rp," years"),
+           y="MWh per person over period")+ylim(c(0,40))+
+      annotate('text',x=2,y=20,hjust=0,label=paste0("Data: Energy Institute World Energy Stats ",theyearonly),size=2)+
+      scale_shape_manual(values=c(19,8,1),labels=c("IEA 2050 Target", "Current Clean", "Current MWh/Cap"
+                                                   ))+
+      guides(shape=guide_legend("Targets"))
+      suf=""
+      if (length(rmTypes)>2) {
+        suf=""
+        p<-p+ geom_rect(aes(ymin=cleanMWhPerCap,ymax=totalMWhPerCap*2,
+              xmax=as.numeric(factor(reorder(Key,Max)))+0.4,
+              xmin=as.numeric(factor(reorder(Key,Max)))-0.4),alpha=0.3,fill="forestgreen") +
+            geom_text(aes(y=totalMWhPerCap*2+1,
+            label=paste0(comma2((totalMWhPerCap*2-cleanMWhPerCap)/Max),"x",rp," yrs"),hjust=0),size=3)
+      }
+    
+      t<-mnstmax %>% unnest(c(data,Type,MaxYear,MaxPop)) 
+      t<-data.frame(Type=t$Type) %>% distinct() %>% filter(!Type %in% rmTypes) %>% map(~substr(.,1,1))
+      t<-paste(unlist(t),sep="",collapse="")
+      png(paste0("mkrollout-top-",theyear,"-",ntop,"-over-",rp,"-years-",t,".png"),width=2200,height=1300,units="px",res=300,type="cairo-png")
+      print(p)
+      dev.off()
+      print(p)
+}
+makeRollingGraph(7,ntop=30)
+makeRollingGraph(10,ntop=30)
+makeRollingGraph(15,ntop=30)
+makeRollingGraph(20,ntop=30)
+makeRollingGraph(15,ntop=30,rmTypes=c("Gas","Coal","SolarPlusWindPlusBio","Clean","Oil"))
+```

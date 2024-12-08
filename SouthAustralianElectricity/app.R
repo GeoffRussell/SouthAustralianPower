@@ -183,7 +183,7 @@ findBands<-function(df) {
 # Battery handling
 #---------------------------------------------------------------------------------------
 lastdfsum<-dfout
-bcalc<-function(bmax,dfout,ofac,icsize=0,dspick) {
+bcalc<-function(bmax,dfout,ofac,icsize=0,dspick,baseloadsize=0) {
   print(dataSets[dspick])
   dfout<-readDataSet(dspick)
   batteryMaxCapacity<-bmax
@@ -204,6 +204,9 @@ bcalc<-function(bmax,dfout,ofac,icsize=0,dspick) {
     dfsum<-dfsum %>% mutate(renew=wind+solar-`Exports - MW`,dblrenew=ofac*renew) 
   }
   dfsum<-dfsum %>% mutate(noBattShortfall=dblrenew-demand,cumNoBattShortfall=cumsum(dblrenew-demand))  
+  if (baseloadsize>0) {
+    dfsum<-dfsum %>% mutate(demand=ifelse(demand>baseloadsize,demand-baseloadsize,0))
+  }
   #-------------------
   # start with battery full 
   #-------------------
@@ -371,6 +374,7 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
             sliderInput("ofac",label="Overbuild factor for wind+solar", min=1,max=3,step=0.1,value=1),
             sliderInput("bsize",label="Battery size in MWh", min=100,max=100000,step=100,value=100),
             sliderInput("icsize",label="Interconnector size (MW)", min=0,max=2000,step=100,value=0),
+            sliderInput("baseloadsize",label="Baseload size (MW)", min=0,max=1800,step=600,value=0),
 #            sliderInput("dfac",label="Electricity expansion factor", min=1,max=2,step=0.2,value=1),
             pickerInput("datasetpick",choices=sort(names(dataSets)),selected=c("WE 30 November 2023"),multiple=FALSE,
                           label = 'Alternative datasets',
@@ -413,7 +417,7 @@ server<-function(input,output,session) {
                 axis.text=element_text(face="bold",size=12))+mtheme
   gendfsum<-reactive({
        print(input$datasetpick)
-       bstatus<-bcalc(input$bsize,dfout,input$ofac,input$icsize,input$datasetpick)
+       bstatus<-bcalc(input$bsize,dfout,input$ofac,input$icsize,input$datasetpick,input$baseloadsize)
        dfile<-bstatus %>%  mutate(diffE=(dblrenew-demand)/12) %>% select(Time,dblrenew,demand,diffE,batteryStatus,batterySupplied,shortFall,addedToBattery) 
        write_csv(dfile,"bcalc-output.csv")
        bstatus
@@ -474,6 +478,7 @@ server<-function(input,output,session) {
       p("Overbuild factor: ",comma(input$ofac),""),
 #     p("Electrification expansion factor: ",comma(input$dfac),""),
       p("Interconnector export size: ",comma(input$icsize)," MWh"),
+      p("Baseload size: ",comma(input$baseloadsize)," MW"),
       p("Shortfall over period: ",comma(sh/1000)," GWh (wind+solar+batteries=",comma((totdemand-sh)/totdemand*100),"%)"),
       p("Curtailment: ",comma(curt/1000)," GWh (",comma(100*curt/dmand),"percent)"),
       p("Max MW shortage: ",comma(shortMW)," dispatchable MW"),
@@ -559,7 +564,8 @@ server<-function(input,output,session) {
       #write_csv(dfsum,"xxx1.csv")
       dfcumshort<-dfsum %>% select(Time,batteryStatus,wind,demand,cumShortMWh,maxShortMW,renew,dblrenew,cumThrowOutMWh)
       
-      #write_csv(dfcumshort,"xxx2.csv")
+      write_csv(dfcumshort,"xxx2.csv")
+      write_csv(dfsum,"dfsumsave.csv")
       thecols=colsshort
       thelabs=labsshort
       dfcs<-dfcumshort %>% pivot_longer(cols=c("demand","renew","dblrenew"),names_to="Level",values_to="MW") 

@@ -12,6 +12,23 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(readxl)
 library(wbstats)
+comma<-function(x) prettyNum(signif(x,digits=4),big.mark=",")
+```
+
+```{r}
+dfjune<-read_csv("SouthAustralianElectricity/openNEMMerge-June-2024.csv") %>% select(date,`Solar (Utility) - MW`,`Solar (Rooftop) - MW`) %>% mutate(us=`Solar (Utility) - MW`,rs=`Solar (Rooftop) - MW`,ratiorsus=ifelse(us==0,0,ifelse(rs/us>10,10,rs/us))) %>% select(date,rs,us,ratiorsus) 
+dfjune %>% filter(ratiorsus!=0)%>% ggplot(aes(x=date,y=ratiorsus))+ geom_line()
+rat<-dfjune$ratiorsus
+cat("\n")
+summary(rat)
+
+p<-dfjune %>% ggplot(aes(x=date,y=ratiorsus))+geom_line()+
+  geom_text(aes(x=dfjune$date[500],y=9.5,hjust=0,label=paste0("Mean: ",comma(mean(rat)))),color="red")+
+  labs(title="Ratio of Rooftop solar to Utility scale solar (South Australia)",x="")
+p
+png("Ratio-rooftop-solar-to-utility-(SA).png",width=5000,height=800,units="px",res=200,type="cairo-png")
+print(p)
+dev.off()
 ```
 
 ```{r}
