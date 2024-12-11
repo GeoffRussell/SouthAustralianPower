@@ -183,7 +183,7 @@ findBands<-function(df) {
 # Battery handling
 #---------------------------------------------------------------------------------------
 lastdfsum<-dfout
-bcalc<-function(bmax,dfout,ofac,icsize=0,dspick,baseloadsize=0) {
+bcalcObsolete<-function(bmax,ofac,icsize=0,dspick,baseloadsize=0) {
   print(dataSets[dspick])
   dfout<-readDataSet(dspick)
   batteryMaxCapacity<-bmax
@@ -205,7 +205,7 @@ bcalc<-function(bmax,dfout,ofac,icsize=0,dspick,baseloadsize=0) {
   }
   dfsum<-dfsum %>% mutate(noBattShortfall=dblrenew-demand,cumNoBattShortfall=cumsum(dblrenew-demand))  
   if (baseloadsize>0) {
-    dfsum<-dfsum %>% mutate(demand=ifelse(demand>baseloadsize,demand-baseloadsize,0))
+    dfsum<-dfsum %>% mutate(savedemand=demand,demand=ifelse(demand>baseloadsize,demand-baseloadsize,0),baseloadsize=baseloadsize)
   }
   #-------------------
   # start with battery full 
@@ -227,6 +227,125 @@ bcalc<-function(bmax,dfout,ofac,icsize=0,dspick,baseloadsize=0) {
     dfsum$shortFall[i]=0
     # spareE is in MWh
     spareE=(dfsum$dblrenew[i]-dfsum$demand[i])/12 
+    if (spareE>0) {  # Electricity exceeds demand ... add spare to battery if there is any capacity
+      if (batteryStatus<batteryMaxCapacity) { # battery isn't full
+        spareB=batteryMaxCapacity-batteryStatus
+        addE=min(spareE,spareB)
+        batteryStatus=batteryStatus+addE
+        dfsum$addedToBattery[i]=addE
+        leftOver=spareE-spareB
+        if (leftOver>0) {
+             # send out interconnector
+             spareW=12*leftOver # convert to MW 
+             if (spareW>icsize) {
+               dfsum$icExpMWh[i]=icsize/12
+               spareW=spareW-icsize
+               leftOver=spareW/12
+             } else {
+               dfsum$icExpMWh[i]=spareW/12
+               spareW=0
+               leftOver=0
+             }
+             dfsum$throwOutMWh[i]=leftOver
+        }
+      }
+      else {   # battery is full, discard energy
+               # or send out interconnector 
+        spareW=12*spareE # convert to MW 
+        if (spareW>icsize) {
+          dfsum$icExpMWh[i]=icsize/12
+          spareW=spareW-icsize
+          spareE=spareW/12
+        }
+        else {
+           dfsum$icExpMWh[i]=spareW/12
+           spareE=0
+        }
+        dfsum$throwOutMWh[i]=spareE
+      }
+    }
+    if (spareE<0) { # demand exceeds generation, get from battery if any available
+      needE=-spareE
+      if (needE>maxNeed) {
+        maxNeed<-needE
+      }
+      if (batteryStatus>0) {
+        if (batteryStatus>=needE) { # extract from battery
+          batteryStatus=batteryStatus-needE
+          dfsum$batteryStatus[i]=batteryStatus
+          dfsum$batterySupplied[i]=needE
+        }
+        else { # we have some in battery, but not enough
+          dfsum$shortFall[i]=needE-batteryStatus
+          dfsum$batterySupplied[i]=batteryStatus
+          batteryStatus=0
+        }
+      }
+      else { # battery empty
+          dfsum$shortFall[i]=needE
+      }
+    }
+    dfsum$batteryStatus[i]=batteryStatus
+  }
+  if (baseloadsize>0) {
+    dfsum<-dfsum %>% mutate(demand=ifelse(demand>baseloadsize,demand-baseloadsize,0),baseloadsize=baseloadsize)
+  }
+  if (baseloadsize>0) {
+    dfsum<-dfsum %>% mutate(demand=savedemand)
+  }
+  dfsum %>% mutate(cumShortMWh=cumsum(shortFall),
+                   cumThrowOutMWh=cumsum(throwOutMWh),
+                   cumIcExpMWh=cumsum(icExpMWh),
+                   maxShortMW=max(shortFall)*12
+                   )
+}
+bcalc<-function(bmax,ofac,icsize=0,dspick,baseloadsize=0) {
+  print(dataSets[dspick])
+  dfout<-readDataSet(dspick)
+  batteryMaxCapacity<-bmax
+  dfsum <- dfout %>% mutate(
+    battuse=`Battery (Discharging) - MW`,
+    #imports=`Imports - MW`,
+    #diesel=`Distillate - MW`,
+    wind=`Wind - MW`,
+    solar=`Solar (Rooftop) - MW`+`Solar (Utility) - MW`) 
+  
+  if (isnem(dspick)) {
+    dfsum<-dfsum %>% mutate(renew=wind+solar,dblrenew=ofac*renew)
+  }
+  else if (isvic(dspick)) {
+    dfsum<-dfsum %>% mutate(renew=wind+solar,dblrenew=ofac*renew)
+  }
+  else { # in SA most exports are of excess wind/solar
+    dfsum<-dfsum %>% mutate(renew=wind+solar-`Exports - MW`,dblrenew=ofac*renew) 
+  }
+  dfsum<-dfsum %>% mutate(noBattShortfall=dblrenew-demand,cumNoBattShortfall=cumsum(dblrenew-demand))  
+  if (baseloadsize>0) {
+    dfsum<-dfsum %>% mutate(supply=dblrenew+baseloadsize,baseloadsize=baseloadsize)
+  }
+  else {
+    dfsum<-dfsum %>% mutate(supply=dblrenew,baseloadsize=0)
+  }
+  #-------------------
+  # start with battery full 
+  #-------------------
+  batteryStatus<-bmax
+  nperiods<-length(dfsum$demand)
+  dfsum$shortFall=rep(0,nperiods)
+  dfsum$icExpMWh=rep(0,nperiods) # in MWh
+  dfsum$batteryStatus=rep(0,nperiods)
+  dfsum$batterySupplied=rep(0,nperiods) # MWh
+  dfsum$throwOutMWh=rep(0,nperiods)
+  dfsum$addedToBattery=rep(0,nperiods)
+  lastdfsum<<-dfsum
+  totalBattuse<<-sum(lastdfsum$battuse/12)
+  maxNeed<-0
+  dfsum$minroll20<-roll_sum(dfsum$supply,n=20,fill=0)
+  write_csv(dfsum,"xxx.csv")
+  for(i in 1:nperiods) {
+    dfsum$shortFall[i]=0
+    # spareE is in MWh
+    spareE=(dfsum$supply[i]-dfsum$demand[i])/12 
     if (spareE>0) {  # Electricity exceeds demand ... add spare to battery if there is any capacity
       if (batteryStatus<batteryMaxCapacity) { # battery isn't full
         spareB=batteryMaxCapacity-batteryStatus
@@ -372,7 +491,7 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
       fluidRow(
         column(width=6,
             sliderInput("ofac",label="Overbuild factor for wind+solar", min=1,max=3,step=0.1,value=1),
-            sliderInput("bsize",label="Battery size in MWh", min=100,max=100000,step=100,value=100),
+            sliderInput("bsize",label="Battery size in MWh", min=500,max=30000,step=500,value=500),
             sliderInput("icsize",label="Interconnector size (MW)", min=0,max=2000,step=100,value=0),
             sliderInput("baseloadsize",label="Baseload size (MW)", min=0,max=1800,step=600,value=0),
 #            sliderInput("dfac",label="Electricity expansion factor", min=1,max=2,step=0.2,value=1),
@@ -417,7 +536,7 @@ server<-function(input,output,session) {
                 axis.text=element_text(face="bold",size=12))+mtheme
   gendfsum<-reactive({
        print(input$datasetpick)
-       bstatus<-bcalc(input$bsize,dfout,input$ofac,input$icsize,input$datasetpick,input$baseloadsize)
+       bstatus<-bcalc(input$bsize,input$ofac,input$icsize,input$datasetpick,input$baseloadsize)
        dfile<-bstatus %>%  mutate(diffE=(dblrenew-demand)/12) %>% select(Time,dblrenew,demand,diffE,batteryStatus,batterySupplied,shortFall,addedToBattery) 
        write_csv(dfile,"bcalc-output.csv")
        bstatus
@@ -563,9 +682,13 @@ server<-function(input,output,session) {
       dfsum<-gendfsum()
       #write_csv(dfsum,"xxx1.csv")
       dfcumshort<-dfsum %>% select(Time,batteryStatus,wind,demand,cumShortMWh,maxShortMW,renew,dblrenew,cumThrowOutMWh)
+      bl<-ifelse(input$baseloadsize>0,paste0("BL",input$baseloadsize,"MW"),"nobl")
+      bsz<-ifelse(input$bsize>0,paste0("BATT",comma(input$bsize),"MW"),"nobatt")
+      ovfac<-ifelse(input$ofac>0,paste0("FAC",comma(input$ofac),""),"nooverbuild")
+      ff<-gsub(" ","",input$datasetpick)
+      fname=paste0("dfsum-",bl,"-",bsz,"-",ovfac,"-",ff,".csv")
       
-      write_csv(dfcumshort,"xxx2.csv")
-      write_csv(dfsum,"dfsumsave.csv")
+      write_csv(dfsum,fname)
       thecols=colsshort
       thelabs=labsshort
       dfcs<-dfcumshort %>% pivot_longer(cols=c("demand","renew","dblrenew"),names_to="Level",values_to="MW") 
@@ -614,8 +737,14 @@ server<-function(input,output,session) {
         {if (input$showBatteryStatus)  
              geom_line(aes(x=Time,y=(batteryStatus/input$bsize)*bfac),color="red",data=dfsum)
         }+
+        {if (input$baseloadsize)  
+             geom_hline(aes(yintercept=baseloadsize),color="purple",data=dfsum)
+        }+
         {if (input$showBatteryStatus)  
             annotate('text',x=dfcs$Time[nperiods/2],y=input$bsize,label="100% full",color="red",vjust=-0.2,hjust=0)
+        }+
+        {if (input$showBatteryStatus)  
+            geom_col(aes(x=Time,y=shortFall*12,alpha=0.2),color="orange",data=dfsum,show.legend=FALSE)
         }+
         geom_rect(aes(xmin=t1,xmax=t2,ymin=0,ymax=Inf),data=nightbands,alpha=0.2)+
         labs(color="Megawatts",title=thetitle)+
@@ -626,6 +755,7 @@ server<-function(input,output,session) {
           sec.axis = sec_axis(~./coef, name="Cumulative shortfall/curtailment in GWh")
         )+theme(legend.direction="vertical",legend.box="vertical")
         p
+#        baseloadsize
   })
   output$facilities=renderPlot({
     dfpower %>% group_by(Technology) %>% summarise(MW=sum(`Generator Capacity (MW)`)) %>%
