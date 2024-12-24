@@ -35,6 +35,15 @@ labsshort<-c(
   "Demand",
   "Wind+Solar"
 )
+colsbreaks<-c( "dblrenew", "demand", "renew","wind")
+colslabels<-c( "Overbuild", "Demand", "Wind+Solar","Wind")
+colslevels<-c(
+  "dblrenew"="cyan",
+  "demand"="brown",
+  "renew"="purple",
+  "wind"="forestgreen"
+)
+
 colsfacilities<-c(
   "Wind"="forestgreen",
   "Solar (Utility),Wind"="cyan",
@@ -87,6 +96,7 @@ dataSets<-c(
   "(VIC) WE 16 May 2024"="openNem-VIC-16-05-24-7D.csv",
   "(NEM) WE 16 May 2024"="openNem-NEM-16-05-24-7D.csv",
   "June 2024"="openNEMMerge-June-2024.csv",
+  "June 2024 (1st week only)"="openNEMMerge-June-1stWeek-2024.csv",
   "WE 30 January 2024"="openNem-SA-30-01-24-7D.csv",
   "WE 25 January 2024"="openNem-SA-25-01-24-7D.csv",
   "WE 30 November 2023"="opennem-30-11-2023sa5.csv",
@@ -101,6 +111,7 @@ dataSetTitles<-c(
   "(VIC) WE 16 May 2024"="Electricity renewable/demand/curtailment/shortfall\nVIC Week ending 16 May 2024",
   "(NEM) WE 16 May 2024"="Electricity renewable/demand/curtailment/shortfall\nNEM Week ending 16 May 2024",
   "June 2024"="Electricity renewable/demand/shortfall\nJune 2024",
+  "June 2024 (1st week only)"="Electricity renewable/demand/shortfall\n1st Week June 2024",
   "WE 30 January 2024"="Electricity renewable/demand/curtailment/shortfall\nWeek ending 30 Jan 2024",
   "WE 25 January 2024"="Electricity renewable/demand/curtailment/shortfall\nWeek ending 25 Jan 2024",
   "WE 30 November 2023"="Electricity renewable/demand/curtailment/shortfall\nWeek ending 30 November 2023",
@@ -128,10 +139,10 @@ renewfieldsNEM<-c("Hydro - MW","Wind - MW","Solar (Utility) - MW","Solar (Roofto
 annual<-p("SA - annual avg power 1.58GW (2023/4)")
 
 isnem<-function(f) {
-  str_detect(f,"NEM")
+  str_detect(f,"NEM-")
 }
 isvic<-function(f) {
-  str_detect(f,"VIC")
+  str_detect(f,"VIC-")
 }
 readDataSet<-function(n) {
   print(n)
@@ -596,9 +607,8 @@ server<-function(input,output,session) {
       p("Period length: ",comma((nperiods/12)/24)," days"),
       p("Overbuild factor: ",comma(input$ofac),""),
 #     p("Electrification expansion factor: ",comma(input$dfac),""),
-      p("Interconnector export size: ",comma(input$icsize)," MWh"),
-      p("Baseload size: ",comma(input$baseloadsize)," MW"),
       p("Shortfall over period: ",comma(sh/1000)," GWh (wind+solar+batteries=",comma((totdemand-sh)/totdemand*100),"%)"),
+      p("Baseload size: ",comma(input$baseloadsize)," MW"),
       p("Curtailment: ",comma(curt/1000)," GWh (",comma(100*curt/dmand),"percent)"),
       p("Max MW shortage: ",comma(shortMW)," dispatchable MW"),
       p("Battery energy storage size: ",comma(input$bsize)," MWh (",comma((input$bsize*1e6)/(avgpower*1e9))," hrs)" ),
@@ -608,6 +618,7 @@ server<-function(input,output,session) {
       p("Max wind energy(60 min): ",comma(maxwindhr)," MWh (Min ",comma(minwindhr),"MWh",comma(minwindhr/maxwindhr*100),"%)"),
       p("Max wind energy(8 hrs): ",comma(maxwind8hr)," MWh (Min ",comma(minwind8hr),"MWh",comma(minwind8hr/maxwind8hr*100),"%)"),
       p("Battery capacity factor: ",comma(100*bsup/((bmax/12)*nperiods)),"%"),
+      p("Interconnector export size: ",comma(input$icsize)," MWh"),
       {if (length(r$diff)==1) {
       p("Max ",comma(hrs),"hr shortage (endpoint) ",r$Time,": ",comma(-r$diff),"MWh")
       }},
@@ -681,7 +692,8 @@ server<-function(input,output,session) {
   output$shortfall<-renderPlot({
       dfsum<-gendfsum()
       #write_csv(dfsum,"xxx1.csv")
-      dfcumshort<-dfsum %>% select(Time,batteryStatus,wind,demand,cumShortMWh,maxShortMW,renew,dblrenew,cumThrowOutMWh)
+      dfcumshort<-dfsum %>% select(Time,batteryStatus,supply,wind,demand,cumShortMWh,maxShortMW,renew,dblrenew,cumThrowOutMWh)
+      maxsupply=max(dfsum$dblrenew)
       bl<-ifelse(input$baseloadsize>0,paste0("BL",input$baseloadsize,"MW"),"nobl")
       bsz<-ifelse(input$bsize>0,paste0("BATT",comma(input$bsize),"MW"),"nobatt")
       ovfac<-ifelse(input$ofac>0,paste0("FAC",comma(input$ofac),""),"nooverbuild")
@@ -705,7 +717,7 @@ server<-function(input,output,session) {
       lab<-c()
       val<-c()
       if (input$showShort) {
-        lab=c("Shortfall")
+        lab=c("Shortfall (cumulative)")
         val=c("dashed")
       }
       if (input$showCurtailed) {
@@ -716,12 +728,17 @@ server<-function(input,output,session) {
         lab=c(lab,"Interconnector Export")
         val=c(val,"twodash")
       }
+      if (input$baseloadsize>0) {
+        lab=c(lab,"Baseload (MW)")
+        val=c(val,"longdash")
+      }
       nightbands<-findBands(dfsum)
       for(i in 1:nrow(nightbands)) {
         cat(paste0())
       }
       bfac=input$bsize
       if (bfac==0) bfac=1000
+      bfac=maxsupply
       p<-dfcs %>% ggplot() + 
         geom_line(aes(x=Time,y=MW,color=Level)) +  
         ptheme +
@@ -738,18 +755,23 @@ server<-function(input,output,session) {
              geom_line(aes(x=Time,y=(batteryStatus/input$bsize)*bfac),color="red",data=dfsum)
         }+
         {if (input$baseloadsize)  
-             geom_hline(aes(yintercept=baseloadsize),color="purple",data=dfsum)
+             geom_hline(aes(yintercept=baseloadsize,linetype="longdash"),color="purple",data=dfsum)
         }+
         {if (input$showBatteryStatus)  
-            annotate('text',x=dfcs$Time[nperiods/2],y=input$bsize,label="100% full",color="red",vjust=-0.2,hjust=0)
+            annotate('text',x=dfcs$Time[nperiods/2],y=bfac,label="Battery 100% full",color="red",vjust=-0.2,hjust=0)
         }+
-        {if (input$showBatteryStatus)  
-            geom_col(aes(x=Time,y=shortFall*12,alpha=0.2),color="orange",data=dfsum,show.legend=FALSE)
+        {if (input$showShort)  
+            #geom_col(aes(x=Time,y=shortFall*12,alpha=0.2),color="orange",data=dfsum,show.legend=FALSE)
+            geom_col(aes(x=Time,y=shortFall*12,fill="orange"),alpha=0.4,data=dfsum)
+        }+
+        {if (input$showShort)  
+            scale_fill_manual(name="Shortfall",labels=c("Shortfall"),values=c("orange"))
         }+
         geom_rect(aes(xmin=t1,xmax=t2,ymin=0,ymax=Inf),data=nightbands,alpha=0.2)+
-        labs(color="Megawatts",title=thetitle)+
-        scale_color_manual(labels=thelabs,values=thecols)+
-        scale_linetype_manual(name="Gigawatt-hours",labels=lab,values=val)+
+        labs(color="Supply/Demand (MW)",title=thetitle)+
+        #scale_color_manual(labels=thelabs,values=thecols)+
+        scale_color_manual(breaks=colsbreaks,labels=colslabels,values=colslevels)+
+        scale_linetype_manual(name="Other-measures",labels=lab,values=val)+
         scale_y_continuous(
           name="Megawatts",
           sec.axis = sec_axis(~./coef, name="Cumulative shortfall/curtailment in GWh")
