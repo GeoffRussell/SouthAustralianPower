@@ -139,10 +139,10 @@ renewfieldsNEM<-c("Hydro - MW","Wind - MW","Solar (Utility) - MW","Solar (Roofto
 annual<-p("SA - annual avg power 1.58GW (2023/4)")
 
 isnem<-function(f) {
-  str_detect(f,"NEM-")
+  str_detect(f,"NEM\\)")
 }
 isvic<-function(f) {
-  str_detect(f,"VIC-")
+  str_detect(f,"VIC\\)")
 }
 readDataSet<-function(n) {
   print(n)
