@@ -98,6 +98,19 @@ it ... find all its flaws. That's really what it is for!
 2. Focus on the "Overbuild" slider and set it to something big like 2. Meaning we aim to double the amount of wind and solar while keeping the same proportions. In the real world, the output of such a doubling wouldn't simply
 be double the current output, but it wouldn't be wildly different.  You will see a cyan curve appear on the graph. 
 
+### The sliders
+
+The sliders are mostly self explanatory. You change the size of the battery with the "Battery Size in MWh" slider and the overbuild factor with the Overbuild factor slider.  
+
+The two "multiplier" sliders handle the
+problem of having a wide range of possible inputs. Consider the "Battery size in MWh" slider. When dealing with
+South Australia, we'd be hard put to imagine too many gigawatts of batteries being installed. Having 20,000 MWh (20 GWh) is plenty. But when handling data covering the whole of NEM, we'd like to specify a much bigger battery. But having a slider with 200,000 MWh would be hard to manipulate and the software doesn't allow variable bounds for the slider. 
+
+Having the multiplier sliders allows you to quickly specify larger batteries and baseload specifications for 
+the larger states. 
+
+
+
 
 
 

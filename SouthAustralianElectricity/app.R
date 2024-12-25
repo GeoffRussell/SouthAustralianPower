@@ -701,7 +701,6 @@ server<-function(input,output,session) {
       ovfac<-ifelse(input$ofac>0,paste0("FAC",comma(input$ofac),""),"nooverbuild")
       ff<-gsub(" ","",input$datasetpick)
       fname=paste0("dfsum-",bl,"-",bsz,"-",ovfac,"-",ff,".csv")
-      
       write_csv(dfsum,fname)
       maxshort<-max(dfcumshort$cumShortMWh)
       

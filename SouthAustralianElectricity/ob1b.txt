@@ -12,7 +12,15 @@ we fix that shortfall with storage?
 The "Alternative datasets" button lists other weeks of data. At present I just have the dual heatwaves of 
 2019 that delivered so much suffering in South Australia.
 
-### And in January 2024
+### June 2024 
+
+The lack of wind during June 2024 was extreme and provides an excellent example of the difficulties of using
+batteries to handle such shortfalls.
+
+It's also useful to illustrate how useful baseload power is in reducing both the overbuild and the battery
+requirements to handle large wind droughts. 
+
+### January 2024
 
 I've added two datasets for January 2024, the week ending on the 25th. They show the
 extraordinarily low wind during the nights of the 23rd and 24th of January. The 8 hours ending at 2am on the 24th
