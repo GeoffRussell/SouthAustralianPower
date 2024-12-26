@@ -703,6 +703,7 @@ server<-function(input,output,session) {
       fname=paste0("dfsum-",bl,"-",bsz,"-",ovfac,"-",ff,".csv")
       write_csv(dfsum,fname)
       maxshort<-max(dfcumshort$cumShortMWh)
+      maxcurt<-max(dfcumshort$cumThrowOutMWh)
       
       thecols=colsshort
       thelabs=labsshort
@@ -742,7 +743,14 @@ server<-function(input,output,session) {
       bfac=input$bsize*input$bmult
       if (bfac==0) bfac=1000
       bfac=maxsupply
-      coef=maxsupply/maxshort*1000
+      mm=max(maxshort,maxcurt,999)
+      if (maxshort==999) {
+         coef<-500*(3/28)
+      }
+      else {
+        coef=maxsupply/mm*1000
+      }
+      
       print(paste0("MaxShortFall: ",maxshort," MaxSupply: ",maxsupply," Coef: ",coef,"\n"))
       p<-dfcs %>% ggplot() + 
         geom_line(aes(x=Time,y=MW,color=Level),linewidth=1) +  
