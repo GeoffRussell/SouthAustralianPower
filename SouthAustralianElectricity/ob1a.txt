@@ -109,6 +109,12 @@ South Australia, we'd be hard put to imagine too many gigawatts of batteries bei
 Having the multiplier sliders allows you to quickly specify larger batteries and baseload specifications for 
 the larger states. 
 
+You can see a summary board under the chart. 
+
+Have a look at the night of the 24th of November. It was a *very* still night. Assuming you
+have dialled in a doubling of wind+solar, the summary board shows
+an accumulated shortfall over the night of 5,463, even with twice the renewables that we have now. Can
+we fix that shortfall with storage?
 
 
 
