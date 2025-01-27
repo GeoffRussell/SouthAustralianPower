@@ -36,27 +36,11 @@ mergeFiles<-function(flist) {
   }
   df %>% arrange(date)
 }
-dfx<-mergeFiles(Sys.glob("~/ARTICLES/STATS/RBatteries/openNem-SA-*-05-24-7D.csv")) %>% mutate(diff=date-lag(date))
-dfx<-mergeFiles(Sys.glob("~/ARTICLES/STATS/RBatteries/openNem-SA-*-24-7D.csv")) %>% mutate(diff=date-lag(date))
-```
-```{r}
-createMergedCsvs(dfx)
-```
-
-```{r}
-                  
-dfm<-mergeFiles(c("SouthAustralianElectricity/openNem-SA-21-12-19-7D.csv",
-                  "SouthAustralianElectricity/openNem-SA-30-01-24-7D.csv",
-                  "SouthAustralianElectricity/openNem-SA-25-01-24-7D.csv",
-#                  "SouthAustralianElectricity/openNem-VIC-25-01-24-7D.csv", 
-                  "SouthAustralianElectricity/openNem-SA-4-11-23-7D.csv",
-                  "SouthAustralianElectricity/openNem-SA-10-01-24-7D.csv"
-                  )) %>% mutate(diff=date-lag(date))
 #----------------------------------------------------
 # find the discontinuities, the places with missing days 
 # produce a new file for each set of sequential 5 minute periods
 #----------------------------------------------------
-createMergedCsvs<-function(dfm) {
+createMergedCsvs<-function(dfm,region) {
   if (nrow(dfm)==1) {
     print("Check files ... looks like mixed states")
     return();
@@ -73,10 +57,57 @@ createMergedCsvs<-function(dfm) {
     mm<-month(range$date[nrow(range)])
     dd<-day(range$date[nrow(range)])
     ndays=as.integer(nrow(range)/288)
-    name=sprintf("openNEMMerge-%02d-%02d-%04d-%dD.csv",dd,mm,yy,ndays)
+    name=sprintf("openNEMMerge-%s-%02d-%02d-%04d-%dD.csv",region,dd,mm,yy,ndays)
     print(name)
     write_csv(range %>% select(-diff),name)
   }
 }
-createMergedCsvs(dfx)
+#createMergedCsvs(dfx)
 ```
+
+```{r}
+dfx<-mergeFiles(Sys.glob("~/ARTICLES/STATS/RBatteries/openNem-SA-*-05-24-7D.csv")) %>% mutate(diff=date-lag(date))
+dfx<-mergeFiles(Sys.glob("~/ARTICLES/STATS/RBatteries/openNem-SA-*-24-7D.csv")) %>% mutate(diff=date-lag(date))
+createMergedCsvs(dfx,"SA")
+```
+
+```{r}
+dfm<-mergeFiles(c("SouthAustralianElectricity/openNem-SA-21-12-19-7D.csv",
+                  "SouthAustralianElectricity/openNem-SA-30-01-24-7D.csv",
+                  "SouthAustralianElectricity/openNem-SA-25-01-24-7D.csv",
+#                  "SouthAustralianElectricity/openNem-VIC-25-01-24-7D.csv", 
+                  "SouthAustralianElectricity/openNem-SA-4-11-23-7D.csv",
+                  "SouthAustralianElectricity/openNem-SA-10-01-24-7D.csv"
+                  )) %>% mutate(diff=date-lag(date))
+```
+
+```{r}
+fnames<-Sys.glob("/home/geoff/ARTICLES/STATS/RBatteries/openNem-QLD-*-12-24-7D.csv")
+fnames
+dfq<-mergeFiles(fnames) %>% mutate(diff=date-lag(date))
+createMergedCsvs(dfq,"QLD")
+```                     
+
+```{r}
+fnames<-Sys.glob("/home/geoff/ARTICLES/STATS/RBatteries/openNem-NSW-*-12-24-7D.csv")
+fnames
+dfnsw<-mergeFiles(fnames) %>% mutate(diff=date-lag(date))
+createMergedCsvs(dfnsw,"NSW")
+```
+```{r}
+findColumns<-function(df) {
+  l<-tibble()
+  for(n in colnames(dfnsw)) {
+    if (n=="date") {
+      next;
+    }
+    l=bind_rows(l,tibble(flds=c(n)))
+    if (grepl("Rooftop",n)) {
+      break;
+    }
+  }
+  l
+}
+findColumns(dfnsw)
+```                     
+
